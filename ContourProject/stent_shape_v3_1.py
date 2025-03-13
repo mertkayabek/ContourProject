@@ -405,7 +405,7 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
                                 #also constrain rotations in x direction(cylinder axis) would help for convergence issues
                                 # try only constrain x rotation
                                 # try also constraining all 3 rotations
-                                "NUMDOF 9 ONOFF 1 1 1 1 1 1 0 0 0 "  # Fix only x and y translations
+                                "NUMDOF 9 ONOFF 1 1 1 1 1 1 0 0 0 "  # Fix rotations
                                 "VAL 1 1 0 0 0 0 0 0 0 "
                                 "FUNCT {} {} 0 0 0 0 0 0 0"  # Use displacement functions for x,y
                             ),
@@ -524,7 +524,7 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
                         BoundaryCondition(
                             node_set,
                             (
-                                "NUMDOF 9 ONOFF 0 0 0 1 1 1 0 0 0 "  # Fix only x and y translations
+                                "NUMDOF 9 ONOFF 0 0 0 1 1 1 0 0 0 "  # Fix rotations
                                 # kola bardağı gibi oluyor x ve y sınırlayınca
                                 "VAL 0 0 0 0 0 0 0 0 0 "
                                 "FUNCT 0 0 0 0 0 0 0 0 0"  # Use displacement functions for x,y
