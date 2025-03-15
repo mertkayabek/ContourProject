@@ -40,27 +40,23 @@ import autograd.numpy as npAD
 import os
 
 # Import the objects we need from meshpy.
-from meshpy import (
-    mpy,	
-    Mesh,
-    MaterialReissner,
-    Beam3rHerm2Line3,
-    BoundaryCondition,
-    Rotation,
-    Function,
-    GeometrySet,
-    InputFile,
-)
-from meshpy.four_c import run_four_c
-from meshpy.utility import get_single_node
-from meshpy.utility import find_close_nodes
-from meshpy.mesh_creation_functions import (
-    create_beam_mesh_line,
+from meshpy.core.conf import mpy
+from meshpy.core.geometry_set import GeometrySet
+from meshpy.core.mesh import Mesh
+from meshpy.core.rotation import Rotation
+from meshpy.four_c.boundary_condition import BoundaryCondition
+from meshpy.four_c.element_beam import Beam3rHerm2Line3
+from meshpy.four_c.function import Function
+from meshpy.four_c.input_file import InputFile
+from meshpy.four_c.material import MaterialReissner
+from meshpy.four_c.run_four_c import run_four_c
+from meshpy.utils.nodes import get_single_node, find_close_nodes
+from meshpy.mesh_creation_functions.beam_basic_geometry import (
     create_beam_mesh_arc_segment_2d,
-    create_beam_mesh_curve,
+    create_beam_mesh_line,
 )
+from meshpy.mesh_creation_functions.beam_curve import create_beam_mesh_curve
 
-from meshpy.four_c import run_four_c
 def create_beams_wrapped_around_cylinder(base_dir, preview=False):
 
     interval = [0, 2] # z coordinate
@@ -78,8 +74,8 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
     # radius of marker max 0.25 mm
 
     n_el = 8*(n_intersections-1)*number_of_beams
-    time_step = 0.002
-    num_steps = 500
+    time_step = 0.005
+    num_steps = 200
 
     
     mesh = Mesh()
@@ -592,7 +588,7 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
         LINEAR_SOLVER                         1
         INT_STRATEGY                          Standard
         DYNAMICTYPE                           Statics
-        RESULTSEVRY                           1
+        RESULTSEVERY                           1
         NLNSOL                                fullnewton
         TIMESTEP                              {time_step}
         NUMSTEP                               {num_steps}
@@ -630,11 +626,11 @@ if __name__ == "__main__":
     """Execution part of script."""
 
     # Adapt this path to the directory you want to store the tutorial files in.
-    output_directory = "/home_student/kayabek/sw/meshpy/ContourProject/results_stentshape2_2/"
+    output_directory = "/home_student/kayabek/sw/Results/results_stentshape2_2/"
     input_file = create_beams_wrapped_around_cylinder(output_directory)
     input_file.write_input_file(os.path.join(output_directory, "simple_beam.dat"))
 
-    simulation_dir = "/home_student/kayabek/sw/meshpy/ContourProject/results_stentshape2_2/results"
+    simulation_dir = "/home_student/kayabek/sw/Results/results_stentshape2_2/results"
 
     return_code = run_four_c(
         os.path.join(output_directory, "simple_beam.dat"),

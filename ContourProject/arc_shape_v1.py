@@ -63,7 +63,7 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
     interval = [0, 6] # t
     cylinder_radius = 3.25 # radius of wrapping cylinder
     n_intersections = 2 # min 2
-    number_of_beams = 4 # each direction normally 72 in total
+    number_of_beams = 8 # each direction normally 72 in total
     compression_factor = 0.95 # Maximum compression. Probably should be around 0.9-0.95
     compressed_part = 0.1 # ratio how much of each beam is compressed from start
     beam_radius = 0.03 # radius of the beam
@@ -174,7 +174,8 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
         beam_object,
         tan_yz,
         compression_factor,
-        compressed_part
+        compressed_part,
+        #node_positions=None  # Add this parameter
     ):
         """
         Creates multiple beams, each shifted in y by an equal amount of 2π/number_of_beams.
@@ -193,6 +194,57 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
             y = tan_yz * R * (1 - npAD.cos(theta))  # y increases throughout
             
             return npAD.array([x, y, z])
+        
+        def calculate_node_positions(num_positions, R, tan_yz):
+            """
+            Calculate normalized parameter positions that correspond to uniform y-coordinate spacing.
+            
+            Args:
+                number_of_beams: Number of beams (will create number_of_beams+1 nodes)
+                R: Radius of the arc (half of total interval)
+                tan_yz: Tangent angle factor for the arc
+                
+            Returns:
+                List of normalized positions in [0,1] for node placement
+            """
+            # Start with position 0
+            positions = [0.0]  # First node is at the start point
+            
+            # Calculate y-coordinate increment
+            y_increment = 2 * tan_yz * R / number_of_beams
+            
+            # For each position, calculate the corresponding parameter value
+            for i in range(1, number_of_beams):
+                y = i * y_increment
+                # Invert the y-coordinate function to find the parameter t
+                # y = tan_yz * R * (1 - cos(θ)) and θ = (t/interval[1]) * π
+                # Solving for t: t = interval[1] * arccos(1 - y/(tan_yz*R)) / π
+                
+                # Handle potential numerical issues
+                arg = 1 - y / (tan_yz * R)
+                if arg < -1:
+                    arg = -1
+                elif arg > 1:
+                    arg = 1
+                    
+                theta = np.arccos(arg)
+                t = interval[1] * theta / np.pi
+        
+                # Normalize to [0, 1]
+                normalized_t = t / interval[1]
+                positions.append(normalized_t)
+            
+            # End with position 1
+            positions.append(1.0)
+            
+            return positions
+        
+        # Calculate node positions - number_of_beams/2 + 2 positions (including start and end)
+        num_positions = number_of_beams // 2
+        # Calculate node positions - number_of_beams+1 positions (including start and end)
+        node_positions = calculate_node_positions(number_of_beams, interval[1]/2, tan_yz)
+        
+        print("Node positions:", node_positions)
 
         beams = []
         beams_start = []
@@ -211,17 +263,24 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
                 material,
                 shape_with_shift,
                 interval=interval,
-                n_el=n_el,
+                #n_el=n_el,
+                node_positions_of_elements=node_positions,  # Use calculated positions instead of n_el
                 add_sets=add_sets
             )
 
             beams.append(dir1)
             beams_start.append(dir1["start"])
             beams_end.append(dir1["end"])
+            if i == 0:
+                print("\nY-coordinates of nodes on first arc:")
+                beam_nodes = dir1["line"].get_all_nodes()
+                beam_nodes.sort(key=lambda node: node.coordinates[2])
+                for j, node in enumerate(beam_nodes):
+                    print(f"Node {j}: y = {node.coordinates[1]:.6f}")
 
         #mesh.display_pyvista()
-        mesh.wrap_around_cylinder(radius=cylinder_radius)
-        #find_intersections_and_apply_coupling(mesh, beams, positional_coupling_penalty, rotational_coupling_penalty) # change this
+        #mesh.wrap_around_cylinder(radius=cylinder_radius)
+        find_intersections_and_apply_coupling(mesh, beams, positional_coupling_penalty, rotational_coupling_penalty) # change this
         mpy.check_overlapping_elements = False
 
         print("\nBeam start and end point coordinates:")
@@ -416,7 +475,7 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
         LINEAR_SOLVER                         1
         INT_STRATEGY                          Standard
         DYNAMICTYPE                           Statics
-        RESULTSEVRY                           1
+        RESULTSEVERY                           1
         NLNSOL                                fullnewton
         TIMESTEP                              {time_step}
         NUMSTEP                               {num_steps}
