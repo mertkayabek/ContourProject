@@ -43,6 +43,7 @@ import glob
 from datetime import datetime
 import shutil
 import pyvista as pv
+import re  
 #pv.start_xvfb()  # Start virtual X server for headless rendering
 
 # Import the objects we need from meshpy.
@@ -77,14 +78,14 @@ def create_beams_wrapped_around_cylinder(
 
     interval = [0, interval_end]
     n_intersections = 2
-    number_of_beams = 12
+    number_of_beams = 24
     compression_factor = 0.95
     youngs_modulus = 30000  # Young's modulus in N/mm^2
     # radius of marker max 0.25 mm
 
     n_el = 8*(n_intersections-1)*number_of_beams
-    time_step = 0.02
-    num_steps = 50
+    time_step = 0.1
+    num_steps = 10
 
     
     mesh = Mesh()
@@ -262,6 +263,7 @@ def create_beams_wrapped_around_cylinder(
         for i in range(number_of_beams):
             #shift_i = (2.0 * npAD.pi * cylinder_radius / number_of_beams) * i
             shift_i = (2*(interval[1] - interval[0])/number_of_beams) * i
+            #shift_i = (2*(interval[1] - interval[0])/ npAD.pi) * i
             def shape_with_shift(t, shift=shift_i):
                 base = n_shape_yz_complete(t)
                 return npAD.array([base[0], base[1] + shift, base[2]])
@@ -398,6 +400,7 @@ def create_beams_wrapped_around_cylinder(
                         BoundaryCondition(
                             node_set,
                             (
+                                # no need for fixing rotation check that
                                 "NUMDOF 9 ONOFF 1 1 0 1 1 1 0 0 0 "  # Fix only x and y translations
                                 "VAL 1 1 0 0 0 0 0 0 0 "
                                 "FUNCT {} {} 0 0 0 0 0 0 0"  # Use displacement functions for x,y
@@ -486,6 +489,7 @@ def create_beams_wrapped_around_cylinder(
         DYNAMICTYPE                           Statics
         RESULTSEVERY                           1
         NLNSOL                                fullnewton
+        DIVERCONT                             adapt_step
         TIMESTEP                              {time_step}
         NUMSTEP                               {num_steps}
         MAXTIME                               2.0
@@ -556,6 +560,7 @@ def visualize_timestep(vtk_file_path, output_path):
 def copy_vtk_files(results_dir, viz_dir, keep_timesteps=[0, 25, 50]):
     """
     Copies the VTK files for specified timesteps instead of visualizing them.
+    Includes both .pvtu and their associated .vtu files.
     """
     vtk_files_dir = os.path.join(results_dir, "xxx-vtk-files")
     if not os.path.exists(vtk_files_dir):
@@ -567,26 +572,72 @@ def copy_vtk_files(results_dir, viz_dir, keep_timesteps=[0, 25, 50]):
         # Format the timestep to match file pattern
         timestep_str = f"{timestep:05d}"
         
-        # Find structure files for this timestep
-        structure_files = glob.glob(os.path.join(vtk_files_dir, f"structure-beams-{timestep_str}*.v*u"))
+        # First find all pvtu files for this timestep (master files)
+        pvtu_files = glob.glob(os.path.join(vtk_files_dir, f"structure-beams-{timestep_str}.pvtu"))
+        #pvtu_files += glob.glob(os.path.join(vtk_files_dir, f"boundingbox-{timestep_str}.pvtu"))
         
-        if structure_files:
-            for src_file in structure_files:
+        # Then find all vtu files for this timestep (piece files)
+        vtu_files = glob.glob(os.path.join(vtk_files_dir, f"structure-beams-{timestep_str}-*.vtu"))
+        #vtu_files += glob.glob(os.path.join(vtk_files_dir, f"boundingbox-{timestep_str}-*.vtu"))
+        
+        # Combine all files to copy
+        all_files = pvtu_files + vtu_files
+        
+        if all_files:
+            for src_file in all_files:
                 dest_file = os.path.join(viz_dir, os.path.basename(src_file))
                 shutil.copy2(src_file, dest_file)
                 files_copied += 1
                 print(f"Copied: {os.path.basename(src_file)}")
+        else:
+            print(f"No VTK files found for timestep {timestep}")
     
+    print(f"Total files copied: {files_copied}")
     return files_copied > 0
+
+
+def get_dynamic_timesteps(results_dir):
+    """Determine first, middle, and last timesteps from available files."""
+    vtk_files_dir = os.path.join(results_dir, "xxx-vtk-files")
+    if not os.path.exists(vtk_files_dir):
+        print(f"Warning: VTK files directory not found: {vtk_files_dir}")
+        return [0, 5, 10]  # Default fallback
+    
+    # Find all structure beam files
+    structure_files = glob.glob(os.path.join(vtk_files_dir, "structure-beams-*.v*u"))
+    
+    # Extract timesteps
+    timesteps = []
+    for filename in structure_files:
+        basename = os.path.basename(filename)
+        match = re.search(r'structure-beams-(\d+)', basename)
+        if match:
+            timestep = int(match.group(1))
+            if timestep not in timesteps:
+                timesteps.append(timestep)
+    
+    if not timesteps:
+        print("No timestep files found, using default")
+        return [0, 5, 10]
+    
+    # Sort the timesteps
+    timesteps.sort()
+    
+    first_timestep = 0  # Always use 0 as first
+    last_timestep = timesteps[-1]
+    middle_timestep = (first_timestep + last_timestep) // 2
+    
+    print(f"Using timesteps: first={first_timestep}, middle={middle_timestep}, last={last_timestep}")
+    return [first_timestep, middle_timestep, last_timestep]
 
 def parameter_sweep():
     # Define parameter ranges
-    interval_ends = np.arange(3.0, 6.0, 1.0)
-    cylinder_radii = np.arange(2.75, 4.25, 0.5)
-    compressed_parts = np.arange(0.1, 0.5, 0.2)
-    beam_radii = np.arange(0.02, 0.04, 0.01)
-    positional_penalties = np.arange(750, 1250, 250)
-    rotational_penalties = np.arange(0, 200, 100)
+    interval_ends = np.arange(2.0, 10.1, 2.0)
+    cylinder_radii = np.arange(2.25, 8.5, 1.5)
+    compressed_parts = np.arange(0.1, 0.71, 0.2)
+    beam_radii = np.arange(0.03, 0.04, 0.01)
+    positional_penalties = np.arange(1000, 1250, 250)
+    rotational_penalties = np.arange(100, 200, 100)
 
     keep_timesteps = [0, 25, 50]
     
@@ -675,7 +726,24 @@ def parameter_sweep():
                     # Create visualizations for important timesteps
                     vtk_dir = os.path.join(results_dir, "xxx-vtk-files")
                     visualization_created = False
-                    
+
+                    # Dynamically determine timesteps based on number of files
+                    if os.path.exists(vtk_dir):
+                        # Count the number of files in the vtk directory
+                        file_count = len(os.listdir(vtk_dir))
+                        # Calculate the last timestep (file_count / 6 - 1)
+                        last_timestep = int(file_count / 6) - 1
+                        # Calculate the middle timestep ((0 + last_timestep) / 2)
+                        middle_timestep = (last_timestep + 1) // 2
+                        
+                        # Update keep_timesteps with dynamically calculated values
+                        keep_timesteps = [0, middle_timestep, last_timestep]
+                        print(f"Dynamically determined timesteps: {keep_timesteps}")
+                    else:
+                        print(f"VTK directory not found, using default timesteps: {keep_timesteps}")
+
+                    visualization_created = copy_vtk_files(results_dir, viz_dir, keep_timesteps)
+                    """
                     for timestep in keep_timesteps:
                         # Format the timestep to match file pattern
                         timestep_str = f"{timestep:05d}"
@@ -689,10 +757,11 @@ def parameter_sweep():
                             viz_file = os.path.join(viz_dir, f"timestep_{timestep}.png")
                             visualization_created = copy_vtk_files(results_dir, viz_dir, keep_timesteps)
                             # Create the visualization
-                            """
-                            if visualize_timestep(vtk_file, viz_file):
-                                visualization_created = True
-                            """
+
+                            #if visualize_timestep(vtk_file, viz_file):
+                            #    visualization_created = True
+
+                    """
                     # Delete results directory to save space
                     if visualization_created:
                         try:

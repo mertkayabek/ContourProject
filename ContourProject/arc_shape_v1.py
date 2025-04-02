@@ -56,26 +56,27 @@ from meshpy.mesh_creation_functions.beam_basic_geometry import (
     create_beam_mesh_line,
 )
 from meshpy.mesh_creation_functions.beam_curve import create_beam_mesh_curve
+import shutil
 
 
 def create_beams_wrapped_around_cylinder(base_dir, preview=False):
 
-    interval = [0, 4] # t
-    cylinder_radius = 3.25 # radius of wrapping cylinder
+    interval = [0, 3] # t
+    cylinder_radius = 2.75 # radius of wrapping cylinder
     n_intersections = 2 # min 2
-    number_of_beams = 12 # each direction normally 72 in total
+    number_of_beams = 4 # each direction normally 72 in total
     compression_factor = 0.95 # Maximum compression. Probably should be around 0.9-0.95
-    compressed_part = 0.4 # ratio how much of each beam is compressed from start
-    beam_radius = 0.03 # radius of the beam
+    compressed_part = 0.1 # ratio how much of each beam is compressed from start
+    beam_radius = 0.02 # radius of the beam
     youngs_modulus = 30000 # N/mm^2 Young's modulus of the beam material
     # penalty parameters 500 and 50 solved converging problem
     positional_coupling_penalty = 1000 # penalty for positional coupling
-    rotational_coupling_penalty = 100 # penalty for rotational coupling
+    rotational_coupling_penalty = 0 # penalty for rotational coupling
     # radius of marker max 0.25 mm
 
     n_el = 8*(n_intersections-1)*number_of_beams
-    time_step = 0.02
-    num_steps = 50
+    time_step = 0.1
+    num_steps = 10
 
     
     mesh = Mesh()
@@ -389,7 +390,7 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
                         BoundaryCondition(
                             node_set,
                             (
-                                "NUMDOF 9 ONOFF 1 1 0 1 1 1 0 0 0 "  # Fix only x and y translations
+                                "NUMDOF 9 ONOFF 1 1 0 0 0 0 0 0 0 "  # Fix only x and y translations
                                 "VAL 1 1 0 0 0 0 0 0 0 "
                                 "FUNCT {} {} 0 0 0 0 0 0 0"  # Use displacement functions for x,y
                             ),
@@ -477,6 +478,7 @@ def create_beams_wrapped_around_cylinder(base_dir, preview=False):
         DYNAMICTYPE                           Statics
         RESULTSEVERY                           1
         NLNSOL                                fullnewton
+        DIVERCONT                             adapt_step
         TIMESTEP                              {time_step}
         NUMSTEP                               {num_steps}
         MAXTIME                               2.0
@@ -517,6 +519,10 @@ if __name__ == "__main__":
     input_file.write_input_file(os.path.join(output_directory, "simple_beam.dat"))
 
     simulation_dir = "/home_student/kayabek/sw/Results/arc_shape1/results"
+    # Delete and recreate simulation directory
+    if os.path.exists(simulation_dir):
+        shutil.rmtree(simulation_dir)
+    os.makedirs(simulation_dir)
 
     return_code = run_four_c(
         os.path.join(output_directory, "simple_beam.dat"),
