@@ -78,7 +78,7 @@ def create_beams_wrapped_around_cylinder(
 
     interval = [0, interval_end]
     n_intersections = 2
-    number_of_beams = 24
+    number_of_beams = 36
     compression_factor = 0.95
     youngs_modulus = 30000  # Young's modulus in N/mm^2
     # radius of marker max 0.25 mm
@@ -306,11 +306,15 @@ def create_beams_wrapped_around_cylinder(
         new_radius = cylinder_radius * (1.0 - compression_factor)
 
         # write a for loop for all nodes in mesh like below
-        
+        max_z = max(node.coordinates[2] for node in mesh.nodes if not node.is_middle_node)
+        threshold = max_z * compressed_part
+
         for node in mesh.nodes:
+
             if not node.is_middle_node:
                 #node in beams_start: This is wrong I dont know why
                 
+
                 if  np.linalg.norm(node.coordinates[2] - interval[0]) < 1e-9:                #node in beams_start:
                     #print(f"Start node coordinates: {node.coordinates}")
                     # boundary condition with radial and axial=0 displacement
@@ -365,7 +369,8 @@ def create_beams_wrapped_around_cylinder(
                     )
                     
                 
-                elif node.coordinates[2] < ((interval[1] + interval[0])/2)*compressed_part:  # z < 5 for interval [0, 10]
+                elif node.coordinates[2] < threshold:
+                #node.coordinates[2] < ((interval[1] + interval[0])/2)*compressed_part:  # z < 5 for interval [0, 10]
                     # add here the boundary condition with radial displacement according to coordinate
                     node_set = GeometrySet(node)
 
@@ -509,6 +514,7 @@ def create_beams_wrapped_around_cylinder(
         USE_ABSOLUTE_POSITIONS                yes
         TRIAD_VISUALIZATIONPOINT              yes
         STRAINS_GAUSSPOINT                    yes
+        ELEMENT_GID                           yes
         ----------------------------------------------------------------BINNING STRATEGY
         BIN_SIZE_LOWER_BOUND                  3.0
         DOMAINBOUNDINGBOX                     -30 -30 -30 30 30 30
@@ -588,16 +594,16 @@ def copy_vtk_files(results_dir, viz_dir, keep_timesteps=[0, 25, 50]):
                 dest_file = os.path.join(viz_dir, os.path.basename(src_file))
                 shutil.copy2(src_file, dest_file)
                 files_copied += 1
-                print(f"Copied: {os.path.basename(src_file)}")
+                #print(f"Copied: {os.path.basename(src_file)}")
         else:
             print(f"No VTK files found for timestep {timestep}")
     
-    print(f"Total files copied: {files_copied}")
+    #print(f"Total files copied: {files_copied}")
     return files_copied > 0
 
-
+"""
 def get_dynamic_timesteps(results_dir):
-    """Determine first, middle, and last timesteps from available files."""
+   
     vtk_files_dir = os.path.join(results_dir, "xxx-vtk-files")
     if not os.path.exists(vtk_files_dir):
         print(f"Warning: VTK files directory not found: {vtk_files_dir}")
@@ -629,15 +635,28 @@ def get_dynamic_timesteps(results_dir):
     
     print(f"Using timesteps: first={first_timestep}, middle={middle_timestep}, last={last_timestep}")
     return [first_timestep, middle_timestep, last_timestep]
+"""
+
+
+def scale(self, vector):
+    """Scale beam nodes of this mesh.
+
+    Args
+    ----
+    vector: np.array, list
+            that will be added to all nodes.
+    """
+    for node in self.nodes:
+        node.coordinates *= vector
 
 def parameter_sweep():
     # Define parameter ranges
-    interval_ends = np.arange(2.0, 10.1, 2.0)
-    cylinder_radii = np.arange(2.25, 8.5, 1.5)
-    compressed_parts = np.arange(0.1, 0.71, 0.2)
-    beam_radii = np.arange(0.03, 0.04, 0.01)
-    positional_penalties = np.arange(1000, 1250, 250)
-    rotational_penalties = np.arange(100, 200, 100)
+    interval_ends = np.arange(6.0, 6.1, 2.0)
+    cylinder_radii = np.arange(3.0, 3.1, 1.0)
+    compressed_parts = np.arange(0.1, 0.59, 0.1)
+    beam_radii = np.arange(0.03, 0.031, 0.01)
+    positional_penalties = np.arange(0, 1, 500)
+    rotational_penalties = np.arange(0, 49, 50)
 
     keep_timesteps = [0, 25, 50]
     
@@ -674,7 +693,7 @@ def parameter_sweep():
             params_dir_name = (
                 f"int{interval_end:.1f}_"
                 f"rad{cylinder_radius:.2f}_"
-                f"comp{compressed_part:.1f}_"
+                f"comp{compressed_part:.2f}_"
                 f"beam{beam_radius:.2f}_"
                 f"pos{pos_penalty}_"
                 f"rot{rot_penalty}"
@@ -707,7 +726,7 @@ def parameter_sweep():
                 input_file.write_input_file(input_file_path)
                 
                 # Run simulation
-                print(f"Running simulation...")
+                #print(f"Running simulation...")
                 return_code = run_four_c(
                     input_file_path,
                     results_dir,
@@ -766,7 +785,7 @@ def parameter_sweep():
                     if visualization_created:
                         try:
                             shutil.rmtree(results_dir)
-                            print(f"Deleted results directory to save space")
+                            #print(f"Deleted results directory to save space")
                         except Exception as e:
                             print(f"Error deleting results directory: {str(e)}")
                     else:
@@ -789,7 +808,7 @@ def parameter_sweep():
                     # Delete results directory to save space regardless of whether files were copied
                     try:
                         shutil.rmtree(results_dir)
-                        print(f"Deleted results directory from failed simulation to save space")
+                        #print(f"Deleted results directory from failed simulation to save space")
                     except Exception as e:
                         print(f"Error deleting results directory: {str(e)}")
                 
