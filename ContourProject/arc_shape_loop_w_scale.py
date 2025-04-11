@@ -43,8 +43,11 @@ import glob
 from datetime import datetime
 import shutil
 import pyvista as pv
-import re  
+import re
 #pv.start_xvfb()  # Start virtual X server for headless rendering
+import time
+from datetime import timedelta
+
 
 # Import the objects we need from meshpy.
 from meshpy.core.conf import mpy
@@ -82,7 +85,8 @@ def create_beams_wrapped_around_cylinder(
     n_intersections = 2
     #number_of_beams = 12
     compression_factor = 0.95
-    youngs_modulus = 30000  # Young's modulus in N/mm^2
+    youngs_modulus = 83000  # Young's modulus in N/mm^2
+    # austenite phase value
     # radius of marker max 0.25 mm
 
     n_el = 8*(n_intersections-1)*number_of_beams
@@ -245,9 +249,25 @@ def create_beams_wrapped_around_cylinder(
                 # Normalize to [0, 1]
                 normalized_t = t / interval[1]
                 positions.append(normalized_t)
-            
             # End with position 1
             positions.append(1.0)
+            
+            
+            # Now add 4 extra nodes between start (0.0) and first calculated node
+            first_interval = positions[1] - positions[0]
+            for i in range(1, 5):  # Create 4 equally spaced nodes
+                new_pos = positions[0] + (first_interval * i) / 5
+                positions.append(new_pos)
+            
+            # Add 4 extra nodes between last calculated node and position 1.0
+            for i in range(1, 5):  # Create 4 equally spaced nodes
+                new_pos = 1 - (first_interval * i) / 5
+                positions.append(new_pos)
+            
+            # Sort the positions to maintain proper order
+            positions.sort()
+            #print("Sorted node positions:", positions)
+
             
             return positions
         
@@ -315,7 +335,7 @@ def create_beams_wrapped_around_cylinder(
         threshold = max_z * compressed_part
 
         for node in mesh.nodes:
-
+            #print(f"All Node coordinates: {node.coordinates[2]}")
             if not node.is_middle_node:
                 #node in beams_start: This is wrong I dont know why
 
@@ -323,6 +343,7 @@ def create_beams_wrapped_around_cylinder(
                     #print(f"Start node coordinates: {node.coordinates}")
                     # boundary condition with radial and axial=0 displacement
                     node_set = GeometrySet(node)
+                    #print(f"Start Node coordinates: {node.coordinates}")
                     """
                     mesh.add(
                         BoundaryCondition(
@@ -382,7 +403,7 @@ def create_beams_wrapped_around_cylinder(
                             node.coordinates, 
                             new_radius
                         )
-                    #print(f"Node coordinates: {node.coordinates}")
+                    #print(f"Compressed Node coordinates: {node.coordinates[2]}")
                     #print(f"Calculated displacement: {displacement}")
 
                     # Create displacement functions with time interpolation
@@ -601,6 +622,16 @@ def copy_vtk_files(results_dir, viz_dir, keep_timesteps=[0, 25, 50]):
                 #print(f"Copied: {os.path.basename(src_file)}")
         else:
             print(f"No VTK files found for timestep {timestep}")
+
+    # Copy log and error files from results directory
+    log_files = glob.glob(os.path.join(results_dir, "xxx.log"))
+    err_files = glob.glob(os.path.join(results_dir, "xxx.err"))
+    
+    for src_file in log_files + err_files:
+        if os.path.exists(src_file):
+            dest_file = os.path.join(viz_dir, os.path.basename(src_file))
+            shutil.copy2(src_file, dest_file)
+            files_copied += 1
     
     #print(f"Total files copied: {files_copied}")
     return files_copied > 0
@@ -658,16 +689,19 @@ def parameter_sweep():
     interval_end = 6.0
     cylinder_radius = 3.0
     beam_radius = 0.03
-    number_of_beams = 32
+    number_of_beams = 72
     #interval_ends = np.arange(6.0, 6.1, 2.0)
     #cylinder_radii = np.arange(3.0, 3.1, 1.0)
-    compressed_parts = np.arange(0.4, 0.41, 0.2)
+    compressed_parts = np.arange(0.25, 0.26, 0.2)
     #beam_radii = np.arange(0.03, 0.031, 0.01)
-    positional_penalties = np.arange(500, 501, 500)
-    rotational_penalties = np.arange(50, 51, 50)
-    z_scale_factors = np.arange(1.5, 1.6, 1.0)
+    positional_penalties = np.arange(0, 1, 500)
+    rotational_penalties = np.arange(0, 49, 50)
+    z_scale_factors = np.arange(1.0, 1.6, 1.0)
 
     keep_timesteps = [0, 25, 50]
+
+    # Timing variables
+    sweep_start_time = time.time()
     
     # Create base directory for results with timestamp
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -695,6 +729,7 @@ def parameter_sweep():
     for compressed_part, z_scale_factor in itertools.product(compressed_parts, z_scale_factors):
         for pos_penalty, rot_penalty in itertools.product(positional_penalties, rotational_penalties):
             current_combination += 1
+            combination_start_time = time.time()
             
             # Create parameter directory name
             params_dir_name = (
@@ -744,7 +779,11 @@ def parameter_sweep():
                     output_name='xxx',
                     n_proc=2
                 )
-                
+                combination_end_time = time.time()
+                time_for_combination = combination_end_time - combination_start_time
+                time_str = str(timedelta(seconds=int(time_for_combination)))
+                print(f"  Time for this combination: {time_str}")
+
                 # Process results
                 if return_code == 0:
                     print(f"Simulation completed successfully.")
