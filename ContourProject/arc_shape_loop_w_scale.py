@@ -693,11 +693,11 @@ def parameter_sweep():
     cylinder_radius = 3.0
     beam_radius = 0.03
     number_of_beams = 72
-    youngs_moduli = np.array([30000, 83000])  # Different material stiffness values
+    youngs_moduli = np.array([83000])  # Different material stiffness values
     beam_radii = np.array([0.02, 0.03, 0.04])  # Different beam thickness values
     compressed_parts = np.array([0.1, 0.3])  # Custom values
     positional_penalties = np.array([100])  # Custom values 
-    rotational_penalties = np.array([0])  # Custom values
+    rotational_penalties = np.array([10])  # Custom values
     z_scale_factors = np.array([0.5, 1.0])  # Custom values
 
     keep_timesteps = [0, 25, 50]
