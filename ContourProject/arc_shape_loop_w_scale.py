@@ -78,6 +78,7 @@ def create_beams_wrapped_around_cylinder(
     rotational_coupling_penalty,
     z_scale_factor=1.0,
     number_of_beams=12,
+    youngs_modulus=83000,
     preview=False
 ):
     
@@ -85,13 +86,14 @@ def create_beams_wrapped_around_cylinder(
     n_intersections = 2
     #number_of_beams = 12
     compression_factor = 0.95
-    youngs_modulus = 83000  # Young's modulus in N/mm^2
+    #youngs_modulus = 83000  # Young's modulus in N/mm^2
     # austenite phase value
     # radius of marker max 0.25 mm
 
     n_el = 8*(n_intersections-1)*number_of_beams
-    time_step = 0.1
-    num_steps = 10
+    num_steps = 20
+    time_step = 1/num_steps
+    
 
     
     mesh = Mesh()
@@ -254,6 +256,7 @@ def create_beams_wrapped_around_cylinder(
             
             
             # Now add 4 extra nodes between start (0.0) and first calculated node
+            
             first_interval = positions[1] - positions[0]
             for i in range(1, 5):  # Create 4 equally spaced nodes
                 new_pos = positions[0] + (first_interval * i) / 5
@@ -522,7 +525,7 @@ def create_beams_wrapped_around_cylinder(
         DIVERCONT                             adapt_step
         TIMESTEP                              {time_step}
         NUMSTEP                               {num_steps}
-        MAXTIME                               2.0
+        MAXTIME                               1.0
         ---------------------------------------------------------------SOLVER 1
         NAME                                  Structure_Solver
         SOLVER                                Superlu
@@ -690,18 +693,20 @@ def parameter_sweep():
     cylinder_radius = 3.0
     beam_radius = 0.03
     number_of_beams = 72
-    #interval_ends = np.arange(6.0, 6.1, 2.0)
-    #cylinder_radii = np.arange(3.0, 3.1, 1.0)
-    compressed_parts = np.arange(0.25, 0.26, 0.2)
-    #beam_radii = np.arange(0.03, 0.031, 0.01)
-    positional_penalties = np.arange(0, 1, 500)
-    rotational_penalties = np.arange(0, 49, 50)
-    z_scale_factors = np.arange(1.0, 1.6, 1.0)
+    youngs_moduli = np.array([30000, 83000])  # Different material stiffness values
+    beam_radii = np.array([0.02, 0.03, 0.04])  # Different beam thickness values
+    compressed_parts = np.array([0.1, 0.3])  # Custom values
+    positional_penalties = np.array([100])  # Custom values 
+    rotational_penalties = np.array([0])  # Custom values
+    z_scale_factors = np.array([0.5, 1.0])  # Custom values
 
     keep_timesteps = [0, 25, 50]
 
     # Timing variables
     sweep_start_time = time.time()
+
+    # Path to check for existing combinations
+    existing_sweeps_dir = "/home_student/kayabek/sw/Results/Sweeps"
     
     # Create base directory for results with timestamp
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -713,163 +718,290 @@ def parameter_sweep():
         f.write(f"Parameter sweep configuration:\n")
         f.write(f"interval_end: {interval_end}\n")
         f.write(f"cylinder_radius: {cylinder_radius}\n")
-        f.write(f"beam_radius: {beam_radius}\n")
+        f.write(f"youngs_moduli: {youngs_moduli}\n")
+        f.write(f"beam_radii: {beam_radii}\n")
         f.write(f"compressed_parts: {compressed_parts}\n")
         f.write(f"positional_penalties: {positional_penalties}\n")
         f.write(f"rotational_penalties: {rotational_penalties}\n")
         f.write(f"z_scale_factors: {z_scale_factors}\n")
 
     # Loop through parameter combinations
-    total_combinations = len(compressed_parts) * len(positional_penalties) * len(rotational_penalties) * len(z_scale_factors)
+    total_combinations = len(youngs_moduli) * len(beam_radii) * len(compressed_parts) * len(positional_penalties) * len(rotational_penalties) * len(z_scale_factors)
     print(f"Total parameter combinations: {total_combinations}")
     
     current_combination = 0
+    skipped_combinations = 0
     
     # Loop through parameter combinations
-    for compressed_part, z_scale_factor in itertools.product(compressed_parts, z_scale_factors):
-        for pos_penalty, rot_penalty in itertools.product(positional_penalties, rotational_penalties):
-            current_combination += 1
-            combination_start_time = time.time()
-            
-            # Create parameter directory name
-            params_dir_name = (
-                f"nbeams{number_of_beams}_"
-                f"int{interval_end:.1f}_"
-                f"rad{cylinder_radius:.2f}_"
-                f"comp{compressed_part:.2f}_"
-                f"beam{beam_radius:.2f}_"
-                f"zscale{z_scale_factor:.1f}_"
-                f"pos{pos_penalty}_"
-                f"rot{rot_penalty}"
-            )
-            params_dir = os.path.join(base_results_dir, params_dir_name)
-            os.makedirs(params_dir, exist_ok=True)
-            
-            results_dir = os.path.join(params_dir, "results")
-            os.makedirs(results_dir, exist_ok=True)
-            
-            # Log progress
-            print(f"\nRunning combination {current_combination}/{total_combinations} ({(current_combination/total_combinations)*100:.1f}%)")
-            print(f"Parameters: interval_end={interval_end}, cylinder_radius={cylinder_radius}, "
-                  f"compressed_part={compressed_part}, beam_radius={beam_radius}, zscale={z_scale_factor}, "
-                  f"pos_penalty={pos_penalty}, rot_penalty={rot_penalty}")
-            
-            try:
-                # Create and run simulation
-                input_file = create_beams_wrapped_around_cylinder(
-                    params_dir,
-                    interval_end,
-                    cylinder_radius,
-                    compressed_part,
-                    beam_radius,
-                    pos_penalty,
-                    rot_penalty,
-                    z_scale_factor,
-                    number_of_beams
-                )
+    for youngs_modulus, beam_radius in itertools.product(youngs_moduli, beam_radii):
+        for compressed_part, z_scale_factor in itertools.product(compressed_parts, z_scale_factors):
+            for pos_penalty, rot_penalty in itertools.product(positional_penalties, rotational_penalties):
+                current_combination += 1
+                combination_start_time = time.time()
                 
-                input_file_path = os.path.join(params_dir, "simple_beam.dat")
-                input_file.write_input_file(input_file_path)
-                
-                # Run simulation
-                #print(f"Running simulation...")
-                return_code = run_four_c(
-                    input_file_path,
-                    results_dir,
-                    output_name='xxx',
-                    n_proc=2
+                # Create parameter directory name
+                params_dir_name = (
+                    f"nbeams{number_of_beams}_"
+                    f"int{interval_end:.1f}_"
+                    f"rad{cylinder_radius:.2f}_"
+                    f"comp{compressed_part:.2f}_"
+                    f"beam{beam_radius:.2f}_"
+                    f"zscale{z_scale_factor:.1f}_"
+                    f"young{youngs_modulus}_"
+                    f"pos{pos_penalty}_"
+                    f"rot{rot_penalty}"
                 )
-                combination_end_time = time.time()
-                time_for_combination = combination_end_time - combination_start_time
-                time_str = str(timedelta(seconds=int(time_for_combination)))
-                print(f"  Time for this combination: {time_str}")
+                # Check if this combination already exists in the Sweeps directory
+                existing_dir = os.path.join(existing_sweeps_dir, params_dir_name)
+                if os.path.exists(existing_dir):
+                    print(f"\nSkipping combination {current_combination}/{total_combinations}: Already exists")
+                    print(f"Parameters: young={youngs_modulus}, beam_radius={beam_radius}, "
+                          f"compressed_part={compressed_part}, zscale={z_scale_factor}, "
+                          f"pos_penalty={pos_penalty}, rot_penalty={rot_penalty}")
+                    skipped_combinations += 1
+                    continue
 
-                # Process results
-                if return_code == 0:
-                    print(f"Simulation completed successfully.")
+                # Start timing for this combination
+                combination_start_time = time.time()
+
+                params_dir = os.path.join(base_results_dir, params_dir_name)
+                os.makedirs(params_dir, exist_ok=True)
+                
+                results_dir = os.path.join(params_dir, "results")
+                os.makedirs(results_dir, exist_ok=True)
+                
+                # Log progress
+                print(f"\nRunning combination {current_combination}/{total_combinations} ({(current_combination/total_combinations)*100:.1f}%)")
+                print(f"Parameters: young={youngs_modulus}, beam_radius={beam_radius}, "
+                      f"compressed_part={compressed_part}, zscale={z_scale_factor}, "
+                      f"pos_penalty={pos_penalty}, rot_penalty={rot_penalty}")
+                
+                try:
+                    # Create and run simulation
+                    input_file = create_beams_wrapped_around_cylinder(
+                        params_dir,
+                        interval_end,
+                        cylinder_radius,
+                        compressed_part,
+                        beam_radius,
+                        pos_penalty,
+                        rot_penalty,
+                        z_scale_factor,
+                        number_of_beams,
+                        youngs_modulus=youngs_modulus
+                    )
                     
-                    # Create visualization directory
-                    viz_dir = os.path.join(params_dir, "visualizations")
-                    os.makedirs(viz_dir, exist_ok=True)
+                    input_file_path = os.path.join(params_dir, "simple_beam.dat")
+                    input_file.write_input_file(input_file_path)
                     
-                    # Create visualizations for important timesteps
-                    vtk_dir = os.path.join(results_dir, "xxx-vtk-files")
-                    visualization_created = False
+                    # Run simulation
+                    #print(f"Running simulation...")
+                    return_code = run_four_c(
+                        input_file_path,
+                        results_dir,
+                        output_name='xxx',
+                        n_proc=2
+                    )
+                    combination_end_time = time.time()
+                    time_for_combination = combination_end_time - combination_start_time
+                    time_str = str(timedelta(seconds=int(time_for_combination)))
+                    print(f"  Time for this combination: {time_str}")
 
-                    # Dynamically determine timesteps based on number of files
-                    if os.path.exists(vtk_dir):
-                        # Count the number of files in the vtk directory
-                        file_count = len(os.listdir(vtk_dir))
-                        # Calculate the last timestep (file_count / 6 - 1)
-                        last_timestep = int(file_count / 6) - 1
-                        # Calculate the middle timestep ((0 + last_timestep) / 2)
-                        middle_timestep = (last_timestep + 1) // 2
+                    # Process results
+                    if return_code == 0:
+                        print(f"Simulation completed successfully.")
                         
-                        # Update keep_timesteps with dynamically calculated values
-                        keep_timesteps = [0, middle_timestep, last_timestep]
-                        print(f"Dynamically determined timesteps: {keep_timesteps}")
-                    else:
-                        print(f"VTK directory not found, using default timesteps: {keep_timesteps}")
-
-                    visualization_created = copy_vtk_files(results_dir, viz_dir, keep_timesteps)
-                    """
-                    for timestep in keep_timesteps:
-                        # Format the timestep to match file pattern
-                        timestep_str = f"{timestep:05d}"
+                        # Create visualization directory
+                        viz_dir = os.path.join(params_dir, "visualizations")
+                        os.makedirs(viz_dir, exist_ok=True)
                         
-                        # Look for structure files
-                        structure_files = glob.glob(os.path.join(vtk_dir, f"structure-beams-{timestep_str}*.v*u"))
-                        
-                        if structure_files:
-                            # Use the first matching file
-                            vtk_file = structure_files[0]
-                            viz_file = os.path.join(viz_dir, f"timestep_{timestep}.png")
-                            visualization_created = copy_vtk_files(results_dir, viz_dir, keep_timesteps)
-                            # Create the visualization
+                        # Create visualizations for important timesteps
+                        vtk_dir = os.path.join(results_dir, "xxx-vtk-files")
+                        visualization_created = False
 
-                            #if visualize_timestep(vtk_file, viz_file):
-                            #    visualization_created = True
+                        # Dynamically determine timesteps based on number of files
+                        if os.path.exists(vtk_dir):
+                            # Count the number of files in the vtk directory
+                            file_count = len(os.listdir(vtk_dir))
+                            # Calculate the last timestep (file_count / 6 - 1)
+                            last_timestep = int(file_count / 6) - 1
+                            # Calculate the middle timestep ((0 + last_timestep) / 2)
+                            middle_timestep = (last_timestep + 1) // 2
+                            
+                            # Update keep_timesteps with dynamically calculated values
+                            keep_timesteps = [0, middle_timestep, last_timestep]
+                            print(f"Dynamically determined timesteps: {keep_timesteps}")
+                        else:
+                            print(f"VTK directory not found, using default timesteps: {keep_timesteps}")
 
-                    """
-                    # Delete results directory to save space
-                    if visualization_created:
-                        try:
-                            shutil.rmtree(results_dir)
-                            #print(f"Deleted results directory to save space")
-                        except Exception as e:
-                            print(f"Error deleting results directory: {str(e)}")
-                    else:
-                        print(f"Warning: No visualizations were created, keeping results directory")
-                else:
-                    print(f"Simulation failed with return code {return_code}")
-                    # For failed simulations, still try to copy any output that might have been generated
-                    viz_dir = os.path.join(params_dir, "visualizations")
-                    os.makedirs(viz_dir, exist_ok=True)
-                    
-                    # Try to copy any VTK files that might have been generated before failure
-                    vtk_dir = os.path.join(results_dir, "xxx-vtk-files")
-                    if os.path.exists(vtk_dir):
                         visualization_created = copy_vtk_files(results_dir, viz_dir, keep_timesteps)
-                        
-                        # Also create a failure log
-                        #with open(os.path.join(viz_dir, "simulation_failed.txt"), "w") as f:
-                        #    f.write(f"Simulation failed with return code {return_code}\n")
-                    
-                    # Delete results directory to save space regardless of whether files were copied
-                    try:
-                        shutil.rmtree(results_dir)
-                        #print(f"Deleted results directory from failed simulation to save space")
-                    except Exception as e:
-                        print(f"Error deleting results directory: {str(e)}")
-                
-                # Keep the results directory for debugging    
-            except Exception as e:
-                # Log errors but continue with next parameter combination
-                print(f"Error in simulation: {str(e)}")
-                with open(os.path.join(params_dir, "error.log"), "w") as f:
-                    f.write(f"Error: {str(e)}\n")
-                continue
+                        """
+                        for timestep in keep_timesteps:
+                            # Format the timestep to match file pattern
+                            timestep_str = f"{timestep:05d}"
+                            
+                            # Look for structure files
+                            structure_files = glob.glob(os.path.join(vtk_dir, f"structure-beams-{timestep_str}*.v*u"))
+                            
+                            if structure_files:
+                                # Use the first matching file
+                                vtk_file = structure_files[0]
+                                viz_file = os.path.join(viz_dir, f"timestep_{timestep}.png")
+                                visualization_created = copy_vtk_files(results_dir, viz_dir, keep_timesteps)
+                                # Create the visualization
 
+                                #if visualize_timestep(vtk_file, viz_file):
+                                #    visualization_created = True
+
+                        """
+                        # Delete results directory to save space
+                        if visualization_created:
+                            try:
+                                shutil.rmtree(results_dir)
+                                #print(f"Deleted results directory to save space")
+                            except Exception as e:
+                                print(f"Error deleting results directory: {str(e)}")
+                        else:
+                            print(f"Warning: No visualizations were created, keeping results directory")
+                    else:
+                        print(f"Simulation failed with return code {return_code}")
+                        # Try with progressively finer time stepping
+                        original_num_steps = 20  # Starting value
+                        max_num_steps = 120  # Max value to try
+                        current_num_steps = original_num_steps + 10  # First retry with 40 steps
+                        
+                        # Keep retrying with increased time step resolution until we succeed or reach max
+                        while current_num_steps <= max_num_steps:
+                            print(f"Retrying with finer time stepping: num_steps={current_num_steps}")
+                            retry_start_time = time.time()
+                            
+                            # Calculate new time step
+                            new_time_step = 1.0 / current_num_steps
+                            """
+                            # Create a modified input file with new time parameters
+                            retry_input_file = create_beams_wrapped_around_cylinder(
+                                params_dir,
+                                interval_end,
+                                cylinder_radius,
+                                compressed_part,
+                                beam_radius,
+                                pos_penalty,
+                                rot_penalty,
+                                z_scale_factor,
+                                number_of_beams,
+                                youngs_modulus=youngs_modulus
+                            )
+                            """
+                            # Modify the time step parameters
+                            retry_input_file_content = input_file.get_string()
+                            retry_input_file_content = retry_input_file_content.replace(
+                                f"TIMESTEP                              {1/original_num_steps}", 
+                                f"TIMESTEP                              {new_time_step}"
+                            ).replace(
+                                f"NUMSTEP                               {original_num_steps}",
+                                f"NUMSTEP                               {current_num_steps}"
+                            )
+                            
+                            # Write the modified input file
+                            retry_input_file_path = os.path.join(params_dir, f"simple_beam.dat")
+                            with open(retry_input_file_path, "w") as f:
+                                f.write(retry_input_file_content)
+                            
+                            # Clean up previous results
+                            if os.path.exists(results_dir):
+                                shutil.rmtree(results_dir)
+                            os.makedirs(results_dir, exist_ok=True)
+                            
+                            # Run the retry simulation
+                            retry_return_code = run_four_c(
+                                retry_input_file_path,
+                                results_dir,
+                                output_name='xxx',
+                                n_proc=2
+                            )
+                            
+                            # Check if retry was successful
+                            if retry_return_code == 0:
+                                print(f"Retry successful with num_steps={current_num_steps}")
+                                
+                                # Process successful results
+                                viz_dir = os.path.join(params_dir, "visualizations")
+                                os.makedirs(viz_dir, exist_ok=True)
+                                
+                                vtk_dir = os.path.join(results_dir, "xxx-vtk-files")
+                                visualization_created = False
+                                
+                                if os.path.exists(vtk_dir):
+                                    # Determine timesteps dynamically
+                                    file_count = len(os.listdir(vtk_dir))
+                                    last_timestep = int(file_count / 6) - 1
+                                    middle_timestep = (last_timestep + 1) // 2
+                                    keep_timesteps = [0, middle_timestep, last_timestep]
+                                    print(f"Using timesteps: {keep_timesteps}")
+                                    
+                                    visualization_created = copy_vtk_files(results_dir, viz_dir, keep_timesteps)
+                                
+                                # Clean up after successful retry
+                                if visualization_created:
+                                    try:
+                                        shutil.rmtree(results_dir)
+                                    except Exception as e:
+                                        print(f"Error deleting results directory: {str(e)}")
+                                
+                                # Exit retry loop on success
+                                break
+                            else:
+                                print(f"Retry failed with num_steps={current_num_steps}, return code {retry_return_code}")
+                                # Continue to next retry attempt with more time steps
+                                retry_time = time.time() - retry_start_time
+                                print(f"Retry took {str(timedelta(seconds=int(retry_time)))}")
+                                
+                                # Try to save any output from this failed attempt
+                                viz_dir = os.path.join(params_dir, f"visualizations_attempt_{current_num_steps}")
+                                os.makedirs(viz_dir, exist_ok=True)
+                                
+                                vtk_dir = os.path.join(results_dir, "xxx-vtk-files")
+                                if os.path.exists(vtk_dir):
+                                    copy_vtk_files(results_dir, viz_dir, keep_timesteps)
+                                
+                                # Increment for next attempt
+                                current_num_steps += 10
+                        
+                        # If we reached max steps without success, do final cleanup
+                        if current_num_steps > max_num_steps:
+                            print(f"All retry attempts failed, max num_steps={max_num_steps} reached")
+                            
+                            # Final attempt to copy any VTK files from the last attempt
+                            viz_dir = os.path.join(params_dir, "visualizations")
+                            os.makedirs(viz_dir, exist_ok=True)
+                            
+                            vtk_dir = os.path.join(results_dir, "xxx-vtk-files")
+                            if os.path.exists(vtk_dir):
+                                copy_vtk_files(results_dir, viz_dir, keep_timesteps)
+                            
+                            # Save log file with information about the failure
+                            with open(os.path.join(params_dir, "retry_failed.log"), "w") as f:
+                                f.write(f"All retry attempts failed, tried up to num_steps={max_num_steps}\n")
+                            
+                            # Clean up results directory
+                            try:
+                                shutil.rmtree(results_dir)
+                            except Exception as e:
+                                print(f"Error deleting results directory: {str(e)}")
+                    # Keep the results directory for debugging    
+                except Exception as e:
+                    # Log errors but continue with next parameter combination
+                    print(f"Error in simulation: {str(e)}")
+                    with open(os.path.join(params_dir, "error.log"), "w") as f:
+                        f.write(f"Error: {str(e)}\n")
+                    continue
+    # Print summary
+    print(f"\nParameter sweep completed:")
+    print(f"Total combinations: {total_combinations}")
+    print(f"Skipped (already existed): {skipped_combinations}")
+    print(f"Processed: {total_combinations - skipped_combinations}")
+    total_time = time.time() - sweep_start_time
+    print(f"Total time: {str(timedelta(seconds=int(total_time)))}")
 
 if __name__ == "__main__":
     """Execution part of script."""
