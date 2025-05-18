@@ -1,8 +1,8 @@
 aneurysm:
   t: 0.1 # thickness of wall
   r_art_i: 1.5
-  r_ca_i: 3.1
-  h_y_ca: 4 #distance between centerline and center of aneurysm
+  r_ca_i: 4.1
+  h_y_ca: 5 #distance between centerline and center of aneurysm
   L: 7
   n_ref_surf: 0 # refine surface before extrusion
   n_ref_neck: 0 # refine additional the surface around the anerym neck

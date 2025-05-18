@@ -94,6 +94,7 @@ def calculate_displacement_for_cylinder(coordinates, new_radius):
 
 def create_beams_wrapped_around_cylinder(
     cubit,
+    second_simulation,
     base_dir, 
     interval_end,
     cylinder_radius,
@@ -116,7 +117,7 @@ def create_beams_wrapped_around_cylinder(
     # radius of marker max 0.25 mm
 
     n_el = 8*(n_intersections-1)*number_of_beams
-    num_steps = 20
+    num_steps = 40
     time_step = 1/num_steps
 
     mesh = Mesh()
@@ -369,7 +370,7 @@ def create_beams_wrapped_around_cylinder(
         beams = []
         beams_start = []
         beams_end = []
-
+        
         for i in range(number_of_beams):
             #shift_i = (2.0 * npAD.pi * cylinder_radius / number_of_beams) * i
             shift_i = (2*(interval[1] - interval[0])/number_of_beams) * i
@@ -426,6 +427,12 @@ def create_beams_wrapped_around_cylinder(
         max_z = max(node.coordinates[2] for node in mesh.nodes if not node.is_middle_node)
         threshold = max_z * compressed_part
         num_nodes = len(mesh.nodes)
+        
+        #beam_nodes_for_contact = GeometrySet()
+        #beam_nodes_for_contact = None
+        beam_lines = GeometrySet(beams[0]["line"])
+        for i in range(1, len(beams)):
+            beam_lines.add(beams[i]["line"])
 
         for node in mesh.nodes:
             # If node has a beam number attribute use it, otherwise mark as N/A
@@ -434,6 +441,10 @@ def create_beams_wrapped_around_cylinder(
             #print(f"Beam: x = {node.coordinates[0]:.3f}, y = {node.coordinates[1]:.3f}, z = {node.coordinates[2]:.3f}")
             if not node.is_middle_node:
                 #node in beams_start: This is wrong I dont know why
+                #if beam_nodes_for_contact is None:
+                #    beam_nodes_for_contact = GeometrySet(node)  # Initialize with first node
+                #else:
+                #    beam_nodes_for_contact.add(node)  # Add subsequent nodes
 
                 if  np.linalg.norm(node.coordinates[2] - interval[0]) < 1e-9:                #node in beams_start:
                     #print(f"Start node coordinates: {node.coordinates}")
@@ -460,7 +471,7 @@ def create_beams_wrapped_around_cylinder(
                     displacement_x = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 3 TIMES 0.0 1.0 1000.0 VALUES 0.0 {} {}".format(
+                        "NUMPOINTS 3 TIMES 0.0 0.8 1000.0 VALUES 0.0 {} {}".format(
                             displacement[0],  # x-component of displacement
                             displacement[0]
                         )
@@ -468,23 +479,30 @@ def create_beams_wrapped_around_cylinder(
                     displacement_y = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 3 TIMES 0.0 1.0 1000.0 VALUES 0.0 {} {}".format(
+                        "NUMPOINTS 3 TIMES 0.0 0.8 1000.0 VALUES 0.0 {} {}".format(
                             displacement[1],  # y-component of displacement
                             displacement[1]
                         )
                     )
+                    displacement_z = Function(
+                        "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
+                        "VARIABLE 0 NAME a TYPE linearinterpolation "
+                        "NUMPOINTS 3 TIMES 0.0 0.8 1.0 VALUES 0.0 0.0 -2.0"
+                    )
+
                     mesh.add(displacement_x)
                     mesh.add(displacement_y)
+                    mesh.add(displacement_z)
 
                     mesh.add(
                         BoundaryCondition(
                             node_set,
                             (
                                 "NUMDOF 9 ONOFF 1 1 1 1 1 1 0 0 0 "  # Fix z also only x and y translations
-                                "VAL 1 1 0 0 0 0 0 0 0 "
-                                "FUNCT {} {} 0 0 0 0 0 0 0"  # Use displacement functions for x,y
+                                "VAL 1 1 1 0 0 0 0 0 0 "
+                                "FUNCT {} {} {} 0 0 0 0 0 0"  # Use displacement functions for x,y
                             ),
-                            format_replacement=[displacement_x, displacement_y],  # Use the displacement functions
+                            format_replacement=[displacement_x, displacement_y, displacement_z],  # Use the displacement functions
                             bc_type=mpy.bc.dirichlet,
                         )
                     )
@@ -506,7 +524,7 @@ def create_beams_wrapped_around_cylinder(
                     displacement_x = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 3 TIMES 0.0 1.0 1000.0 VALUES 0.0 {} {}".format(
+                        "NUMPOINTS 3 TIMES 0.0 0.8 1000.0 VALUES 0.0 {} {}".format(
                             displacement[0],  # x-component of displacement
                             displacement[0]
                         )
@@ -514,24 +532,31 @@ def create_beams_wrapped_around_cylinder(
                     displacement_y = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 3 TIMES 0.0 1.0 1000.0 VALUES 0.0 {} {}".format(
+                        "NUMPOINTS 3 TIMES 0.0 0.8 1000.0 VALUES 0.0 {} {}".format(
                             displacement[1],  # y-component of displacement
                             displacement[1]
                         )
                     )
+                    displacement_z = Function(
+                        "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
+                        "VARIABLE 0 NAME a TYPE linearinterpolation "
+                        "NUMPOINTS 3 TIMES 0.0 0.8 1.0 VALUES 0.0 0.0 -2.0"
+                    )
+
                     mesh.add(displacement_x)
                     mesh.add(displacement_y)
+                    mesh.add(displacement_z)
 
                     mesh.add(
                         BoundaryCondition(
                             node_set,
                             (
                                 # no need for fixing rotation check that
-                                "NUMDOF 9 ONOFF 1 1 0 1 1 1 0 0 0 "  # Fix only x and y translations
-                                "VAL 1 1 0 0 0 0 0 0 0 "
-                                "FUNCT {} {} 0 0 0 0 0 0 0"  # Use displacement functions for x,y
+                                "NUMDOF 9 ONOFF 1 1 1 1 1 1 0 0 0 "  # Fix only x and y translations
+                                "VAL 1 1 -3 0 0 0 0 0 0 "
+                                "FUNCT {} {} {} 0 0 0 0 0 0"  # Use displacement functions for x,y
                             ),
-                            format_replacement=[displacement_x, displacement_y],  # Use the displacement functions
+                            format_replacement=[displacement_x, displacement_y, displacement_z],  # Use the displacement functions
                             bc_type=mpy.bc.dirichlet,
                         )
                     )
@@ -556,7 +581,13 @@ def create_beams_wrapped_around_cylinder(
                     """
                     #pass
     
-            
+        mesh.add(
+            BoundaryCondition(
+                beam_lines,
+                "COUPLING_ID 2",
+                bc_type=mpy.bc.beam_to_solid_surface_contact,
+            )
+        )    
     tan_yz, degrees = calculate_angle_for_intersections(n_intersections, interval, cylinder_radius)
     
     #print(f"degrees: {degrees}")
@@ -865,8 +896,6 @@ def setup_pre_deformed_flow_diverter(cubit, config, second_simulation):
     return input_file
 
 
-
-
 def create_straight_toy_aneurysm(cubit, config, restart):
     """creates the straight toy aneurysm with a hex8 mesh"""
     
@@ -883,7 +912,6 @@ def create_straight_toy_aneurysm(cubit, config, restart):
 
     # Create inner and outer cylinder.
     cylinder_i = cubit.cylinder(L, r_art_i, r_art_i, r_art_i)
-
 
     sphere_i = cubit.sphere(r_ca_i)
     lumen = cubit.get_last_id("volume")
@@ -904,13 +932,10 @@ def create_straight_toy_aneurysm(cubit, config, restart):
     for curve_id in curvestotweak:
         cubit.cmd(f"Tweak Curve {curve_id} Fillet Radius {2*t}")
     
-    
-
     print("surf_ids:", cubit.get_group_surfaces(group_id))
     cubit.cmd(f"surface {5} {6} {7} Scheme Auto")
     cubit.cmd("surface {5} {6} {7} size auto factor 4")
     cubit.cmd(f"mesh surface {5} {6} {7}")
-
 
     for n in range(n_ref_surf):
         cubit.cmd(f"refine surface{5} {6} {7}")
@@ -950,7 +975,6 @@ def create_straight_toy_aneurysm(cubit, config, restart):
                 bc_section="BEAM INTERACTION/BEAM TO SOLID SURFACE CONTACT SURFACE",
                 bc_description="COUPLING_ID 2",
             )
-
 
     # constrain only the artery outside
     outer_ca_surf=9
@@ -993,7 +1017,9 @@ def setup_simulation(config, second_simulation):
 
     # create first simulation
     # TODO: MERT create function which creates the contour device with boundary conditions
-    input_file = create_beams_wrapped_around_cylinder(cubit,
+    input_file = create_beams_wrapped_around_cylinder(
+        cubit,
+        second_simulation,
         output_directory,
         interval_end,
         cylinder_radius,
