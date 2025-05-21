@@ -105,7 +105,7 @@ def create_beams_wrapped_around_cylinder(
     z_scale_factor=1.0,
     number_of_beams=12,
     youngs_modulus=83000,
-    preview=False
+    preview=False,
 ):
     
     interval = [0, interval_end]
@@ -117,7 +117,7 @@ def create_beams_wrapped_around_cylinder(
     # radius of marker max 0.25 mm
 
     n_el = 8*(n_intersections-1)*number_of_beams
-    num_steps = 40
+    num_steps = 100
     time_step = 1/num_steps
 
     mesh = Mesh()
@@ -463,7 +463,9 @@ def create_beams_wrapped_around_cylinder(
                             bc_type=mpy.bc.dirichlet,
                         )
                     )
-                    """
+        esh.wrap_around_cylinder(radius=cylinder_radius)
+        find_intersections_and_apply_coupling(mesh, beams, positional_coupling_penalty, rotational_coupling_penalty) # change this
+        mpy.check_overlapping_elements = False                 """
                     displacement = calculate_displacement_for_cylinder(
                             node.coordinates, 
                             new_radius
@@ -471,7 +473,7 @@ def create_beams_wrapped_around_cylinder(
                     displacement_x = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 3 TIMES 0.0 0.8 1000.0 VALUES 0.0 {} {}".format(
+                        "NUMPOINTS 3 TIMES 0.0 1.0 1000.0 VALUES 0.0 {} {}".format(
                             displacement[0],  # x-component of displacement
                             displacement[0]
                         )
@@ -479,7 +481,7 @@ def create_beams_wrapped_around_cylinder(
                     displacement_y = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 3 TIMES 0.0 0.8 1000.0 VALUES 0.0 {} {}".format(
+                        "NUMPOINTS 3 TIMES 0.0 1.0 1000.0 VALUES 0.0 {} {}".format(
                             displacement[1],  # y-component of displacement
                             displacement[1]
                         )
@@ -487,7 +489,10 @@ def create_beams_wrapped_around_cylinder(
                     displacement_z = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 3 TIMES 0.0 0.8 1.0 VALUES 0.0 0.0 -2.0"
+                        "NUMPOINTS 4 TIMES 0.0 1.0 2.0 1000.0 VALUES 0.0 0.0 {} {}".format(
+                            -5,  # y-component of displacement
+                            -5
+                        )
                     )
 
                     mesh.add(displacement_x)
@@ -537,24 +542,18 @@ def create_beams_wrapped_around_cylinder(
                             displacement[1]
                         )
                     )
-                    displacement_z = Function(
-                        "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
-                        "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 3 TIMES 0.0 0.8 1.0 VALUES 0.0 0.0 -2.0"
-                    )
 
                     mesh.add(displacement_x)
                     mesh.add(displacement_y)
-                    mesh.add(displacement_z)
 
                     mesh.add(
                         BoundaryCondition(
                             node_set,
                             (
                                 # no need for fixing rotation check that
-                                "NUMDOF 9 ONOFF 1 1 1 1 1 1 0 0 0 "  # Fix only x and y translations
-                                "VAL 1 1 -3 0 0 0 0 0 0 "
-                                "FUNCT {} {} {} 0 0 0 0 0 0"  # Use displacement functions for x,y
+                                "NUMDOF 9 ONOFF 1 1 0 1 1 1 0 0 0 "  # Fix only x and y translations
+                                "VAL 1 1 0 0 0 0 0 0 0 "
+                                "FUNCT {} {} 0 0 0 0 0 0 0"  # Use displacement functions for x,y
                             ),
                             format_replacement=[displacement_x, displacement_y, displacement_z],  # Use the displacement functions
                             bc_type=mpy.bc.dirichlet,
@@ -580,14 +579,15 @@ def create_beams_wrapped_around_cylinder(
                     )
                     """
                     #pass
-    
-        mesh.add(
-            BoundaryCondition(
-                beam_lines,
-                "COUPLING_ID 2",
-                bc_type=mpy.bc.beam_to_solid_surface_contact,
-            )
-        )    
+                    
+        if second_simulation:
+            mesh.add(
+                BoundaryCondition(
+                    beam_lines,
+                    "COUPLING_ID 2",
+                    bc_type=mpy.bc.beam_to_solid_surface_contact,
+                )
+            )  
     tan_yz, degrees = calculate_angle_for_intersections(n_intersections, interval, cylinder_radius)
     
     #print(f"degrees: {degrees}")
@@ -607,6 +607,9 @@ def create_beams_wrapped_around_cylinder(
         compression_factor,
         compressed_part
     )
+
+
+        #todo add coupling
     
     # The vtk output will also show all node sets for BCs on the mesh.
     mesh.write_vtk("simple_beam", base_dir)
@@ -633,9 +636,9 @@ def create_beams_wrapped_around_cylinder(
         PROBLEMTYPE                           Structure
         RESTART                               0
         ---------------------------------------------------------------------IO
-        OUTPUT_BIN                            no
+        OUTPUT_BIN                            yes
         STRUCT_DISP                           yes
-        FILESTEPS                             1000
+        FILESTEPS                             1
         VERBOSITY                             Standard
         STRUCT_STRAIN                         yes
         STRUCT_STRESS                         yes
@@ -643,12 +646,11 @@ def create_beams_wrapped_around_cylinder(
         LINEAR_SOLVER                         1
         INT_STRATEGY                          Standard
         DYNAMICTYPE                           Statics
-        RESULTSEVERY                           1
+        RESULTSEVERY                          1
         NLNSOL                                fullnewton
-        DIVERCONT                             adapt_step
         TIMESTEP                              {time_step}
         NUMSTEP                               {num_steps}
-        MAXTIME                               1.0
+        MAXTIME                               2.0
         ---------------------------------------------------------------SOLVER 1
         NAME                                  Structure_Solver
         SOLVER                                Superlu
@@ -667,7 +669,7 @@ def create_beams_wrapped_around_cylinder(
         STRAINS_GAUSSPOINT                    yes
         ELEMENT_GID                           yes
         ----------------------------------------------------------------BINNING STRATEGY
-        BIN_SIZE_LOWER_BOUND                  3.0
+        BIN_SIZE_LOWER_BOUND                  10.0
         DOMAINBOUNDINGBOX                     -30 -30 -30 30 30 30
         ----------------------------------------------------------------BEAM INTERACTION
         REPARTITIONSTRATEGY                   Everydt
@@ -683,19 +685,6 @@ preview = False
 
 
 
-# def setup_countour_device(cubit, second_simulation):
-
-#     input_file = InputFile(cubit=cubit)
-
-
-#     # create device with parameters as normal.
-
-
-#     # add special bc conditions, if second simulaiton(all beam nodes for beam to surface condition)
-
-#     # check
-
-#     return  input_file
 
 
 def setup_pre_deformed_flow_diverter(cubit, config, second_simulation):
@@ -1003,7 +992,7 @@ def setup_simulation(config, second_simulation):
     if preview:
         cubit.display_in_cubit()
 
-    output_directory = "/home_student/kayabek/sw/Results/cubit_results/"
+    output_directory = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results"
     interval_end = 6.0
     cylinder_radius = 3.0
     compressed_part = 0
@@ -1029,7 +1018,7 @@ def setup_simulation(config, second_simulation):
         rot_penalty,
         z_scale_factor,
         number_of_beams,
-        youngs_modulus=youngs_modulus
+        youngs_modulus=youngs_modulus,
     )
 
     # add missing material for artery
@@ -1054,7 +1043,7 @@ if __name__ == "__main__":
         config = yaml.safe_load(file)
 
     # Adapt this path to the directory you want to store the simulation files
-    simulation_dir_1 = "/home_student/kayabek/sw/Results/cubit_results/simulation_step_1"
+    simulation_dir_1 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_1"
     os.makedirs(simulation_dir_1, exist_ok=True)
 
     inputfile_1 = setup_simulation(config, False)
@@ -1067,7 +1056,7 @@ if __name__ == "__main__":
     inputfile_1.write_input_file(fd_placement_dat)
     run_four_c( fd_placement_dat, simulation_dir_1)
 
-    simulation_dir_2 = "/home_student/kayabek/sw/Results/cubit_results/simulation_step_2"
+    simulation_dir_2 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_2"
     os.makedirs(simulation_dir_2, exist_ok=True)
 
     # ensure clean simulation directory
@@ -1088,6 +1077,22 @@ if __name__ == "__main__":
         """,
             option_overwrite=True,
         )
+    )
+
+    inputfile_1.add(
+        """----------------------------------BEAM INTERACTION/BEAM TO SOLID SURFACE CONTACT
+                    CONSTRAINT_STRATEGY                      penalty
+                    CONTACT_DISCRETIZATION                   mortar
+                    CONTACT_TYPE                             gap_variation
+                    GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 2
+                    GAUSS_POINTS                             6
+                    GEOMETRY_PAIR_STRATEGY                   segmentation
+                    PENALTY_LAW                              linear_quadratic
+                    PENALTY_PARAMETER                        400.0
+                    PENALTY_PARAMETER_G0                     0.0001
+                    MORTAR_SHAPE_FUNCTION                    line2
+                    MORTAR_CONTACT_DEFINED_IN                reference_configuration
+                """
     )
 
     inputfile_1.write_input_file(fd_placement_dat2)
