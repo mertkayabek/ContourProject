@@ -1,5 +1,5 @@
 # 4C output control file
-# created by kayabek on student3.bauv.unibw-muenchen.de at Thu May 22 00:08:26 2025
+# created by kayabek on student3.bauv.unibw-muenchen.de at Fri May 23 18:10:32 2025
 # using code version (git SHA1) 966e6cf18248bf76f9bbb22b559739ea8455dad7 
 
 input_file = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_1/fd-vmc-art.dat"
@@ -12,10 +12,10 @@ field:
     time = 0
     step = 0
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s0"
@@ -62,10 +62,10 @@ field:
     time = 0.01
     step = 1
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s1"
@@ -124,10 +124,10 @@ field:
     time = 0.01
     step = 1
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s1"
@@ -176,10 +176,10 @@ field:
     time = 0.02
     step = 2
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s2"
@@ -238,10 +238,10 @@ field:
     time = 0.02
     step = 2
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s2"
@@ -290,10 +290,10 @@ field:
     time = 0.03
     step = 3
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s3"
@@ -352,10 +352,10 @@ field:
     time = 0.03
     step = 3
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s3"
@@ -404,10 +404,10 @@ field:
     time = 0.04
     step = 4
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s4"
@@ -466,10 +466,10 @@ field:
     time = 0.04
     step = 4
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s4"
@@ -518,10 +518,10 @@ field:
     time = 0.05
     step = 5
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s5"
@@ -580,10 +580,10 @@ field:
     time = 0.05
     step = 5
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s5"
@@ -632,10 +632,10 @@ field:
     time = 0.06
     step = 6
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s6"
@@ -694,10 +694,10 @@ field:
     time = 0.06
     step = 6
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s6"
@@ -746,10 +746,10 @@ field:
     time = 0.07000000000000001
     step = 7
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s7"
@@ -808,10 +808,10 @@ field:
     time = 0.07000000000000001
     step = 7
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s7"
@@ -860,10 +860,10 @@ field:
     time = 0.08
     step = 8
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s8"
@@ -922,10 +922,10 @@ field:
     time = 0.08
     step = 8
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s8"
@@ -974,10 +974,10 @@ field:
     time = 0.09
     step = 9
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s9"
@@ -1036,10 +1036,10 @@ field:
     time = 0.09
     step = 9
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s9"
@@ -1088,10 +1088,10 @@ field:
     time = 0.09999999999999999
     step = 10
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s10"
@@ -1150,10 +1150,10 @@ field:
     time = 0.09999999999999999
     step = 10
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s10"
@@ -1202,10 +1202,10 @@ field:
     time = 0.11
     step = 11
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s11"
@@ -1264,10 +1264,10 @@ field:
     time = 0.11
     step = 11
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s11"
@@ -1316,10 +1316,10 @@ field:
     time = 0.12
     step = 12
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s12"
@@ -1378,10 +1378,10 @@ field:
     time = 0.12
     step = 12
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s12"
@@ -1430,10 +1430,10 @@ field:
     time = 0.13
     step = 13
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s13"
@@ -1492,10 +1492,10 @@ field:
     time = 0.13
     step = 13
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s13"
@@ -1544,10 +1544,10 @@ field:
     time = 0.14
     step = 14
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s14"
@@ -1606,10 +1606,10 @@ field:
     time = 0.14
     step = 14
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s14"
@@ -1658,10 +1658,10 @@ field:
     time = 0.15
     step = 15
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s15"
@@ -1720,10 +1720,10 @@ field:
     time = 0.15
     step = 15
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s15"
@@ -1772,10 +1772,10 @@ field:
     time = 0.16
     step = 16
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s16"
@@ -1834,10 +1834,10 @@ field:
     time = 0.16
     step = 16
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s16"
@@ -1886,10 +1886,10 @@ field:
     time = 0.17
     step = 17
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s17"
@@ -1948,10 +1948,10 @@ field:
     time = 0.17
     step = 17
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s17"
@@ -2000,10 +2000,10 @@ field:
     time = 0.18
     step = 18
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s18"
@@ -2062,10 +2062,10 @@ field:
     time = 0.18
     step = 18
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s18"
@@ -2114,10 +2114,10 @@ field:
     time = 0.19
     step = 19
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s19"
@@ -2176,10 +2176,10 @@ field:
     time = 0.19
     step = 19
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s19"
@@ -2228,10 +2228,10 @@ field:
     time = 0.2
     step = 20
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s20"
@@ -2290,10 +2290,10 @@ field:
     time = 0.2
     step = 20
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s20"
@@ -2342,10 +2342,10 @@ field:
     time = 0.21
     step = 21
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s21"
@@ -2404,10 +2404,10 @@ field:
     time = 0.21
     step = 21
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s21"
@@ -2456,10 +2456,10 @@ field:
     time = 0.2200000000000001
     step = 22
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s22"
@@ -2518,10 +2518,10 @@ field:
     time = 0.2200000000000001
     step = 22
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s22"
@@ -2570,10 +2570,10 @@ field:
     time = 0.2300000000000001
     step = 23
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s23"
@@ -2632,10 +2632,10 @@ field:
     time = 0.2300000000000001
     step = 23
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s23"
@@ -2684,10 +2684,10 @@ field:
     time = 0.2400000000000001
     step = 24
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s24"
@@ -2746,10 +2746,10 @@ field:
     time = 0.2400000000000001
     step = 24
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s24"
@@ -2798,10 +2798,10 @@ field:
     time = 0.2500000000000001
     step = 25
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s25"
@@ -2860,10 +2860,10 @@ field:
     time = 0.2500000000000001
     step = 25
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s25"
@@ -2912,10 +2912,10 @@ field:
     time = 0.2600000000000001
     step = 26
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s26"
@@ -2974,10 +2974,10 @@ field:
     time = 0.2600000000000001
     step = 26
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s26"
@@ -3026,10 +3026,10 @@ field:
     time = 0.2700000000000001
     step = 27
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s27"
@@ -3088,10 +3088,10 @@ field:
     time = 0.2700000000000001
     step = 27
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s27"
@@ -3140,10 +3140,10 @@ field:
     time = 0.2800000000000001
     step = 28
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s28"
@@ -3202,10 +3202,10 @@ field:
     time = 0.2800000000000001
     step = 28
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s28"
@@ -3254,10 +3254,10 @@ field:
     time = 0.2900000000000001
     step = 29
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s29"
@@ -3316,10 +3316,10 @@ field:
     time = 0.2900000000000001
     step = 29
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s29"
@@ -3368,10 +3368,10 @@ field:
     time = 0.3000000000000001
     step = 30
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s30"
@@ -3430,10 +3430,10 @@ field:
     time = 0.3000000000000001
     step = 30
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s30"
@@ -3482,10 +3482,10 @@ field:
     time = 0.3100000000000001
     step = 31
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s31"
@@ -3544,10 +3544,10 @@ field:
     time = 0.3100000000000001
     step = 31
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s31"
@@ -3596,10 +3596,10 @@ field:
     time = 0.3200000000000001
     step = 32
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s32"
@@ -3658,10 +3658,10 @@ field:
     time = 0.3200000000000001
     step = 32
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s32"
@@ -3710,10 +3710,10 @@ field:
     time = 0.3300000000000001
     step = 33
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s33"
@@ -3772,10 +3772,10 @@ field:
     time = 0.3300000000000001
     step = 33
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s33"
@@ -3824,10 +3824,10 @@ field:
     time = 0.3400000000000001
     step = 34
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s34"
@@ -3886,10 +3886,10 @@ field:
     time = 0.3400000000000001
     step = 34
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s34"
@@ -3938,10 +3938,10 @@ field:
     time = 0.3500000000000001
     step = 35
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s35"
@@ -4000,10 +4000,10 @@ field:
     time = 0.3500000000000001
     step = 35
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s35"
@@ -4052,10 +4052,10 @@ field:
     time = 0.3600000000000002
     step = 36
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s36"
@@ -4114,10 +4114,10 @@ field:
     time = 0.3600000000000002
     step = 36
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s36"
@@ -4166,10 +4166,10 @@ field:
     time = 0.3700000000000002
     step = 37
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s37"
@@ -4228,10 +4228,10 @@ field:
     time = 0.3700000000000002
     step = 37
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s37"
@@ -4280,10 +4280,10 @@ field:
     time = 0.3800000000000002
     step = 38
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s38"
@@ -4342,10 +4342,10 @@ field:
     time = 0.3800000000000002
     step = 38
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s38"
@@ -4394,10 +4394,10 @@ field:
     time = 0.3900000000000002
     step = 39
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s39"
@@ -4456,10 +4456,10 @@ field:
     time = 0.3900000000000002
     step = 39
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s39"
@@ -4508,10 +4508,10 @@ field:
     time = 0.4000000000000002
     step = 40
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s40"
@@ -4570,10 +4570,10 @@ field:
     time = 0.4000000000000002
     step = 40
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s40"
@@ -4622,10 +4622,10 @@ field:
     time = 0.4100000000000002
     step = 41
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s41"
@@ -4684,10 +4684,10 @@ field:
     time = 0.4100000000000002
     step = 41
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s41"
@@ -4736,10 +4736,10 @@ field:
     time = 0.4200000000000002
     step = 42
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s42"
@@ -4798,10 +4798,10 @@ field:
     time = 0.4200000000000002
     step = 42
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s42"
@@ -4850,10 +4850,10 @@ field:
     time = 0.4300000000000002
     step = 43
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s43"
@@ -4912,10 +4912,10 @@ field:
     time = 0.4300000000000002
     step = 43
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s43"
@@ -4964,10 +4964,10 @@ field:
     time = 0.4400000000000002
     step = 44
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s44"
@@ -5026,10 +5026,10 @@ field:
     time = 0.4400000000000002
     step = 44
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s44"
@@ -5078,10 +5078,10 @@ field:
     time = 0.4500000000000002
     step = 45
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s45"
@@ -5140,10 +5140,10 @@ field:
     time = 0.4500000000000002
     step = 45
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s45"
@@ -5192,10 +5192,10 @@ field:
     time = 0.4600000000000002
     step = 46
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s46"
@@ -5254,10 +5254,10 @@ field:
     time = 0.4600000000000002
     step = 46
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s46"
@@ -5306,10 +5306,10 @@ field:
     time = 0.4700000000000003
     step = 47
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s47"
@@ -5368,10 +5368,10 @@ field:
     time = 0.4700000000000003
     step = 47
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s47"
@@ -5420,10 +5420,10 @@ field:
     time = 0.4800000000000003
     step = 48
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s48"
@@ -5482,10 +5482,10 @@ field:
     time = 0.4800000000000003
     step = 48
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s48"
@@ -5534,10 +5534,10 @@ field:
     time = 0.4900000000000003
     step = 49
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s49"
@@ -5596,10 +5596,10 @@ field:
     time = 0.4900000000000003
     step = 49
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s49"
@@ -5648,10 +5648,10 @@ field:
     time = 0.5000000000000002
     step = 50
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s50"
@@ -5710,10 +5710,10 @@ field:
     time = 0.5000000000000002
     step = 50
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s50"
@@ -5762,10 +5762,10 @@ field:
     time = 0.5100000000000002
     step = 51
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s51"
@@ -5824,10 +5824,10 @@ field:
     time = 0.5100000000000002
     step = 51
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s51"
@@ -5876,10 +5876,10 @@ field:
     time = 0.5200000000000002
     step = 52
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s52"
@@ -5938,10 +5938,10 @@ field:
     time = 0.5200000000000002
     step = 52
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s52"
@@ -5990,10 +5990,10 @@ field:
     time = 0.5300000000000002
     step = 53
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s53"
@@ -6052,10 +6052,10 @@ field:
     time = 0.5300000000000002
     step = 53
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s53"
@@ -6104,10 +6104,10 @@ field:
     time = 0.5400000000000003
     step = 54
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s54"
@@ -6166,10 +6166,10 @@ field:
     time = 0.5400000000000003
     step = 54
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s54"
@@ -6218,10 +6218,10 @@ field:
     time = 0.5500000000000003
     step = 55
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s55"
@@ -6280,10 +6280,10 @@ field:
     time = 0.5500000000000003
     step = 55
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s55"
@@ -6332,10 +6332,10 @@ field:
     time = 0.5600000000000003
     step = 56
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s56"
@@ -6394,10 +6394,10 @@ field:
     time = 0.5600000000000003
     step = 56
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s56"
@@ -6446,10 +6446,10 @@ field:
     time = 0.5700000000000003
     step = 57
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s57"
@@ -6508,10 +6508,10 @@ field:
     time = 0.5700000000000003
     step = 57
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s57"
@@ -6560,10 +6560,10 @@ field:
     time = 0.5800000000000003
     step = 58
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s58"
@@ -6622,10 +6622,10 @@ field:
     time = 0.5800000000000003
     step = 58
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s58"
@@ -6674,10 +6674,10 @@ field:
     time = 0.5900000000000003
     step = 59
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s59"
@@ -6736,10 +6736,10 @@ field:
     time = 0.5900000000000003
     step = 59
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s59"
@@ -6788,10 +6788,10 @@ field:
     time = 0.6000000000000003
     step = 60
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s60"
@@ -6850,10 +6850,10 @@ field:
     time = 0.6000000000000003
     step = 60
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s60"
@@ -6902,10 +6902,10 @@ field:
     time = 0.6100000000000003
     step = 61
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s61"
@@ -6964,10 +6964,10 @@ field:
     time = 0.6100000000000003
     step = 61
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s61"
@@ -7016,10 +7016,10 @@ field:
     time = 0.6200000000000003
     step = 62
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s62"
@@ -7078,10 +7078,10 @@ field:
     time = 0.6200000000000003
     step = 62
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s62"
@@ -7130,10 +7130,10 @@ field:
     time = 0.6300000000000003
     step = 63
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s63"
@@ -7192,10 +7192,10 @@ field:
     time = 0.6300000000000003
     step = 63
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s63"
@@ -7244,10 +7244,10 @@ field:
     time = 0.6400000000000003
     step = 64
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s64"
@@ -7306,10 +7306,10 @@ field:
     time = 0.6400000000000003
     step = 64
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s64"
@@ -7358,10 +7358,10 @@ field:
     time = 0.6500000000000004
     step = 65
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s65"
@@ -7420,10 +7420,10 @@ field:
     time = 0.6500000000000004
     step = 65
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s65"
@@ -7472,10 +7472,10 @@ field:
     time = 0.6600000000000004
     step = 66
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s66"
@@ -7534,10 +7534,10 @@ field:
     time = 0.6600000000000004
     step = 66
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s66"
@@ -7586,10 +7586,10 @@ field:
     time = 0.6700000000000004
     step = 67
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s67"
@@ -7648,10 +7648,10 @@ field:
     time = 0.6700000000000004
     step = 67
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s67"
@@ -7700,10 +7700,10 @@ field:
     time = 0.6800000000000004
     step = 68
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s68"
@@ -7762,10 +7762,10 @@ field:
     time = 0.6800000000000004
     step = 68
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s68"
@@ -7814,10 +7814,10 @@ field:
     time = 0.6900000000000004
     step = 69
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s69"
@@ -7876,10 +7876,10 @@ field:
     time = 0.6900000000000004
     step = 69
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s69"
@@ -7928,10 +7928,10 @@ field:
     time = 0.7000000000000004
     step = 70
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s70"
@@ -7990,10 +7990,10 @@ field:
     time = 0.7000000000000004
     step = 70
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s70"
@@ -8042,10 +8042,10 @@ field:
     time = 0.7100000000000004
     step = 71
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s71"
@@ -8104,10 +8104,10 @@ field:
     time = 0.7100000000000004
     step = 71
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s71"
@@ -8156,10 +8156,10 @@ field:
     time = 0.7200000000000004
     step = 72
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s72"
@@ -8218,10 +8218,10 @@ field:
     time = 0.7200000000000004
     step = 72
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s72"
@@ -8270,10 +8270,10 @@ field:
     time = 0.7300000000000004
     step = 73
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s73"
@@ -8332,10 +8332,10 @@ field:
     time = 0.7300000000000004
     step = 73
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s73"
@@ -8384,10 +8384,10 @@ field:
     time = 0.7400000000000004
     step = 74
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s74"
@@ -8446,10 +8446,10 @@ field:
     time = 0.7400000000000004
     step = 74
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s74"
@@ -8498,10 +8498,10 @@ field:
     time = 0.7500000000000004
     step = 75
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s75"
@@ -8560,10 +8560,10 @@ field:
     time = 0.7500000000000004
     step = 75
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s75"
@@ -8612,10 +8612,10 @@ field:
     time = 0.7600000000000005
     step = 76
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s76"
@@ -8674,10 +8674,10 @@ field:
     time = 0.7600000000000005
     step = 76
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s76"
@@ -8726,10 +8726,10 @@ field:
     time = 0.7700000000000005
     step = 77
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s77"
@@ -8788,10 +8788,10 @@ field:
     time = 0.7700000000000005
     step = 77
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s77"
@@ -8840,10 +8840,10 @@ field:
     time = 0.7800000000000005
     step = 78
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s78"
@@ -8902,10 +8902,10 @@ field:
     time = 0.7800000000000005
     step = 78
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s78"
@@ -8954,10 +8954,10 @@ field:
     time = 0.7900000000000005
     step = 79
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s79"
@@ -9016,10 +9016,10 @@ field:
     time = 0.7900000000000005
     step = 79
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s79"
@@ -9068,10 +9068,10 @@ field:
     time = 0.8000000000000005
     step = 80
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s80"
@@ -9130,10 +9130,10 @@ field:
     time = 0.8000000000000005
     step = 80
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s80"
@@ -9182,10 +9182,10 @@ field:
     time = 0.8100000000000005
     step = 81
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s81"
@@ -9244,10 +9244,10 @@ field:
     time = 0.8100000000000005
     step = 81
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s81"
@@ -9296,10 +9296,10 @@ field:
     time = 0.8200000000000005
     step = 82
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s82"
@@ -9358,10 +9358,10 @@ field:
     time = 0.8200000000000005
     step = 82
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s82"
@@ -9410,10 +9410,10 @@ field:
     time = 0.8300000000000005
     step = 83
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s83"
@@ -9472,10 +9472,10 @@ field:
     time = 0.8300000000000005
     step = 83
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s83"
@@ -9524,10 +9524,10 @@ field:
     time = 0.8400000000000005
     step = 84
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s84"
@@ -9586,10 +9586,10 @@ field:
     time = 0.8400000000000005
     step = 84
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s84"
@@ -9638,10 +9638,10 @@ field:
     time = 0.8500000000000005
     step = 85
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s85"
@@ -9700,10 +9700,10 @@ field:
     time = 0.8500000000000005
     step = 85
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s85"
@@ -9752,10 +9752,10 @@ field:
     time = 0.8600000000000005
     step = 86
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s86"
@@ -9814,10 +9814,10 @@ field:
     time = 0.8600000000000005
     step = 86
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s86"
@@ -9866,10 +9866,10 @@ field:
     time = 0.8700000000000006
     step = 87
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s87"
@@ -9928,10 +9928,10 @@ field:
     time = 0.8700000000000006
     step = 87
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s87"
@@ -9980,10 +9980,10 @@ field:
     time = 0.8800000000000006
     step = 88
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s88"
@@ -10042,10 +10042,10 @@ field:
     time = 0.8800000000000006
     step = 88
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s88"
@@ -10094,10 +10094,10 @@ field:
     time = 0.8900000000000006
     step = 89
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s89"
@@ -10156,10 +10156,10 @@ field:
     time = 0.8900000000000006
     step = 89
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s89"
@@ -10208,10 +10208,10 @@ field:
     time = 0.9000000000000006
     step = 90
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s90"
@@ -10270,10 +10270,10 @@ field:
     time = 0.9000000000000006
     step = 90
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s90"
@@ -10322,10 +10322,10 @@ field:
     time = 0.9100000000000006
     step = 91
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s91"
@@ -10384,10 +10384,10 @@ field:
     time = 0.9100000000000006
     step = 91
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s91"
@@ -10436,10 +10436,10 @@ field:
     time = 0.9200000000000006
     step = 92
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s92"
@@ -10498,10 +10498,10 @@ field:
     time = 0.9200000000000006
     step = 92
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s92"
@@ -10550,10 +10550,10 @@ field:
     time = 0.9300000000000006
     step = 93
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s93"
@@ -10612,10 +10612,10 @@ field:
     time = 0.9300000000000006
     step = 93
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s93"
@@ -10664,10 +10664,10 @@ field:
     time = 0.9400000000000006
     step = 94
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s94"
@@ -10726,10 +10726,10 @@ field:
     time = 0.9400000000000006
     step = 94
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s94"
@@ -10778,10 +10778,10 @@ field:
     time = 0.9500000000000006
     step = 95
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s95"
@@ -10840,10 +10840,10 @@ field:
     time = 0.9500000000000006
     step = 95
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s95"
@@ -10892,10 +10892,10 @@ field:
     time = 0.9600000000000006
     step = 96
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s96"
@@ -10954,10 +10954,10 @@ field:
     time = 0.9600000000000006
     step = 96
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s96"
@@ -11006,10 +11006,10 @@ field:
     time = 0.9700000000000006
     step = 97
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s97"
@@ -11068,10 +11068,10 @@ field:
     time = 0.9700000000000006
     step = 97
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s97"
@@ -11120,10 +11120,10 @@ field:
     time = 0.9800000000000006
     step = 98
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s98"
@@ -11182,10 +11182,10 @@ field:
     time = 0.9800000000000006
     step = 98
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s98"
@@ -11234,10 +11234,10 @@ field:
     time = 0.9900000000000007
     step = 99
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s99"
@@ -11296,10 +11296,10 @@ field:
     time = 0.9900000000000007
     step = 99
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s99"
@@ -11348,10 +11348,10 @@ field:
     time = 1.000000000000001
     step = 100
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.structure.s100"
@@ -11410,10 +11410,10 @@ field:
     time = 1.000000000000001
     step = 100
 
-    num_nd = 994
-    max_nodeid = 993
-    num_ele = 481
-    num_dof = 3246
+    num_nd = 3668
+    max_nodeid = 3667
+    num_ele = 1804
+    num_dof = 11268
     num_dim = 3
 
     mesh_file = "xxx.mesh.ia_structure.s100"

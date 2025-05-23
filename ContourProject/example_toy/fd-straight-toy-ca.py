@@ -489,9 +489,9 @@ def create_beams_wrapped_around_cylinder(
                     displacement_z = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 4 TIMES 0.0 1.0 2.0 1000.0 VALUES 0.0 0.0 {} {}".format(
-                            -5,  # y-component of displacement
-                            -5
+                        "NUMPOINTS 4 TIMES 0.0 1.0 2.0 1000.0 VALUES 0.0 -2.0 {} {}".format(
+                            -2.5,  # y-component of displacement
+                            -2.5
                         )
                     )
 
@@ -529,7 +529,7 @@ def create_beams_wrapped_around_cylinder(
                     displacement_x = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 3 TIMES 0.0 0.8 1000.0 VALUES 0.0 {} {}".format(
+                        "NUMPOINTS 3 TIMES 0.0 1.0 1000.0 VALUES 0.0 {} {}".format(
                             displacement[0],  # x-component of displacement
                             displacement[0]
                         )
@@ -537,7 +537,7 @@ def create_beams_wrapped_around_cylinder(
                     displacement_y = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 3 TIMES 0.0 0.8 1000.0 VALUES 0.0 {} {}".format(
+                        "NUMPOINTS 3 TIMES 0.0 1.0 1000.0 VALUES 0.0 {} {}".format(
                             displacement[1],  # y-component of displacement
                             displacement[1]
                         )
@@ -926,8 +926,8 @@ def create_straight_toy_aneurysm(cubit, config, restart):
     cubit.cmd("surface {5} {6} {7} size auto factor 4")
     cubit.cmd(f"mesh surface {5} {6} {7}")
 
-    for n in range(n_ref_surf):
-        cubit.cmd(f"refine surface{5} {6} {7}")
+    for n in range(int(n_ref_surf)):
+        cubit.cmd(f"refine surface {5} {6} {7}")
 
     outer_surfaces = []
     cubit.cmd(f"merge surface {5} {6} {7}")
@@ -1045,7 +1045,8 @@ if __name__ == "__main__":
     # Adapt this path to the directory you want to store the simulation files
     simulation_dir_1 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_1"
     os.makedirs(simulation_dir_1, exist_ok=True)
-
+    """
+    
     inputfile_1 = setup_simulation(config, False)
 
     # ensure clean simulation directory
@@ -1055,6 +1056,7 @@ if __name__ == "__main__":
     fd_placement_dat = os.path.join(simulation_dir_1, "fd-vmc-art.dat")
     inputfile_1.write_input_file(fd_placement_dat)
     run_four_c( fd_placement_dat, simulation_dir_1)
+    """
 
     simulation_dir_2 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_2"
     os.makedirs(simulation_dir_2, exist_ok=True)

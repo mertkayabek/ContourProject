@@ -2136,7 +2136,7 @@ MASSLIN                         FourC::Inpar::Solid::MassLin
 MATERIALTANGENT                 analytical
 MAXDIVCONREFINEMENTLEVEL        10
 MAXITER                         50
-MAXTIME                         1.5
+MAXTIME                         2
 MIDTIME_ENERGY_TYPE             0
 MINITER                         0
 MODIFIEDEXPLEULER               true
@@ -2150,7 +2150,7 @@ NORM_DISP                       0
 NORM_INCO                       0
 NORM_PRES                       0
 NORM_RESF                       0
-NUMSTEP                         200
+NUMSTEP                         500
 OUTPUT_STEP_OFFSET              0
 PREDICT                         1
 PRESTRESS                       FourC::Inpar::Solid::PreStress
@@ -2166,7 +2166,7 @@ STARTFUNCNO                     -1
 STC_LAYER                       1
 STC_SCALING                     0
 TIMEINIT                        0
-TIMESTEP                        0.005
+TIMESTEP                        0.0025
 TIME_ADAPTIVITY                 false
 TOLCONSTR                       1e-08
 TOLCONSTRINCR                   1e-08
