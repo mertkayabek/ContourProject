@@ -83,16 +83,16 @@ STRATEGY                        0
 CONSTRAINT_STRATEGY             FourC::Inpar::BeamToSolid::BeamToSolidConstraintEnforcement
 CONTACT_DISCRETIZATION          FourC::Inpar::BeamToSolid::BeamToSolidContactDiscretization
 CONTACT_TYPE                    FourC::Inpar::BeamToSolid::BeamToSolidSurfaceContact
-GAUSS_POINTS                    6
+GAUSS_POINTS                    4
 GEOMETRY_PAIR_SEGMENTATION_NOT_ALL_GAUSS_POINTS_PROJECT_VALID_ACTION FourC::Inpar::GEOMETRYPAIR::NotAllGaussPointsProjectValidAction
-GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 2
+GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 4
 GEOMETRY_PAIR_STRATEGY          FourC::Inpar::GEOMETRYPAIR::LineTo3DStrategy
 GEOMETRY_PAIR_SURFACE_NORMALS   FourC::Inpar::GEOMETRYPAIR::SurfaceNormals
 INTEGRATION_POINTS_CIRCUMFERENCE 6
 MORTAR_CONTACT_DEFINED_IN       FourC::Inpar::BeamToSolid::BeamToSolidSurfaceContactMortarDefinedIn
 MORTAR_SHAPE_FUNCTION           FourC::Inpar::BeamToSolid::BeamToSolidMortarShapefunctions
 PENALTY_LAW                     FourC::Inpar::BeamToSolid::BeamToSolidSurfaceContactPenaltyLaw
-PENALTY_PARAMETER               400
+PENALTY_PARAMETER               100
 PENALTY_PARAMETER_G0            0.0001
 
 -------------------BEAM INTERACTION/BEAM TO SOLID SURFACE MESHTYING
@@ -2150,7 +2150,7 @@ NORM_DISP                       0
 NORM_INCO                       0
 NORM_PRES                       0
 NORM_RESF                       0
-NUMSTEP                         500
+NUMSTEP                         150
 OUTPUT_STEP_OFFSET              0
 PREDICT                         1
 PRESTRESS                       FourC::Inpar::Solid::PreStress
@@ -2166,7 +2166,7 @@ STARTFUNCNO                     -1
 STC_LAYER                       1
 STC_SCALING                     0
 TIMEINIT                        0
-TIMESTEP                        0.0025
+TIMESTEP                        0.01
 TIME_ADAPTIVITY                 false
 TOLCONSTR                       1e-08
 TOLCONSTRINCR                   1e-08

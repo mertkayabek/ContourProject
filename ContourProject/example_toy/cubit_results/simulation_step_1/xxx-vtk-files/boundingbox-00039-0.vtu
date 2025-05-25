@@ -6,7 +6,7 @@
   <UnstructuredGrid>
     <FieldData>
       <DataArray type="Float64" Name="TIME" NumberOfTuples="1" format="ascii">
-3.900000000000002e-01 
+7.800000000000004e-01 
       </DataArray>
     </FieldData>
 

@@ -95,30 +95,35 @@ def calculate_displacement_for_cylinder(coordinates, new_radius):
 def create_beams_wrapped_around_cylinder(
     cubit,
     second_simulation,
-    base_dir, 
-    interval_end,
-    cylinder_radius,
-    compressed_part,
-    beam_radius,
-    positional_coupling_penalty,
-    rotational_coupling_penalty,
-    z_scale_factor=1.0,
-    number_of_beams=12,
-    youngs_modulus=83000,
     preview=False,
+    config=None,  # Add config parameter
 ):
-    
+    # Read simulation parameters from config file
+    contour_config = config["contour"]
+    disp_config = config["displacement"]
+    time_config = config["time"]
+    base_dir = contour_config["output_directory"] if "output_directory" in contour_config else "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results"  # Default value if not provided
+    interval_end = contour_config["interval_end"] if "interval_end" in contour_config else 6.0  # Default value if not provided
+    cylinder_radius = contour_config["cylinder_radius"] if "cylinder_radius" in contour_config else 3.0  # Default value if not provided
+    compressed_part = contour_config["compressed_part"] if "compressed_part" in contour_config else 0.0  # Default value if not provided
+    beam_radius = contour_config["beam_radius"] if "beam_radius" in contour_config else 0.015  # Default value if not provided
+    youngs_modulus = contour_config["youngs_modulus"] if "youngs_modulus" in contour_config else 83000  # Default value if not provided
+    positional_coupling_penalty = contour_config["pos_penalty"] if "pos_penalty" in contour_config else 100
+    rotational_coupling_penalty = contour_config["rot_penalty"] if "rot_penalty" in contour_config else 0.01
+    z_scale_factor = contour_config["z_scale_factor"] if "z_scale_factor" in contour_config else 0.5
+    number_of_beams = contour_config["number_of_beams"] if "number_of_beams" in contour_config else 12
+    compression_factor = contour_config["compression_factor"] if "compression_factor" in contour_config else 0.95  # Default value if not provided
+    z_intermediate = disp_config["z_intermediate"] if "z_intermediate" in disp_config else -0.5
+    z_final = disp_config["z_final"] if "z_final" in disp_config else -2.5
+
+    num_steps = time_config["steps1"] if "steps1" in time_config else 100  # Default value if not provided
+    time_step = 1/num_steps
+
     interval = [0, interval_end]
     n_intersections = 2
-    #number_of_beams = 12
-    compression_factor = 0.95
-    #youngs_modulus = 83000  # Young's modulus in N/mm^2
+    n_el = 8*(n_intersections-1)*number_of_beams
     # austenite phase value
     # radius of marker max 0.25 mm
-
-    n_el = 8*(n_intersections-1)*number_of_beams
-    num_steps = 100
-    time_step = 1/num_steps
 
     mesh = Mesh()
     mat = MaterialReissner(youngs_modulus=youngs_modulus, radius=beam_radius)
@@ -257,26 +262,12 @@ def create_beams_wrapped_around_cylinder(
                 arc_length = calculate_elliptical_arc_length(y, R, tan_yz, z_scale_factor)
                 half_ellipse_length = calculate_elliptical_arc_length(2*R, R, tan_yz, z_scale_factor)
                 normalized_t = arc_length / half_ellipse_length
-
-                """
-                arg = 1 - y / (tan_yz * R) 
-                if arg < -1:
-                    arg = -1
-                elif arg > 1:
-                    arg = 1
-                    
-                theta = np.arccos(arg)
-                t = interval[1] * theta / np.pi
-        
-                # Normalize to [0, 1]
-                normalized_t = t / interval[1]
-                """
                 positions.append(normalized_t)
+
             # End with position 1
             positions.append(1.0)
 
-            #add extra nodes every 0.025
-            
+            #Now add 4 extra nodes between start (0.0) and first calculated node
             step = (positions[1] - positions[0]) / 4
             current = positions[0] + step  # Start at 0.01
             while current < positions[1]:
@@ -286,24 +277,9 @@ def create_beams_wrapped_around_cylinder(
                 #positions.sort()
                 current += step
             
-
-            """
-            # Now add 4 extra nodes between start (0.0) and first calculated node
-            first_interval = positions[1] - positions[0]
-            for i in range(1, 11):  # Create 4 equally spaced nodes
-                new_pos = positions[0] + (first_interval * i) / 5
-                positions.append(new_pos)
-            
-            # Add 4 extra nodes between last calculated node and position 1.0
-            for i in range(1, 11):  # Create 4 equally spaced nodes
-                new_pos = 1 - (first_interval * i) / 5
-                positions.append(new_pos)
-            """
             # Sort the positions to maintain proper order7
             positions.sort()
             #print("Sorted node positions:", positions)
-
-            
             return positions
         
         def calculate_elliptical_arc_length(target_y, R, tan_yz, z_scale_factor, num_samples=1000000):
@@ -332,7 +308,6 @@ def create_beams_wrapped_around_cylinder(
             
             target_theta = np.arccos(arg)
 
-            
             # Create sample points for numerical integration
             theta_values = np.linspace(0, target_theta, num_samples)
             
@@ -412,15 +387,6 @@ def create_beams_wrapped_around_cylinder(
         find_intersections_and_apply_coupling(mesh, beams, positional_coupling_penalty, rotational_coupling_penalty) # change this
         mpy.check_overlapping_elements = False     
 
-        #print("\nBeam start and end point coordinates:")
-        for i, beam in enumerate(beams):
-            start_node = beam["start"].get_all_nodes()[0]  # Get the first node from the geometry set
-            start_coords = start_node.coordinates
-            #print(f"Beam {i + 1}: ({start_coords[0]:.3f}, {start_coords[1]:.3f}, {start_coords[2]:.3f})")
-            end_node = beam["end"].get_all_nodes()[0]  # Get the first node from the geometry set
-            end_coords = end_node.coordinates
-            #print(f"Beam {i + 1}: ({end_coords[0]:.3f}, {end_coords[1]:.3f}, {end_coords[2]:.3f})")
-
         new_radius = cylinder_radius * (1.0 - compression_factor)
 
         # write a for loop for all nodes in mesh like below
@@ -435,37 +401,16 @@ def create_beams_wrapped_around_cylinder(
             beam_lines.add(beams[i]["line"])
 
         for node in mesh.nodes:
-            # If node has a beam number attribute use it, otherwise mark as N/A
-            #beam_num = getattr(node, "beam_number", "N/A")
             #print(f"Beam {beam_num}: x = {node.coordinates[0]:.3f}, y = {node.coordinates[1]:.3f}, z = {node.coordinates[2]:.3f}")
             #print(f"Beam: x = {node.coordinates[0]:.3f}, y = {node.coordinates[1]:.3f}, z = {node.coordinates[2]:.3f}")
             if not node.is_middle_node:
-                #node in beams_start: This is wrong I dont know why
-                #if beam_nodes_for_contact is None:
-                #    beam_nodes_for_contact = GeometrySet(node)  # Initialize with first node
-                #else:
-                #    beam_nodes_for_contact.add(node)  # Add subsequent nodes
 
                 if  np.linalg.norm(node.coordinates[2] - interval[0]) < 1e-9:                #node in beams_start:
                     #print(f"Start node coordinates: {node.coordinates}")
                     # boundary condition with radial and axial=0 displacement
                     node_set = GeometrySet(node)
                     #print(f"Start Node coordinates: {node.coordinates}")
-                    """
-                    mesh.add(
-                        BoundaryCondition(
-                            node_set,
-                            (
-                                "NUMDOF 9 ONOFF 0 0 1 1 1 1 0 0 0 "
-                                "VAL 0 0 0 0 0 0 0 0 0 "
-                                "FUNCT 0 0 0 0 0 0 0 0 0"
-                            ),
-                            bc_type=mpy.bc.dirichlet,
-                        )
-                    )
-        esh.wrap_around_cylinder(radius=cylinder_radius)
-        find_intersections_and_apply_coupling(mesh, beams, positional_coupling_penalty, rotational_coupling_penalty) # change this
-        mpy.check_overlapping_elements = False                 """
+                    
                     displacement = calculate_displacement_for_cylinder(
                             node.coordinates, 
                             new_radius
@@ -489,9 +434,10 @@ def create_beams_wrapped_around_cylinder(
                     displacement_z = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 4 TIMES 0.0 1.0 2.0 1000.0 VALUES 0.0 -2.0 {} {}".format(
-                            -2.5,  # y-component of displacement
-                            -2.5
+                        "NUMPOINTS 4 TIMES 0.0 1.0 2.0 1000.0 VALUES 0.0 {} {} {}".format(
+                            z_intermediate,
+                            z_final,
+                            z_final
                         )
                     )
 
@@ -551,34 +497,15 @@ def create_beams_wrapped_around_cylinder(
                             node_set,
                             (
                                 # no need for fixing rotation check that
-                                "NUMDOF 9 ONOFF 1 1 0 1 1 1 0 0 0 "  # Fix only x and y translations
+                                "NUMDOF 9 ONOFF 1 1 0 0 0 0 0 0 0 "  # Fix only x and y translations
                                 "VAL 1 1 0 0 0 0 0 0 0 "
                                 "FUNCT {} {} 0 0 0 0 0 0 0"  # Use displacement functions for x,y
                             ),
-                            format_replacement=[displacement_x, displacement_y, displacement_z],  # Use the displacement functions
+                            format_replacement=[displacement_x, displacement_y],  # Use the displacement functions
                             bc_type=mpy.bc.dirichlet,
                         )
                     )
-                    #node in beams_end: This didnot work I dont know why
-                """
-                elif np.linalg.norm(node.coordinates[2] - interval[0])<1e-9: 
-                    # add here find end nodes
-                    print(f"End node coordinates: {node.coordinates}")
-                    node_set = GeometrySet(node)
-                    mesh.add(
-                        BoundaryCondition(
-                            node_set,
-                            (
-                                "NUMDOF 9 ONOFF 0 0 0 0 0 0 0 0 0 "  # Fix only x and y translations
-                                # kola bardağı gibi oluyor x ve y sınırlayınca
-                                "VAL 0 0 0 0 0 0 0 0 0 "
-                                "FUNCT 0 0 0 0 0 0 0 0 0"  # Use displacement functions for x,y
-                            ),
-                            bc_type=mpy.bc.dirichlet,
-                        )
-                    )
-                    """
-                    #pass
+                    
                     
         if second_simulation:
             mesh.add(
@@ -609,7 +536,6 @@ def create_beams_wrapped_around_cylinder(
     )
 
 
-        #todo add coupling
     
     # The vtk output will also show all node sets for BCs on the mesh.
     mesh.write_vtk("simple_beam", base_dir)
@@ -682,8 +608,6 @@ def create_beams_wrapped_around_cylinder(
 
 # global settings
 preview = False
-
-
 
 
 
@@ -976,7 +900,6 @@ def create_straight_toy_aneurysm(cubit, config, restart):
     )
     #cubit.display_in_cubit()
 
-
 def setup_simulation(config, second_simulation):
     """
     returns an input file based yml configuration and first or second simulation.
@@ -992,33 +915,12 @@ def setup_simulation(config, second_simulation):
     if preview:
         cubit.display_in_cubit()
 
-    output_directory = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results"
-    interval_end = 6.0
-    cylinder_radius = 3.0
-    compressed_part = 0
-    beam_radius = 0.03
-    youngs_modulus = 83000
-    beam_radius = 0.03
-    pos_penalty = 100
-    rot_penalty = 0.05
-    z_scale_factor = 0.5
-    number_of_beams = 4
-
     # create first simulation
     # TODO: MERT create function which creates the contour device with boundary conditions
     input_file = create_beams_wrapped_around_cylinder(
         cubit,
         second_simulation,
-        output_directory,
-        interval_end,
-        cylinder_radius,
-        compressed_part,
-        beam_radius,
-        pos_penalty,
-        rot_penalty,
-        z_scale_factor,
-        number_of_beams,
-        youngs_modulus=youngs_modulus,
+        config=config,  # Add config parameter
     )
 
     # add missing material for artery
@@ -1045,7 +947,6 @@ if __name__ == "__main__":
     # Adapt this path to the directory you want to store the simulation files
     simulation_dir_1 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_1"
     os.makedirs(simulation_dir_1, exist_ok=True)
-    """
     
     inputfile_1 = setup_simulation(config, False)
 
@@ -1056,7 +957,6 @@ if __name__ == "__main__":
     fd_placement_dat = os.path.join(simulation_dir_1, "fd-vmc-art.dat")
     inputfile_1.write_input_file(fd_placement_dat)
     run_four_c( fd_placement_dat, simulation_dir_1)
-    """
 
     simulation_dir_2 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_2"
     os.makedirs(simulation_dir_2, exist_ok=True)
@@ -1086,11 +986,11 @@ if __name__ == "__main__":
                     CONSTRAINT_STRATEGY                      penalty
                     CONTACT_DISCRETIZATION                   mortar
                     CONTACT_TYPE                             gap_variation
-                    GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 2
-                    GAUSS_POINTS                             6
+                    GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 4
+                    GAUSS_POINTS                             4
                     GEOMETRY_PAIR_STRATEGY                   segmentation
                     PENALTY_LAW                              linear_quadratic
-                    PENALTY_PARAMETER                        400.0
+                    PENALTY_PARAMETER                        100.0
                     PENALTY_PARAMETER_G0                     0.0001
                     MORTAR_SHAPE_FUNCTION                    line2
                     MORTAR_CONTACT_DEFINED_IN                reference_configuration

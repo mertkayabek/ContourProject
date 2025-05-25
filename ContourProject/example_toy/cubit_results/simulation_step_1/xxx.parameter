@@ -2150,7 +2150,7 @@ NORM_DISP                       0
 NORM_INCO                       0
 NORM_PRES                       0
 NORM_RESF                       0
-NUMSTEP                         100
+NUMSTEP                         50
 OUTPUT_STEP_OFFSET              0
 PREDICT                         1
 PRESTRESS                       FourC::Inpar::Solid::PreStress
@@ -2166,7 +2166,7 @@ STARTFUNCNO                     -1
 STC_LAYER                       1
 STC_SCALING                     0
 TIMEINIT                        0
-TIMESTEP                        0.01
+TIMESTEP                        0.02
 TIME_ADAPTIVITY                 false
 TOLCONSTR                       1e-08
 TOLCONSTRINCR                   1e-08
