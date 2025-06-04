@@ -1,0 +1,58 @@
+# Configuration file for Rose Petal Medical Contour Device
+# Author: Mert Kayabek
+# Device: Medical contour device with parametric rose petal geometry
+
+# Geometric parameters for the rose petal shape
+geometry:
+  z_max: 8                    # Maximum height of the petal (mm)
+  x_max: 8                    # Maximum width of the petal (mm)
+  stretch_factor: 1           # Factor to stretch the petal in the y-direction
+  catheter_depth: 1           # Depth of microcatheter below z=0 (mm)
+  num_petals: 32              # Number of petals to create
+
+# Material properties
+material:
+  youngs_modulus: 200         # Young's modulus (GPa)
+  radius: 0.05                # Beam radius (mm)
+
+# Mesh parameters
+mesh:
+  elements_per_petal: 50      # Number of elements per petal beam
+
+# Boundary conditions
+boundary_conditions:
+  fix_base_points: true       # Fix start and end points of each petal
+  coupling_penalty_pos: 200   # Positional penalty parameter for node coupling
+  coupling_penalty_rot: 0     # Rotational penalty parameter for node coupling
+
+# Simulation parameters
+simulation:
+  solver_type: "Superlu"      # Linear solver type
+  dynamics_type: "Statics"    # Type of analysis (Statics/Dynamics)
+  results_every: 1            # Output results every N steps
+  solver_method: "fullnewton" # Nonlinear solver method
+  timestep: 0.1               # Time step size
+  num_steps: 10               # Number of time steps
+  max_time: 1.0               # Maximum simulation time
+
+# Output settings
+output:
+  base_directory: "/home_student/kayabek/sw/Results/results_case11/"
+  simulation_directory: "/home_student/kayabek/sw/Results/results_case11/results"
+  output_name: "rose_petal_device"
+  vtk_output: true            # Generate VTK output for visualization
+  binary_output: false        # Use binary output format
+  
+# Parallel processing
+parallel:
+  num_processors: 2           # Number of processors for parallel execution
+
+# Visualization settings
+visualization:
+  output_displacement: true   # Output displacement field
+  output_strain: true         # Output strain field
+  output_stress: true         # Output stress field
+  output_beams: true          # Output beam-specific data
+  absolute_positions: true    # Use absolute positions in beam output
+  triad_visualization: true   # Show triad visualization points
+  strain_gausspoints: true    # Show strains at Gauss points
