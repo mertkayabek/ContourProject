@@ -139,7 +139,7 @@ def create_rose_petals(config):
                 
                 # Z-coordinate system with catheter integration
                 # Creates quick ascent/descent near catheter using sine³ for steeper slopes
-                z = (-catheter_depth * (1 - npAD.sin(theta)**3) +  # Base catheter depth
+                z = ((1- npAD.sin(theta)**3) -  # Base catheter depth
                      z_max * npAD.sin(theta)**2)                    # Peak elevation
                 
                 # Y-coordinate stretched by factor to modify petal shape

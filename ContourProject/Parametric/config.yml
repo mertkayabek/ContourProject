@@ -8,12 +8,12 @@ geometry:
   x_max: 8                    # Maximum width of the petal (mm)
   stretch_factor: 1           # Factor to stretch the petal in the y-direction
   catheter_depth: 1           # Depth of microcatheter below z=0 (mm)
-  num_petals: 32              # Number of petals to create
+  num_petals: 72              # Number of petals to create
 
 # Material properties
 material:
   youngs_modulus: 200         # Young's modulus (GPa)
-  radius: 0.05                # Beam radius (mm)
+  radius: 0.015                # Beam radius (mm)
 
 # Mesh parameters
 mesh:
