@@ -1,0 +1,16 @@
+# Configuration file for Arc-Based Contour Device Parameter Sweep
+# Author: Mert Kayabek
+# Device: Arc-based contour device simulation with parameter sweep
+
+# Basic geometry parameters
+interval_end: 7.0                    # End of z-coordinate interval
+cylinder_radius: 3.5                 # Radius of wrapping cylinder
+number_of_beams: 36                  # Total number of beams in the device
+
+# Parameter sweep arrays
+youngs_moduli: [83000]               # Different material stiffness values (N/mm²)
+beam_radii: [0.015]                  # Different beam cross-sectional radii (mm)
+compressed_parts: [0]                # Compression ratios (0 = no compression)
+positional_penalties: [100]          # Positional coupling penalties
+rotational_penalties: [0.0005, 0.0015, 0.005, 0.00001]  # Rotational penalties
+z_scale_factors: [0.6]               # Z-direction arc scaling factors

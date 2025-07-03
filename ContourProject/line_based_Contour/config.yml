@@ -1,0 +1,60 @@
+# Configuration file for Line-Based Contour Device
+# Author: Mert Kayabek
+# Device: Line-based contour device simulation
+
+# Time stepping parameters
+time:
+  steps1: 500
+  dt_1: 1.0
+
+# Contour device parameters
+contour:
+  output_directory: "/home_student/kayabek/sw/meshpy/ContourProject/line_based_Contour/Simulation"
+  interval_start: 0       # z coordinate start
+  interval_end: 2         # z coordinate end
+  cylinder_radius: 3.25   # radius of wrapping cylinder
+  n_intersections: 2      # minimum 2
+  number_of_beams: 6     # each direction normally 72 in total
+  compression_factor: 0.95 # Maximum compression. Probably should be around 0.9-0.95
+  compressed_part: 0.025  # ratio how much of each beam is compressed from start
+  beam_radius: 0.03       # radius of the beam
+  youngs_modulus: 83000   # N/mm^2 Young's modulus of the beam material
+  pos_penalty: 100        # penalty for positional coupling
+  rot_penalty: 0.05       # penalty for rotational coupling, supposed to be 0
+
+# Simulation parameters
+simulation:
+  solver_type: "Superlu"      # Linear solver type
+  dynamics_type: "Statics"    # Type of analysis (Statics/Dynamics)
+  results_every: 1            # Output results every N steps
+  solver_method: "fullnewton" # Nonlinear solver method
+  divergence_control: "adapt_step"  # Divergence control strategy
+  max_time: 1.0               # Maximum simulation time
+  bin_size_lower_bound: 3.0   # Binning strategy parameter
+  domain_bounding_box: [-30, -30, -30, 30, 30, 30]  # Domain bounding box
+
+# Output settings
+output:
+  output_name: "simple_beam"
+  vtk_output: true            # Generate VTK output for visualization
+  binary_output: false       # Use binary output format
+  file_steps: 1000           # File output steps
+  verbosity: "Standard"      # Output verbosity level
+  output_displacement: true  # Output displacement field
+  output_strain: true        # Output strain field
+  output_stress: true        # Output stress field
+  output_beams: true         # Output beam-specific data
+  absolute_positions: true   # Use absolute positions in beam output
+  triad_visualization: true  # Show triad visualization points
+  strain_gausspoints: true   # Show strains at Gauss points
+  interval_steps: 1          # VTK output interval steps
+  every_iteration: false     # Output every iteration
+
+# Parallel processing
+parallel:
+  num_processors: 2          # Number of processors for parallel execution
+
+# Beam interaction parameters
+beam_interaction:
+  repartition_strategy: "Everydt"
+  search_strategy: "bounding_volume_hierarchy"
