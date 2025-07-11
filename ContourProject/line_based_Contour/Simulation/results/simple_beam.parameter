@@ -1,0 +1,2412 @@
+--------------------------------------------------------ALE DYNAMIC
+ALE_TYPE                        5
+ASSESSMESHQUALITY               false
+DIVERCONT                       1
+INITIALDISP                     0
+LINEAR_SOLVER                   -1
+MAXITER                         1
+MAXTIME                         4
+MESHTYING                       0
+NUMSTEP                         41
+NUM_INITSTEP                    0
+RESTARTEVERY                    1
+RESULTSEVERY                    0
+STARTFUNCNO                     -1
+TIMESTEP                        0.1
+TOLDISP                         1e-06
+TOLRES                          1e-06
+UPDATEMATRIX                    false
+
+---------------------------------------------------ARTERIAL DYNAMIC
+DYNAMICTYPE                     0
+INITFUNCNO                      -1
+INITIALFIELD                    0
+LINEAR_SOLVER                   -1
+MAXTIME                         1000
+NUMSTEP                         0
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+SOLVESCATRA                     false
+TIMESTEP                        0.01
+
+-------------------------------------------------------BEAM CONTACT
+BEAMS_ADDITEXT                  true
+BEAMS_BASICSTIFFGAP             -1
+BEAMS_BOXESINOCT                8
+BEAMS_BTBLINEPENALTYPARAM       -1
+BEAMS_BTBPENALTYPARAM           0
+BEAMS_BTSOL                     false
+BEAMS_BTSPENALTYPARAM           0
+BEAMS_DAMPING                   false
+BEAMS_DAMPINGPARAM              -1000
+BEAMS_DAMPREGPARAM1             -1000
+BEAMS_DAMPREGPARAM2             -1000
+BEAMS_DEBUG                     false
+BEAMS_ENDPOINTPENALTY           false
+BEAMS_EXTVAL                    -1.0
+BEAMS_GAPSHIFTPARAM             0
+BEAMS_INACTIVESTIFF             false
+BEAMS_MAXDELTADISSCALEFAC       1
+BEAMS_MAXDISISCALEFAC           -1
+BEAMS_NEWGAP                    false
+BEAMS_NUMINTEGRATIONINTERVAL    1
+BEAMS_OCTREE                    0
+BEAMS_PARSHIFTANGLE1            -1
+BEAMS_PARSHIFTANGLE2            -1
+BEAMS_PENALTYLAW                0
+BEAMS_PENREGPARAM_C0            -1
+BEAMS_PENREGPARAM_F0            -1
+BEAMS_PENREGPARAM_G0            -1
+BEAMS_PERPSHIFTANGLE1           -1
+BEAMS_PERPSHIFTANGLE2           -1
+BEAMS_SEGANGLE                  -1
+BEAMS_SEGCON                    false
+BEAMS_SMOOTHING                 0
+BEAMS_STRATEGY                  0
+BEAMS_TREEDEPTH                 6
+MODELEVALUATOR                  0
+------------------------------------BEAM CONTACT/RUNTIME VTK OUTPUT
+CONTACT_FORCES                  false
+EVERY_ITERATION                 false
+GAPS                            false
+INTERVAL_STEPS                  -1
+VTK_OUTPUT_BEAM_CONTACT         false
+
+
+---------------------------------------------------BEAM INTERACTION
+REPARTITIONSTRATEGY             1
+SEARCH_STRATEGY                 FourC::Inpar::BeamInteraction::SearchStrategy
+------------------------------BEAM INTERACTION/BEAM TO BEAM CONTACT
+STRATEGY                        0
+
+---------------------BEAM INTERACTION/BEAM TO SOLID SURFACE CONTACT
+CONSTRAINT_STRATEGY             FourC::Inpar::BeamToSolid::BeamToSolidConstraintEnforcement
+CONTACT_DISCRETIZATION          FourC::Inpar::BeamToSolid::BeamToSolidContactDiscretization
+CONTACT_TYPE                    FourC::Inpar::BeamToSolid::BeamToSolidSurfaceContact
+GAUSS_POINTS                    6
+GEOMETRY_PAIR_SEGMENTATION_NOT_ALL_GAUSS_POINTS_PROJECT_VALID_ACTION FourC::Inpar::GEOMETRYPAIR::NotAllGaussPointsProjectValidAction
+GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 6
+GEOMETRY_PAIR_STRATEGY          FourC::Inpar::GEOMETRYPAIR::LineTo3DStrategy
+GEOMETRY_PAIR_SURFACE_NORMALS   FourC::Inpar::GEOMETRYPAIR::SurfaceNormals
+INTEGRATION_POINTS_CIRCUMFERENCE 6
+MORTAR_CONTACT_DEFINED_IN       FourC::Inpar::BeamToSolid::BeamToSolidSurfaceContactMortarDefinedIn
+MORTAR_SHAPE_FUNCTION           FourC::Inpar::BeamToSolid::BeamToSolidMortarShapefunctions
+PENALTY_LAW                     FourC::Inpar::BeamToSolid::BeamToSolidSurfaceContactPenaltyLaw
+PENALTY_PARAMETER               0
+PENALTY_PARAMETER_G0            0
+
+-------------------BEAM INTERACTION/BEAM TO SOLID SURFACE MESHTYING
+CONSTRAINT_STRATEGY             FourC::Inpar::BeamToSolid::BeamToSolidConstraintEnforcement
+CONTACT_DISCRETIZATION          FourC::Inpar::BeamToSolid::BeamToSolidContactDiscretization
+COUPLING_TYPE                   FourC::Inpar::BeamToSolid::BeamToSolidSurfaceCoupling
+GAUSS_POINTS                    6
+GEOMETRY_PAIR_SEGMENTATION_NOT_ALL_GAUSS_POINTS_PROJECT_VALID_ACTION FourC::Inpar::GEOMETRYPAIR::NotAllGaussPointsProjectValidAction
+GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 6
+GEOMETRY_PAIR_STRATEGY          FourC::Inpar::GEOMETRYPAIR::LineTo3DStrategy
+GEOMETRY_PAIR_SURFACE_NORMALS   FourC::Inpar::GEOMETRYPAIR::SurfaceNormals
+INTEGRATION_POINTS_CIRCUMFERENCE 6
+MORTAR_SHAPE_FUNCTION           FourC::Inpar::BeamToSolid::BeamToSolidMortarShapefunctions
+PENALTY_PARAMETER               0
+ROTATIONAL_COUPLING             false
+ROTATIONAL_COUPLING_PENALTY_PARAMETER 0
+ROTATIONAL_COUPLING_SURFACE_TRIAD FourC::Inpar::BeamToSolid::BeamToSolidSurfaceRotationCoupling
+
+-----------------------------BEAM INTERACTION/BEAM TO SOLID SURFACE
+----------BEAM INTERACTION/BEAM TO SOLID SURFACE/RUNTIME VTK OUTPUT
+AVERAGED_NORMALS                false
+INTEGRATION_POINTS              false
+MORTAR_LAMBDA_CONTINUOUS        false
+MORTAR_LAMBDA_CONTINUOUS_SEGMENTS 5
+MORTAR_LAMBDA_DISCRET           false
+NODAL_FORCES                    false
+SEGMENTATION                    false
+UNIQUE_IDS                      false
+WRITE_OUTPUT                    false
+
+
+--------------------BEAM INTERACTION/BEAM TO SOLID VOLUME MESHTYING
+CONSTRAINT_STRATEGY             FourC::Inpar::BeamToSolid::BeamToSolidConstraintEnforcement
+CONTACT_DISCRETIZATION          FourC::Inpar::BeamToSolid::BeamToSolidContactDiscretization
+COUPLE_RESTART_STATE            false
+GAUSS_POINTS                    6
+GEOMETRY_PAIR_SEGMENTATION_NOT_ALL_GAUSS_POINTS_PROJECT_VALID_ACTION FourC::Inpar::GEOMETRYPAIR::NotAllGaussPointsProjectValidAction
+GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 6
+GEOMETRY_PAIR_STRATEGY          FourC::Inpar::GEOMETRYPAIR::LineTo3DStrategy
+INTEGRATION_POINTS_CIRCUMFERENCE 6
+MORTAR_FOURIER_MODES            -1
+MORTAR_SHAPE_FUNCTION           FourC::Inpar::BeamToSolid::BeamToSolidMortarShapefunctions
+PENALTY_PARAMETER               0
+ROTATION_COUPLING               FourC::Inpar::BeamToSolid::BeamToSolidRotationCoupling
+ROTATION_COUPLING_MORTAR_SHAPE_FUNCTION FourC::Inpar::BeamToSolid::BeamToSolidMortarShapefunctions
+ROTATION_COUPLING_PENALTY_PARAMETER 0
+--BEAM INTERACTION/BEAM TO SOLID VOLUME MESHTYING/RUNTIME VTK OUTPUT
+INTEGRATION_POINTS              false
+MORTAR_LAMBDA_CONTINUOUS        false
+MORTAR_LAMBDA_CONTINUOUS_SEGMENTS 5
+MORTAR_LAMBDA_CONTINUOUS_SEGMENTS_CIRCUMFERENCE 8
+MORTAR_LAMBDA_DISCRET           false
+NODAL_FORCES                    false
+SEGMENTATION                    false
+UNIQUE_IDS                      false
+WRITE_OUTPUT                    false
+
+
+----------------------------BEAM INTERACTION/BEAM TO SPHERE CONTACT
+PENALTY_PARAMETER               0
+STRATEGY                        0
+
+--------------------------------------BEAM INTERACTION/CROSSLINKING
+CROSSLINKER                     = false
+FILAMENTBSPOTINTERVALGLOBAL     = -1.0
+FILAMENTBSPOTINTERVALLOCAL      = -1.0
+FILAMENTBSPOTRANGEGLOBAL        = -1.0 -1.0
+FILAMENTBSPOTRANGELOCAL         = 0.0 1.0
+INIT_LINKER_BOUNDINGBOX         = 1e12 1e12 1e12 1e12 1e12 1e12
+KT                              = 0
+MATCROSSLINKERPERTYPE           = -1
+MAXNUMBONDSPERFILAMENTBSPOT     = 1
+MAXNUMINITCROSSLINKERPERTYPE    = 0
+NUMCROSSLINKERPERTYPE           = 0
+TIMESTEP                        = -1
+VISCOSITY                       = 0
+
+----------------------------------BEAM INTERACTION/SPHERE BEAM LINK
+CONTRACTIONRATE                 = 0
+FILAMENTBSPOTINTERVALGLOBAL     = -1.0
+FILAMENTBSPOTINTERVALLOCAL      = -1.0
+FILAMENTBSPOTRANGEGLOBAL        = -1.0 -1.0
+FILAMENTBSPOTRANGELOCAL         = 0.0 1.0
+MATLINKERPERTYPE                = -1
+MAXNUMLINKERPERTYPE             = 0
+SPHEREBEAMLINKING               = false
+TIMESTEP                        = -1
+
+
+-----------------------------------------------------BEAM POTENTIAL
+AUTOMATIC_DIFFERENTIATION       false
+BEAMPOTENTIAL_TYPE              0
+BEAMPOT_BOXESINOCT              8
+BEAMPOT_BTSOL                   false
+BEAMPOT_BTSPH                   false
+BEAMPOT_OCTREE                  0
+BEAMPOT_TREEDEPTH               6
+CHOICE_MASTER_SLAVE             FourC::Inpar::BeamPotential::MasterSlaveChoice
+CUTOFF_RADIUS                   -1
+NUM_GAUSSPOINTS                 10
+NUM_INTEGRATION_SEGMENTS        1
+POTENTIAL_REDUCTION_LENGTH      -1
+POT_LAW_EXPONENT                1.0
+POT_LAW_PREFACTOR               0.0
+REGULARIZATION_SEPARATION       -1
+REGULARIZATION_TYPE             2
+STRATEGY                        0
+----------------------------------BEAM POTENTIAL/RUNTIME VTK OUTPUT
+EVERY_ITERATION                 false
+FORCES                          false
+INTERVAL_STEPS                  -1
+MOMENTS                         false
+VTK_OUTPUT_BEAM_POTENTIAL       false
+WRITE_FORCE_MOMENT_PER_ELEMENTPAIR false
+WRITE_UIDS                      false
+
+
+---------------------------------------------------BINNING STRATEGY
+BIN_PER_DIR                     = -1 -1 -1
+BIN_SIZE_LOWER_BOUND            = 3
+DOMAINBOUNDINGBOX               = -30 -30 -30 30 30 30
+PERIODICONOFF                   = 0 0 0
+WRITEBINS                       = 0
+
+----------------------------------------------------BIOFILM CONTROL
+AVGROWTH                        false
+BIOFILMGROWTH                   false
+BIONUMSTEP                      0
+BIOTIMESTEP                     0.05
+FLUXCOEF                        0
+NORMFORCENEGCOEF                0
+NORMFORCEPOSCOEF                0
+OUTPUT_GMSH                     false
+TANGONEFORCECOEF                0
+TANGTWOFORCECOEF                0
+
+--------------------------------------------BOUNDINGVOLUME STRATEGY
+BEAM_RADIUS_EXTENSION_FACTOR    2
+SPHERE_RADIUS_EXTENSION_FACTOR  2
+WRITE_GEOMETRIC_SEARCH_VISUALIZATION false
+
+--------------------------------------------------BROWNIAN DYNAMICS
+BEAMS_DAMPING_COEFF_PER_UNITLENGTH = 0.0 0.0 0.0
+BEAMS_DAMPING_COEFF_SPECIFIED_VIA = 0
+BROWNDYNPROB                    = false
+KT                              = 0
+MAXRANDFORCE                    = -1
+TIMESTEP                        = -1
+VISCOSITY                       = 0
+
+-----------------------------------------CARDIAC MONODOMAIN CONTROL
+ACTTHRES                        1
+WRITEMAXINTSTATE                0
+WRITEMAXIONICCURRENTS           0
+
+-------------------------------CARDIOVASCULAR 0D-STRUCTURE COUPLING
+ENHANCED_OUTPUT                 false
+EPS_PERIODIC                    1e-16
+K_PTC                           0
+LINEAR_COUPLED_SOLVER           -1
+PTC_3D0D                        false
+RESTART_WITH_CARDVASC0D         false
+SOLALGORITHM                    0
+TIMINT_THETA                    0.5
+TOL_CARDVASC0D_DOFINCR          1e-08
+TOL_CARDVASC0D_RES              1e-08
+T_PERIOD                        -1
+--------CARDIOVASCULAR 0D-STRUCTURE COUPLING/RESPIRATORY PARAMETERS
+E_alv                           0
+L_alv                           0
+M_CO2_arcer                     0
+M_CO2_arcor                     0
+M_CO2_arespl                    0
+M_CO2_armsc                     0
+M_CO2_arspl                     0
+M_O2_arcer                      0
+M_O2_arcor                      0
+M_O2_arespl                     0
+M_O2_armsc                      0
+M_O2_arspl                      0
+RESPIRATORY_MODEL               0
+R_alv                           0
+U_m                             0
+U_t_curve                       -1
+V_alv_0                         -1
+V_lung_dead                     150000
+V_lung_tidal                    400000
+V_lung_u                        0
+V_m_gas                         22400
+V_tisscer                       1
+V_tisscor                       1
+V_tissespl                      1
+V_tissmsc                       1
+V_tissspl                       1
+alpha_CO2                       0
+alpha_O2                        0
+c_Hb                            0
+fCO2_alv_0                      0.05263
+fCO2_ext                        0.03
+fO2_alv_0                       0.1368
+fO2_ext                         0.21
+kappa_CO2                       0
+kappa_O2                        0
+p_alv_0                         -1
+p_vap_water_37                  6.27949
+ppCO2_ar_pul_0                  1
+ppCO2_ar_sys_0                  1
+ppCO2_arcer_sys_0               1
+ppCO2_arcor_sys_0               1
+ppCO2_arespl_sys_0              1
+ppCO2_armsc_sys_0               1
+ppCO2_arspl_sys_0               1
+ppCO2_at_l_0                    1
+ppCO2_at_r_0                    1
+ppCO2_cap_pul_0                 1
+ppCO2_v_l_0                     1
+ppCO2_v_r_0                     1
+ppCO2_ven_pul_0                 1
+ppCO2_ven_sys_0                 1
+ppCO2_vencer_sys_0              1
+ppCO2_vencor_sys_0              1
+ppCO2_venespl_sys_0             1
+ppCO2_venmsc_sys_0              1
+ppCO2_venspl_sys_0              1
+ppO2_ar_pul_0                   1
+ppO2_ar_sys_0                   1
+ppO2_arcer_sys_0                1
+ppO2_arcor_sys_0                1
+ppO2_arespl_sys_0               1
+ppO2_armsc_sys_0                1
+ppO2_arspl_sys_0                1
+ppO2_at_l_0                     1
+ppO2_at_r_0                     1
+ppO2_cap_pul_0                  1
+ppO2_v_l_0                      1
+ppO2_v_r_0                      1
+ppO2_ven_pul_0                  1
+ppO2_ven_sys_0                  1
+ppO2_vencer_sys_0               1
+ppO2_vencor_sys_0               1
+ppO2_venespl_sys_0              1
+ppO2_venmsc_sys_0               1
+ppO2_venspl_sys_0               1
+q_alv_0                         0
+q_arcer_sys_in_0                0
+q_arcor_sys_in_0                0
+q_armsc_sys_in_0                0
+q_arspl_sys_in_0                0
+q_arsspl_sys_in_0               0
+
+--CARDIOVASCULAR 0D-STRUCTURE COUPLING/SYS-PUL CIRCULATION PARAMETERS
+ATRIUM_MODEL                    1
+Atrium_act_curve_l              -1
+Atrium_act_curve_r              -1
+Atrium_prescr_E_curve_l         -1
+Atrium_prescr_E_curve_r         -1
+C_ar_pul                        0
+C_ar_sys                        0
+C_arcer_sys                     0
+C_arcor_sys                     0
+C_arespl_sys                    0
+C_armsc_sys                     0
+C_arspl_sys                     0
+C_cap_pul                       0
+C_ven_pul                       0
+C_ven_sys                       0
+C_vencer_sys                    0
+C_vencor_sys                    0
+C_venespl_sys                   0
+C_venmsc_sys                    0
+C_venspl_sys                    0
+E_at_max_l                      0
+E_at_max_r                      0
+E_at_min_l                      0
+E_at_min_r                      0
+E_v_max_l                       0
+E_v_max_r                       0
+E_v_min_l                       0
+E_v_min_r                       0
+L_ar_pul                        0
+L_ar_sys                        0
+L_ven_pul                       0
+L_ven_sys                       0
+R_ar_pul                        0
+R_ar_sys                        0
+R_arcer_sys                     0
+R_arcor_sys                     0
+R_arespl_sys                    0
+R_armsc_sys                     0
+R_arspl_sys                     0
+R_arvalve_max_l                 0
+R_arvalve_max_r                 0
+R_arvalve_min_l                 0
+R_arvalve_min_r                 0
+R_atvalve_max_l                 0
+R_atvalve_max_r                 0
+R_atvalve_min_l                 0
+R_atvalve_min_r                 0
+R_cap_pul                       0
+R_ven_pul                       0
+R_ven_sys                       0
+R_vencer_sys                    0
+R_vencor_sys                    0
+R_venespl_sys                   0
+R_venmsc_sys                    0
+R_venspl_sys                    0
+VENTRICLE_MODEL                 2
+V_ar_pul_u                      0
+V_ar_sys_u                      0
+V_arcer_sys_u                   72130
+V_arcor_sys_u                   24000
+V_arespl_sys_u                  134640
+V_armsc_sys_u                   105800
+V_arspl_sys_u                   274400
+V_at_l_u                        0
+V_at_r_u                        0
+V_cap_pul_u                     123000
+V_v_l_u                         0
+V_v_r_u                         0
+V_ven_pul_u                     120000
+V_ven_sys_u                     100000
+V_vencer_sys_u                  294640
+V_vencor_sys_u                  98210
+V_venespl_sys_u                 550000
+V_venmsc_sys_u                  432140
+V_venspl_sys_u                  1.121e+06
+Ventricle_act_curve_l           -1
+Ventricle_act_curve_r           -1
+Ventricle_prescr_E_curve_l      -1
+Ventricle_prescr_E_curve_r      -1
+Z_ar_pul                        0
+Z_ar_sys                        0
+p_ar_pul_0                      0
+p_ar_sys_0                      0
+p_arperi_sys_0                  0
+p_at_l_0                        0
+p_at_r_0                        0
+p_cap_pul_0                     0
+p_v_l_0                         0
+p_v_r_0                         0
+p_ven_pul_0                     0
+p_ven_sys_0                     0
+p_vencer_sys_0                  0
+p_vencor_sys_0                  0
+p_venespl_sys_0                 0
+p_venmsc_sys_0                  0
+p_venspl_sys_0                  0
+q_ar_pul_0                      0
+q_ar_sys_0                      0
+q_arcer_sys_0                   0
+q_arcor_sys_0                   0
+q_arespl_sys_0                  0
+q_armsc_sys_0                   0
+q_arspl_sys_0                   0
+q_cap_pul_0                     0
+q_ven_pul_0                     0
+q_ven_sys_0                     0
+q_vencer_sys_0                  0
+q_vencor_sys_0                  0
+q_venespl_sys_0                 0
+q_venmsc_sys_0                  0
+q_venspl_sys_0                  0
+q_vin_l_0                       0
+q_vin_r_0                       0
+q_vout_l_0                      0
+q_vout_r_0                      0
+
+
+----------------------------------------------------CONTACT DYNAMIC
+ADHESION                        0
+CONSTRAINT_DIRECTIONS           1
+CONTACTFORCE_ENDTIME            false
+CPP_NORMALS                     false
+FRICTION                        0
+FRLESS_FIRST                    false
+GP_SLIP_INCR                    false
+HYBRID_ANGLE_MAX                -1
+HYBRID_ANGLE_MIN                -1
+INITCONTACTBYGAP                false
+INITCONTACTGAPVALUE             0
+LINEAR_SOLVER                   -1
+NITSCHE_PENALTY_ADAPTIVE        true
+NITSCHE_THETA                   0
+NITSCHE_THETA_2                 1
+NITSCHE_WEIGHTING               2
+NONSMOOTH_CONTACT_SURFACE       false
+NONSMOOTH_GEOMETRIES            false
+NORMCOMBI_DISPLAGR              1
+NORMCOMBI_RESFCONTCONSTR        1
+PENALTYPARAM                    0
+PENALTYPARAMTAN                 0
+REGULARIZATION_STIFFNESS        -1
+REGULARIZATION_THICKNESS        -1
+REGULARIZED_NORMAL_CONTACT      false
+RESTART_WITH_CONTACT            false
+SEMI_SMOOTH_CN                  1
+SEMI_SMOOTH_CT                  1
+SEMI_SMOOTH_NEWTON              true
+STRATEGY                        1
+SYSTEM                          1
+TIMING_DETAILS                  false
+TOLCONTCONSTR                   1e-06
+TOLLAGR                         1e-06
+UZAWACONSTRTOL                  1e-08
+UZAWAMAXSTEPS                   10
+VELOCITY_UPDATE                 false
+
+-----------------------COUPLED REDUCED-D AIRWAYS AND TISSUE DYNAMIC
+CONVTOL_P                       1e-06
+CONVTOL_Q                       1e-06
+MAXITER                         5
+MAXTIME                         4
+NORMAL                          1
+NUMSTEP                         1
+RELAXTYPE                       0
+TIMESTEP                        0.01
+
+--------------------------------------------------------CUT GENERAL
+BOUNDARYCELL_CUBATURDEGREE      20
+DIRECT_DIVERGENCE_REFPLANE      0
+DO_SELFCUT                      true
+GENERAL_POSITION_DISTANCE_FLOATTYPE 2
+GENERAL_POSITION_POSITION_FLOATTYPE 2
+INTEGRATE_INSIDE_CELLS          true
+KERNEL_DISTANCE_FLOATTYPE       0
+KERNEL_INTERSECTION_FLOATTYPE   0
+SELFCUT_DO_MESHCORRECTION       true
+SELFCUT_MESHCORRECTION_MULTIPLICATOR 30
+SPLIT_CUTSIDES                  true
+
+-----------------------------------------------------DISCRETISATION
+NUMAIRWAYSDIS                   1
+NUMALEDIS                       1
+NUMARTNETDIS                    1
+NUMFLUIDDIS                     1
+NUMSTRUCDIS                     1
+NUMTHERMDIS                     1
+
+-----------------------------------------------ELASTO HYDRO DYNAMIC
+COUPALGO                        1
+DIFFTIMESTEPSIZE                false
+DRY_CONTACT_MODEL               false
+FIELDCOUPLING                   0
+ITEMAX                          10
+ITEMIN                          1
+MAXTIME                         1000
+NUMSTEP                         200
+RESTARTEVERY                    1
+RESTARTEVERYTIME                0
+RESULTSEVERY                    1
+RESULTSEVERYTIME                0
+TIMESTEP                        -1
+UNPROJ_ZERO_DBC                 false
+------------------------------------ELASTO HYDRO DYNAMIC/MONOLITHIC
+ADAPTCONV                       false
+ADAPTCONV_BETTER                0.1
+CONVTOL                         1e-06
+INFNORMSCALING                  true
+ITERNORM                        4
+LINEAR_SOLVER                   -1
+NORMCOMBI_RESFINC               3
+NORM_INC                        0
+NORM_RESF                       0
+PTCDT                           0.1
+TOLINC                          1e-06
+
+-----------------------------------ELASTO HYDRO DYNAMIC/PARTITIONED
+CONVTOL                         1e-06
+MAXOMEGA                        10
+MINOMEGA                        0.1
+STARTOMEGA                      1
+
+
+-------------------------------------------------------ELCH CONTROL
+COUPLE_BOUNDARY_FLUXES          true
+CYCLING_TIMESTEP                -1
+DIFFCOND_FORMULATION            false
+ELECTRODE_INFO_EVERY_STEP       false
+EQUPOT                          0
+FARADAY_CONSTANT                96485.3
+GALVANOSTATIC                   false
+GAS_CONSTANT                    8.31447
+GSTATCONDID_ANODE               1
+GSTATCONDID_CATHODE             0
+GSTATCONVTOL                    1e-05
+GSTATCURTOL                     1e-15
+GSTATFUNCTNO                    -1
+GSTATITEMAX                     10
+GSTAT_APPROX_ELECT_RESIST       0
+GSTAT_LENGTH_CURRENTPATH        0
+INITPOTCALC                     false
+MOLARVOLUME                     0
+MOVBOUNDARYCONVTOL              1e-06
+MOVBOUNDARYITEMAX               10
+MOVBOUNDARYTHETA                0
+MOVINGBOUNDARY                  0
+ONLYPOTENTIAL                   false
+TEMPERATURE                     298
+TEMPERATURE_FROM_FUNCT          -1
+----------------------------------------------ELCH CONTROL/DIFFCOND
+CURRENT_SOLUTION_VAR            false
+MAT_DIFFCOND_DIFFBASED          true
+MAT_NEWMAN_CONST_A              2
+MAT_NEWMAN_CONST_B              -2
+MAT_NEWMAN_CONST_C              -1
+PERMITTIVITY_VACUUM             8.85419e-12
+
+---------------------------------------------------ELCH CONTROL/SCL
+ADAPTED_TIME_STEP_SIZE          -1
+ADAPT_TIME_STEP                 -1
+ADD_MICRO_MACRO_COUPLING        false
+COUPLING_OUTPUT                 false
+INITFUNCNO                      -1
+INITIALFIELD                    0
+INITPOTCALC                     false
+MATRIXTYPE                      FourC::Core::LinAlg::MatrixType
+SOLVER                          -1
+
+
+---------------------------------------------EMBEDDED MESH COUPLING
+CONSTRAINT_ENFORCEMENT          FourC::Inpar::CONSTRAINTS::EmbeddedMeshConstraintEnforcement
+CONSTRAINT_ENFORCEMENT_PENALTYPARAM 0
+COUPLING_STRATEGY               FourC::Inpar::CONSTRAINTS::EmbeddedMeshCouplingStrategy
+MORTAR_SHAPE_FUNCTION           FourC::Inpar::CONSTRAINTS::SolidToSolidMortarShapefunctions
+
+---------------------------------------------FLUID BEAM INTERACTION
+COUPLING                        FourC::Inpar::FBI::BeamToFluidCoupling
+PRESORT_STRATEGY                FourC::Inpar::FBI::BeamToFluidPreSortStrategy
+STARTSTEP                       0
+---------------------FLUID BEAM INTERACTION/BEAM TO FLUID MESHTYING
+CONSTRAINT_STRATEGY             FourC::Inpar::FBI::BeamToFluidConstraintEnforcement
+GAUSS_POINTS                    6
+GEOMETRY_PAIR_SEGMENTATION_NOT_ALL_GAUSS_POINTS_PROJECT_VALID_ACTION FourC::Inpar::GEOMETRYPAIR::NotAllGaussPointsProjectValidAction
+GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 6
+GEOMETRY_PAIR_STRATEGY          FourC::Inpar::GEOMETRYPAIR::LineTo3DStrategy
+INTEGRATION_POINTS_CIRCUMFERENCE 6
+MESHTYING_DISCRETIZATION        FourC::Inpar::FBI::BeamToFluidDiscretization
+MORTAR_SHAPE_FUNCTION           FourC::Inpar::FBI::BeamToFluidMeshtingMortarShapefunctions
+PENALTY_PARAMETER               0
+SEARCH_RADIUS                   1000
+--FLUID BEAM INTERACTION/BEAM TO FLUID MESHTYING/RUNTIME VTK OUTPUT
+CONSTRAINT_VIOLATION            false
+INTEGRATION_POINTS              false
+MORTAR_LAMBDA_CONTINUOUS        false
+MORTAR_LAMBDA_CONTINUOUS_SEGMENTS 5
+MORTAR_LAMBDA_DISCRET           false
+NODAL_FORCES                    false
+SEGMENTATION                    false
+WRITE_OUTPUT                    false
+
+
+
+------------------------------------------------------FLUID DYNAMIC
+ADAPTCONV                       false
+ADAPTCONV_BETTER                0.1
+ALLDOFCOUPLED                   true
+ALPHA_F                         1
+ALPHA_M                         1
+BLOCKMATRIX                     false
+BODYFORCEFUNCNO                 -1
+CALCERROR                       0
+CALCERRORFUNCNO                 -1
+COMPUTE_DIVU                    false
+COMPUTE_EKIN                    false
+CONVCHECK                       1
+CONVFORM                        convective
+CORRTERMFUNCNO                  -1
+GAMMA                           1
+GEOMETRY                        0
+GMSH_OUTPUT                     false
+GRIDVEL                         0
+INCONSISTENT_RESIDUAL           false
+INFNORMSCALING                  false
+INITIALFIELD                    0
+INITSTATITEMAX                  5
+ITEMAX                          10
+LIFTDRAG                        false
+LINEAR_SOLVER                   -1
+MAXTIME                         1000
+MESHTYING                       0
+NEW_OST                         false
+NONLINEARBC                     false
+NONLINITER                      0
+NUMSTASTEPS                     0
+NUMSTEP                         1
+OFF_PROC_ASSEMBLY               false
+OSEENFIELDFUNCNO                -1
+OST_CONT_PRESS                  0
+PHYSICAL_TYPE                   1
+PREDICTOR                       steady_state
+PRESSAVGBC                      false
+REFMACH                         1
+RESTARTEVERY                    20
+RESULTSEVERY                    1
+SIMPLER_SOLVER                  -1
+STAB_DEN_REF                    0
+STAB_MOM_REF                    0
+STARTFUNCNO                     -1
+START_THETA                     1
+STEADYSTEP                      -1
+STRONG_REDD_3D_COUPLING_TYPE    false
+THETA                           0.66
+TIMEINTEGR                      1
+TIMESTEP                        0.01
+VARVISCFUNCNO                   -1
+VELGRAD_PROJ_METHOD             0
+VELGRAD_PROJ_SOLVER             -1
+WSS_ML_AGR_SOLVER               -1
+WSS_TYPE                        0
+-----------------------------FLUID DYNAMIC/EDGE-BASED STABILIZATION
+EOS_CONV_CROSS                  0
+EOS_CONV_STREAM                 0
+EOS_DEFINITION_TAU              7
+EOS_DIV                         0
+EOS_H_DEFINITION                0
+EOS_PRES                        0
+PRES_KRYLOV_2Dz                 false
+
+--------------------------FLUID DYNAMIC/MULTIFRACTAL SUBGRID SCALES
+ADAPT_CSGS_PHI                  false
+BETA                            0
+CALC_N                          false
+CONSISTENT_FLUID_RESIDUAL       false
+CONVFORM                        convective
+CSGS                            0
+CSGS_PHI                        0
+C_DIFF                          1
+C_NU                            1
+EVALUATION_B                    element_center
+LOMA_CONTI                      false
+ML_SOLVER                       -1
+N                               1
+NEAR_WALL_LIMIT                 false
+NEAR_WALL_LIMIT_CSGS_PHI        false
+REF_LENGTH                      cube_edge
+REF_VELOCITY                    strainrate
+SCALE_SEPARATION                no_scale_sep
+SET_FINE_SCALE_VEL              false
+
+--------------------------FLUID DYNAMIC/NONLINEAR SOLVER TOLERANCES
+TOL_PRES_INC                    1e-06
+TOL_PRES_RES                    1e-06
+TOL_VEL_INC                     1e-06
+TOL_VEL_RES                     1e-06
+
+----------------------------FLUID DYNAMIC/POROUS-FLOW STABILIZATION
+CHARELELENGTH_PC                1
+CHARELELENGTH_U                 0
+CROSS-STRESS                    0
+DEFINITION_TAU                  6
+EVALUATION_MAT                  element_center
+EVALUATION_TAU                  element_center
+GRAD_DIV                        true
+INCONSISTENT                    false
+LOMA_CONTI_CROSS_STRESS         0
+LOMA_CONTI_REYNOLDS_STRESS      0
+LOMA_CONTI_SUPG                 false
+PSPG                            true
+REYNOLDS-STRESS                 0
+RSTAB                           0
+Reconstruct_Sec_Der             false
+STABTYPE                        1
+STAB_BIOT                       false
+STAB_BIOT_SCALING               1
+SUPG                            true
+TDS                             0
+TRANSIENT                       0
+VSTAB                           0
+
+-------------------------FLUID DYNAMIC/RESIDUAL-BASED STABILIZATION
+CHARELELENGTH_PC                1
+CHARELELENGTH_U                 0
+CROSS-STRESS                    0
+DEFINITION_TAU                  6
+EVALUATION_MAT                  element_center
+EVALUATION_TAU                  element_center
+GRAD_DIV                        true
+INCONSISTENT                    false
+LOMA_CONTI_CROSS_STRESS         0
+LOMA_CONTI_REYNOLDS_STRESS      0
+LOMA_CONTI_SUPG                 false
+PSPG                            true
+REYNOLDS-STRESS                 0
+RSTAB                           0
+Reconstruct_Sec_Der             false
+STABTYPE                        1
+SUPG                            true
+TDS                             0
+TRANSIENT                       0
+VSTAB                           0
+
+------------------------------------FLUID DYNAMIC/SUBGRID VISCOSITY
+CHANNEL_L_TAU                   0
+C_INCLUDE_CI                    false
+C_SMAGORINSKY                   0
+C_SMAGORINSKY_AVERAGED          false
+C_TURBPRANDTL                   1
+C_YOSHIZAWA                     -1
+FILTER_WIDTH                    0
+
+---------------------------------------FLUID DYNAMIC/TIMEADAPTIVITY
+ADAPTIVE_DT_INC                 0.8
+ADAPTIVE_TIME_STEP_ESTIMATOR    0
+CFL_NUMBER                      -1
+FREEZE_ADAPTIVE_DT_AT           1000000
+
+-------------------------------------FLUID DYNAMIC/TURBULENCE MODEL
+CANONICAL_FLOW                  no
+CHAN_AMPL_INIT_DIST             0.1
+CHA_NUMSUBDIVISIONS             5
+DUMPING_PERIOD                  1
+EXCLUDE_XFEM                    false
+FORCING_TIME_STEPS              0
+FORCING_TYPE                    0
+FSSUGRVISC                      0
+HOMDIR                          not_specified
+MEAN_SCALAR_GRADIENT            0
+OUTMEAN                         false
+PHYSICAL_MODEL                  no_model
+POWER_INPUT                     0
+SAMPLING_START                  10000000
+SAMPLING_STOP                   1
+SCALAR_FORCING                  no
+SUBGRID_DISSIPATION             false
+THRESHOLD_WAVENUMBER            0
+TURBMODEL_LS                    true
+TURBULENCE_APPROACH             DNS_OR_RESVMM_LES
+
+-------------------------------------FLUID DYNAMIC/TURBULENT INFLOW
+CANONICAL_INFLOW                no
+INFLOWFUNC                      -1
+INFLOW_CHA_SIDE                 0
+INFLOW_DUMPING_PERIOD           1
+INFLOW_HOMDIR                   not_specified
+INFLOW_INIT_DIST                0.1
+INFLOW_SAMPLING_START           10000000
+INFLOW_SAMPLING_STOP            1
+INITIALINFLOWFIELD              0
+NUMINFLOWSTEP                   1
+TURBULENTINFLOW                 false
+
+-------------------------------------------FLUID DYNAMIC/WALL MODEL
+Blending_Type                   none
+C_Tauw                          1
+GP_Wall_Normal                  3
+GP_Wall_Normal_Off_Wall         3
+GP_Wall_Parallel                3
+Inc_Tauw                        1
+Min_Tauw                        2e-09
+PROJECTION_SOLVER               -1
+Projection                      No
+Switch_Step                     -1
+Tauw_Calc_Type                  residual
+Tauw_Type                       constant
+Treat_Tauw_on_Dirichlet_Inflow  false
+X_WALL                          false
+
+
+-------------------------------------------------------FPSI DYNAMIC
+ALPHABJ                         = 1
+CONVTOL                         = 1e-06
+COUPALGO                        = 0
+FDCheck                         = false
+FDCheck_column                  = 0
+FDCheck_row                     = 0
+INCTOL                          = 1e-8 1e-8 1e-8 1e-8 1e-8 1e-8
+ITEMAX                          = 100
+ITEMIN                          = 1
+LINEAR_SOLVER                   = -1
+LineSearch                      = false
+MAXTIME                         = 1000
+NORMCOMBI_RESFINC               = 0
+NORM_INC                        = 0
+NORM_RESF                       = 0
+NUMSTEP                         = 200
+PARTITIONED                     = 0
+RESTARTEVERY                    = 1
+RESTOL                          = 1e-8 1e-8 1e-8 1e-8 1e-8 1e-8
+RESULTSEVERY                    = 1
+SECONDORDER                     = false
+SHAPEDERIVATIVES                = false
+TIMESTEP                        = 0.1
+USESHAPEDERIVATIVES             = false
+
+-------------------------------------------------------FS3I DYNAMIC
+CONSTHERMPRESS                  Yes
+COUPLED_LINEAR_SOLVER           -1
+FLUIDSCAL_FIELDCOUPLING         0
+FLUIDSCAL_SCATRATYPE            1
+INF_PERM                        true
+LINEAR_SOLVER1                  -1
+LINEAR_SOLVER2                  -1
+MAXTIME                         1000
+NUMSTEP                         20
+RESTARTEVERY                    1
+RESTART_FROM_PART_FSI           false
+RESULTSEVERY                    1
+SCATRA_SOLVERTYPE               2
+STRUCTSCAL_CONVFORM             1
+STRUCTSCAL_FIELDCOUPLING        0
+STRUCTSCAL_INITFUNCNO           -1
+STRUCTSCAL_INITIALFIELD         0
+TIMESTEP                        0.1
+-------------------------------------------FS3I DYNAMIC/PARTITIONED
+CONVTOL                         1e-06
+COUPALGO                        1
+ITEMAX                          10
+
+------------------------FS3I DYNAMIC/STRUCTURE SCALAR STABILIZATION
+ASSUGRDIFF                      false
+CHARELELENGTH                   0
+CONSISTENCY                     0
+DEFINITION_ASSGD                0
+DEFINITION_TAU                  2
+EVALUATION_MAT                  0
+EVALUATION_TAU                  0
+STABTYPE                        1
+SUGRVEL                         false
+TAU_VALUE                       0
+
+
+--------------------------------------------------------FSI DYNAMIC
+COUPALGO                        5
+DEBUGOUTPUT                     false
+MATCHALL                        true
+MATCHGRID_FLUIDALE              true
+MATCHGRID_STRUCTALE             true
+MAXTIME                         1000
+NUMSTEP                         200
+RESTARTEVERY                    1
+RESTART_FROM_PART_FSI           false
+RESULTSEVERY                    1
+SECONDORDER                     false
+SLIDEALEPROJ                    0
+TIMESTEP                        0.1
+VERBOSITY                       3
+---------------------------------------------FSI DYNAMIC/CONSTRAINT
+ALPHA                           0.8
+PRECONDITIONER                  0
+SIMPLEITER                      2
+
+--------------------------------------FSI DYNAMIC/MONOLITHIC SOLVER
+ADAPTIVEDIST                    = 0
+ALEPCITER                       = 1 1 1 1
+ALEPCOMEGA                      = 1.0 1.0 1.0 1.0
+BASETOL                         = 0.001
+BLOCKSMOOTHER                   = BGS BGS BGS
+CONVTOL                         = 1e-06
+ENERGYFILE                      = false
+FLUIDPCITER                     = 1 1 1 1
+FLUIDPCOMEGA                    = 1.0 1.0 1.0 1.0
+FSIAMGANALYZE                   = false
+INFNORMSCALING                  = true
+ITEMAX                          = 100
+KRYLOV_ITEMAX                   = 1000
+KRYLOV_SIZE                     = 50
+LINEARBLOCKSOLVER               = 0
+LINEAR_SOLVER                   = -1
+NORMCOMBI_RESFINC               = 0
+NORM_INC                        = 1
+NORM_RESF                       = 1
+PCITER                          = 1 1 1
+PCOMEGA                         = 1.0 1.0 1.0
+PRECONDREUSE                    = 0
+REBUILDPRECEVERYSTEP            = true
+SCHUROMEGA                      = 0.001 0.01 0.1
+SHAPEDERIVATIVES                = false
+STRUCTPCITER                    = 1 1 1 1
+STRUCTPCOMEGA                   = 1.0 1.0 1.0 1.0
+SYMMETRICPRECOND                = false
+TOL_DIS_INC_INF                 = 1e-06
+TOL_DIS_INC_L2                  = 1e-06
+TOL_DIS_RES_INF                 = 1e-06
+TOL_DIS_RES_L2                  = 1e-06
+TOL_FSI_INC_INF                 = 1e-06
+TOL_FSI_INC_L2                  = 1e-06
+TOL_FSI_RES_INF                 = 1e-06
+TOL_FSI_RES_L2                  = 1e-06
+TOL_PRE_INC_INF                 = 1e-06
+TOL_PRE_INC_L2                  = 1e-06
+TOL_PRE_RES_INF                 = 1e-06
+TOL_PRE_RES_L2                  = 1e-06
+TOL_VEL_INC_INF                 = 1e-06
+TOL_VEL_INC_L2                  = 1e-06
+TOL_VEL_RES_INF                 = 1e-06
+TOL_VEL_RES_L2                  = 1e-06
+
+-------------------------------------FSI DYNAMIC/PARTITIONED SOLVER
+BASETOL                         0.001
+CONVTOL                         1e-06
+COUPMETHOD                      conforming
+COUPVARIABLE                    0
+DIVPROJECTION                   false
+ITEMAX                          100
+MAXOMEGA                        0
+MINOMEGA                        -1
+PARTITIONED                     1
+PREDICTOR                       d(n)
+RELAX                           1
+
+-----------------------------------------FSI DYNAMIC/TIMEADAPTIVITY
+ADAPTSTEPMAX                    = 5
+AUXINTEGRATORFLUID              = 2
+AVERAGINGDT                     = 0.3 0.7
+DIVERCONT                       = 0
+DTMAX                           = 0.1
+DTMIN                           = 0.0001
+LOCERRTOLFLUID                  = 0.001
+NUMINCREASESTEPS                = 0
+SAFETYFACTOR                    = 0.9
+SIZERATIOMAX                    = 2
+SIZERATIOMIN                    = 0.5
+TIMEADAPTON                     = false
+
+
+-----------------------------------------------------------------IO
+ELEMENT_MAT_ID                  false
+FILESTEPS                       1000
+FLUID_ELEDATA_EVERY_STEP        false
+FLUID_NODEDATA_FIRST_STEP       false
+FLUID_STRESS                    false
+FLUID_WALL_SHEAR_STRESS         false
+LIMIT_OUTP_TO_PROC              -1
+OEI_FILE_COUNTER                0
+OUTPUT_BIN                      false
+OUTPUT_EVERY_ITER               false
+OUTPUT_GMSH                     false
+OUTPUT_ROT                      false
+OUTPUT_SPRING                   false
+PREFIX_GROUP_ID                 false
+RESTARTEVERY                    -1
+RESTARTWALLTIMEINTERVAL         -1
+STDOUTEVERY                     1
+STRUCT_CONDITION_NUMBER         FourC::Inpar::Solid::ConditionNumber
+STRUCT_COUPLING_STRESS          0
+STRUCT_DISP                     true
+STRUCT_ELE                      true
+STRUCT_JACOBIAN_MATLAB          false
+STRUCT_OPTIONAL_QUANTITY        0
+STRUCT_PLASTIC_STRAIN           0
+STRUCT_STRAIN                   2
+STRUCT_STRESS                   2
+STRUCT_SURFACTANT               false
+THERM_HEATFLUX                  0
+THERM_TEMPERATURE               false
+THERM_TEMPGRAD                  0
+VERBOSITY                       1
+WRITE_FINAL_STATE               false
+WRITE_INITIAL_STATE             true
+WRITE_TO_FILE                   false
+WRITE_TO_SCREEN                 true
+-------------------------------------------------IO/EVERY ITERATION
+OUTPUT_EVERY_ITER               false
+RUN_NUMBER                      -1
+STEP_NP_NUMBER                  -1
+WRITE_OWNER_EACH_NEWTON_ITER    false
+
+-------------------------------------------IO/MONITOR STRUCTURE DBC
+FILE_TYPE                       0
+INTERVAL_STEPS                  -1
+PRECISION_FILE                  16
+PRECISION_SCREEN                5
+WRITE_HEADER                    false
+
+----------------------------------------------IO/RUNTIME VTK OUTPUT
+COMPRESSION_LEVEL               FourC::LibB64::CompressionLevel
+EVERY_ITERATION                 false
+EVERY_ITERATION_RESERVE_DIGITS  4
+EVERY_ITERATION_VIRTUAL_TIME_INCREMENT 1e-08
+INTERVAL_STEPS                  1
+OUTPUT_DATA_FORMAT              FourC::Core::IO::OutputDataFormat
+OUTPUT_WRITER                   FourC::Core::IO::OutputWriter
+STEP_OFFSET                     0
+TIMESTEP_RESERVE_DIGITS         5
+----------------------------------------IO/RUNTIME VTK OUTPUT/BEAMS
+BEAMFILAMENTCONDITION           false
+DISPLACEMENT                    true
+ELEMENT_GHOSTING                false
+ELEMENT_GID                     false
+INTERNAL_ENERGY_ELEMENT         false
+KINETIC_ENERGY_ELEMENT          false
+MATERIAL_FORCES_CONTINUOUS      false
+MATERIAL_FORCES_GAUSSPOINT      false
+NUMBER_SUBSEGMENTS              5
+ORIENTATION_PARAMETER           false
+OUTPUT_BEAMS                    true
+REF_LENGTH                      false
+RVE_CROSSSECTION_FORCES         false
+SPATIAL_FORCES_GAUSSPOINT       false
+STRAINS_CONTINUOUS              false
+STRAINS_GAUSSPOINT              true
+TRIAD_VISUALIZATIONPOINT        true
+USE_ABSOLUTE_POSITIONS          true
+
+----------------------------------------IO/RUNTIME VTK OUTPUT/FLUID
+ACCELERATION                    false
+DISPLACEMENT                    false
+ELEMENT_GID                     false
+ELEMENT_OWNER                   false
+GRIDVELOCITY                    false
+NODE_GID                        false
+OUTPUT_FLUID                    false
+PRESSURE                        false
+VELOCITY                        false
+
+------------------------------------IO/RUNTIME VTK OUTPUT/STRUCTURE
+ACCELERATION                    false
+DISPLACEMENT                    true
+ELEMENT_GHOSTING                false
+ELEMENT_GID                     false
+ELEMENT_MAT_ID                  false
+ELEMENT_OWNER                   false
+GAUSS_POINT_DATA_OUTPUT_TYPE    FourC::Inpar::Solid::GaussPointDataOutputType
+NODE_GID                        false
+OUTPUT_STRUCTURE                true
+STRESS_STRAIN                   false
+VELOCITY                        false
+
+
+------------------------------------IO/RUNTIME VTP OUTPUT STRUCTURE
+EVERY_ITERATION                 false
+INTERVAL_STEPS                  -1
+LINKINGFORCE                    false
+NUMBEROFBONDS                   false
+ORIENTATIONANDLENGTH            false
+OWNER                           false
+STEP_OFFSET                     0
+
+
+--------------------------------------------------LEVEL-SET CONTROL
+CALCERROR                       0
+EXTRACT_INTERFACE_VEL           false
+MAXTIME                         1000
+NUMSTEP                         24
+NUM_CONVEL_LAYERS               -1
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+TIMESTEP                        0.1
+---------------------------------LEVEL-SET CONTROL/REINITIALIZATION
+ARTDIFFREINIT                   0
+CHARELELENGTHREINIT             0
+CONVTOL_REINIT                  -1
+CORRECTOR_STEP                  true
+DEFINITION_ARTDIFFREINIT        0
+DEFINITION_TAU_REINIT           0
+DIFF_FUNC                       0
+DIMENSION                       0
+INTERFACE_THICKNESS             1
+LINEARIZATIONREINIT             0
+LUMPING                         false
+NUMSTEPSREINIT                  1
+PENALTY_PARA                    -1
+PROJECTION                      true
+PROJECTION_DIFF                 0
+REINITBAND                      false
+REINITBANDWIDTH                 1
+REINITIALIZATION                0
+REINITINTERVAL                  1
+REINITVOLCORRECTION             false
+REINIT_INITIAL                  false
+SMOOTHED_SIGN_TYPE              2
+STABTYPEREINIT                  1
+THETAREINIT                     1
+TIMESTEPREINIT                  1
+VELREINIT                       0
+
+
+-------------------------------------------------------LOMA CONTROL
+CONSTHERMPRESS                  Yes
+CONVTOL                         1e-06
+ITEMAX                          10
+ITEMAX_BEFORE_SAMPLING          1
+LINEAR_SOLVER                   -1
+MAXTIME                         1000
+MONOLITHIC                      false
+NUMSTEP                         24
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+SGS_MATERIAL_UPDATE             false
+TIMESTEP                        0.1
+
+------------------------------------------------LUBRICATION DYNAMIC
+ABSTOLRES                       1e-14
+ADAPTCONV                       false
+ADAPTCONV_BETTER                0.1
+ADD_SQUEEZE_TERM                false
+CALCERROR                       0
+CALCERRORNO                     -1
+CONVTOL                         1e-13
+GAP_OFFSET                      0
+HEIGHTFEILD                     0
+HFUNCNO                         -1
+ITEMAX                          10
+ITERNORM                        2
+LINEAR_SOLVER                   -1
+MATLAB_STATE_OUTPUT             false
+MAXTIME                         1000
+MODIFIED_REYNOLDS_EQU           false
+NORM_PRE                        0
+NORM_RESF                       0
+NUMSTEP                         20
+OUTMEAN                         false
+OUTPUT_GMSH                     false
+PENALTY_CAVITATION              0
+PURE_LUB                        false
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+ROUGHNESS_STD_DEVIATION         0
+TIMESTEP                        0.1
+TOLPRE                          1e-06
+TOLRES                          1e-06
+VELFUNCNO                       -1
+VELOCITYFIELD                   0
+
+--------------------------------------------------MESH PARTITIONING
+IMBALANCE_TOL                   1.1
+METHOD                          FourC::Core::Rebalance::RebalanceType
+MIN_ELE_PER_PROC                0
+
+----------------------------------------------------------------MOR
+POD_MATRIX                      none
+
+----------------------------------------------------MORTAR COUPLING
+ALGORITHM                       0
+BINARYTREE_UPDATETYPE           0
+CROSSPOINTS                     false
+INTTYPE                         0
+LM_DUAL_CONSISTENT              1
+LM_QUAD                         0
+LM_SHAPEFCN                     2
+MESH_RELOCATION                 0
+NUMGP_PER_DIM                   0
+OUTPUT_INTERFACES               false
+RESTART_WITH_MESHTYING          false
+SEARCH_ALGORITHM                1
+SEARCH_PARAM                    0.3
+SEARCH_USE_AUX_POS              true
+TRIANGULATION                   1
+----------------------------MORTAR COUPLING/PARALLEL REDISTRIBUTION
+EXPLOIT_PROXIMITY               true
+GHOSTING_STRATEGY               FourC::Inpar::Mortar::ExtendGhosting
+IMBALANCE_TOL                   1.1
+MAX_BALANCE_EVAL_TIME           2
+MAX_BALANCE_SLAVE_ELES          0.5
+MIN_ELEPROC                     0
+PARALLEL_REDIST                 FourC::Inpar::Mortar::ParallelRedist
+PRINT_DISTRIBUTION              true
+
+
+--------------------------------------------MULTI POINT CONSTRAINTS
+ENFORCEMENT                     0
+PENALTY_PARAM                   100000
+RVE_REFERENCE_POINTS            0
+
+--------------------------------------------------------------NURBS
+DO_LS_DBC_PROJECTION            false
+SOLVER_LS_DBC_PROJECTION        -1
+
+---------------------------------------------------PARTICLE DYNAMIC
+DYNAMICTYPE                     = 1
+GRAVITY_ACCELERATION            = 0.0 0.0 0.0
+GRAVITY_RAMP_FUNCT              = -1
+INITIAL_POSITION_AMPLITUDE      = 0.0 0.0 0.0
+INTERACTION                     = 0
+MAXTIME                         = 1
+NUMSTEP                         = 100
+PARTICLE_WALL_LOADED            = false
+PARTICLE_WALL_MAT               = -1
+PARTICLE_WALL_MOVING            = false
+PARTICLE_WALL_SOURCE            = 0
+PHASE_TO_DYNLOADBALFAC          = none
+PHASE_TO_MATERIAL_ID            = none
+RESTARTEVERY                    = 1
+RESULTSEVERY                    = 1
+RIGID_BODY_MOTION               = false
+RIGID_BODY_PHASECHANGE_RADIUS   = -1
+TIMESTEP                        = 0.01
+TRANSFER_EVERY                  = false
+VISCOUS_DAMPING                 = -1
+WRITE_GHOSTED_PARTICLES         = false
+-----------------------------------------------PARTICLE DYNAMIC/DEM
+ADHESIONLAW                     0
+ADHESION_DISTANCE               -1
+ADHESION_HAMAKER                -1
+ADHESION_MAX_CONTACT_FORCE      0
+ADHESION_MAX_CONTACT_PRESSURE   0
+ADHESION_SURFACE_ENERGY         -1
+ADHESION_SURFACE_ENERGY_DISTRIBUTION 0
+ADHESION_SURFACE_ENERGY_DISTRIBUTION_CUTOFF_FACTOR -1
+ADHESION_SURFACE_ENERGY_DISTRIBUTION_VAR -1
+ADHESION_SURFACE_ENERGY_FACTOR  1
+ADHESION_USE_MAX_CONTACT_FORCE  false
+ADHESION_VDW_CURVE_SHIFT        false
+COEFF_RESTITUTION               -1
+DAMP_REG_FAC                    -1
+FRICT_COEFF_ROLL                -1
+FRICT_COEFF_TANG                -1
+INITIAL_RADIUS                  0
+MAX_RADIUS                      0
+MAX_VELOCITY                    -1
+MIN_RADIUS                      0
+NORMALCONTACTLAW                0
+NORMAL_DAMP                     -1
+NORMAL_STIFF                    -1
+POISSON_RATIO                   -1
+RADIUSDISTRIBUTION_SIGMA        -1
+REL_PENETRATION                 -1
+ROLLINGCONTACTLAW               0
+TANGENTIALCONTACTLAW            0
+TENSION_CUTOFF                  true
+WRITE_PARTICLE_ENERGY           false
+WRITE_PARTICLE_WALL_INTERACTION false
+YOUNG_MODULUS                   -1
+
+-------------------PARTICLE DYNAMIC/INITIAL AND BOUNDARY CONDITIONS
+DIRICHLET_BOUNDARY_CONDITION    none
+INITIAL_ACCELERATION_FIELD      none
+INITIAL_ANGULAR_ACCELERATION_FIELD none
+INITIAL_ANGULAR_VELOCITY_FIELD  none
+INITIAL_TEMP_FIELD              none
+INITIAL_VELOCITY_FIELD          none
+TEMPERATURE_BOUNDARY_CONDITION  none
+
+-----------------------------------------------PARTICLE DYNAMIC/SPH
+BARRIER_FORCE                   = false
+BARRIER_FORCE_DAMP_GAS          = 0
+BARRIER_FORCE_DAMP_HEAVY        = 0
+BARRIER_FORCE_DISTANCE          = 0
+BARRIER_FORCE_STIFF_GAS         = -1
+BARRIER_FORCE_STIFF_HEAVY       = -1
+BARRIER_FORCE_TEMPSCALE         = 0
+BOUNDARYPARTICLEFORMULATION     = 0
+BOUNDARYPARTICLEINTERACTION     = 0
+DENSITYCORRECTION               = 0
+DENSITYEVALUATION               = 0
+DIRICHLETBOUNDARYTYPE           = 0
+DIRICHLET_FUNCT                 = -1
+DIRICHLET_OUTWARD_NORMAL        = 0.0 0.0 0.0
+DIRICHLET_PLANE_POINT           = 0.0 0.0 0.0
+EQUATIONOFSTATE                 = 0
+HEATSOURCETYPE                  = 0
+HEATSOURCE_DIRECTION            = 0.0 0.0 0.0
+HEATSOURCE_FUNCT                = -1
+INITIALPARTICLESPACING          = 0
+INTERFACE_VISCOSITY             = false
+INTERFACE_VISCOSITY_LIQUIDGAS   = 0
+INTERFACE_VISCOSITY_SOLIDLIQUID = 0
+KERNEL                          = 0
+KERNEL_SPACE_DIM                = 2
+MOMENTUMFORMULATION             = 0
+NEUMANNBOUNDARYTYPE             = 0
+NEUMANN_FUNCT                   = -1
+NEUMANN_OUTWARD_NORMAL          = 0.0 0.0 0.0
+NEUMANN_PLANE_POINT             = 0.0 0.0 0.0
+PHASECHANGEDEFINITION           = none
+PHASECHANGETYPE                 = 0
+RIGIDPARTICLECONTACTDAMP        = 0
+RIGIDPARTICLECONTACTSTIFF       = -1
+RIGIDPARTICLECONTACTTYPE        = 0
+STATICCONTACTANGLE              = 0
+SURFACETENSIONCOEFFICIENT       = -1
+SURFACETENSIONFORMULATION       = 0
+SURFACETENSIONMINIMUM           = 0
+SURFACETENSIONREFTEMP           = 0
+SURFACETENSIONTEMPFAC           = 0
+SURFACETENSION_RAMP_FUNCT       = -1
+TEMPERATUREEVALUATION           = 0
+TEMPERATUREGRADIENT             = false
+TRANSPORTVELOCITYFORMULATION    = 0
+TRANS_DT_BARRIER                = 0
+TRANS_DT_CURVATURE              = 0
+TRANS_DT_INTVISC                = 0
+TRANS_DT_MARANGONI              = 0
+TRANS_DT_SURFACETENSION         = 0
+TRANS_DT_WETTING                = 0
+TRANS_REF_TEMPERATURE           = 0
+TRIPLEPOINTNORMAL_CORR_CF_LOW   = 0
+TRIPLEPOINTNORMAL_CORR_CF_UP    = 0
+VAPOR_HEATLOSS                  = false
+VAPOR_HEATLOSS_ENTHALPY_REFTEMP = 0
+VAPOR_HEATLOSS_LATENTHEAT       = 0
+VAPOR_HEATLOSS_PFAC             = 0
+VAPOR_HEATLOSS_TFAC             = 0
+VAPOR_RECOIL                    = false
+VAPOR_RECOIL_BOILINGTEMPERATURE = 0
+VAPOR_RECOIL_PFAC               = 0
+VAPOR_RECOIL_TFAC               = 0
+WALLFORMULATION                 = 0
+WRITE_PARTICLE_WALL_INTERACTION = false
+
+
+-------------------------------------------------------PASI DYNAMIC
+CONVTOLRELATIVEDISP             -1
+CONVTOLRELATIVEFORCE            -1
+CONVTOLSCALEDDISP               -1
+CONVTOLSCALEDFORCE              -1
+COUPLING                        0
+IGNORE_CONV_CHECK               false
+ITEMAX                          10
+MAXOMEGA                        10
+MAXTIME                         1
+MINOMEGA                        0.1
+NUMSTEP                         100
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+STARTOMEGA                      1
+TIMESTEP                        0.01
+
+---------------------------------------------POROELASTICITY DYNAMIC
+CONTACT_NO_PENETRATION          false
+CONTIPARTINT                    false
+CONVECTIVE_TERM                 false
+COUPALGO                        1
+EQUILIBRATION                   FourC::Core::LinAlg::EquilibrationMethod
+ITEMAX                          10
+ITEMIN                          1
+LINEAR_SOLVER                   -1
+MATCHINGGRID                    true
+MAXTIME                         1000
+NORMCOMBI_RESFINC               1
+NORM_INC                        2
+NORM_RESF                       2
+NUMSTEP                         200
+PHYSICAL_TYPE                   11
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+SECONDORDER                     true
+TIMESTEP                        0.05
+TOLINC_DISP                     1e-08
+TOLINC_GLOBAL                   1e-08
+TOLINC_PORO                     1e-08
+TOLINC_PRES                     1e-08
+TOLINC_VEL                      1e-08
+TOLRES_DISP                     1e-08
+TOLRES_GLOBAL                   1e-08
+TOLRES_NCOUP                    1e-08
+TOLRES_PORO                     1e-08
+TOLRES_PRES                     1e-08
+TOLRES_VEL                      1e-08
+TRANSIENT_TERMS                 3
+VECTORNORM_INC                  3
+VECTORNORM_RESF                 3
+
+----------------------------------------POROFLUIDMULTIPHASE DYNAMIC
+ABSTOLRES                       1e-14
+ADAPTCONV                       false
+ADAPTCONV_BETTER                0.1
+ARTERY_COUPLING                 false
+CALCERROR                       0
+CALCERRORNO                     -1
+DIVERCONT                       0
+DOMAININT_FUNCT                 -1.0
+FDCHECK                         0
+FDCHECKEPS                      1e-06
+FDCHECKTOL                      1e-06
+FLUX_PROJ_METHOD                0
+FLUX_PROJ_SOLVER                -1
+INITFUNCNO                      -1
+INITIALFIELD                    0
+ITEMAX                          10
+LINEAR_SOLVER                   -1
+MAXTIME                         1000
+NUMSTEP                         20
+OUTPUT_PHASE_VELOCITIES         true
+OUTPUT_POROSITY                 true
+OUTPUT_SATANDPRESS              true
+OUTPUT_SOLIDPRESS               true
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+SKIPINITDER                     true
+STAB_BIOT                       false
+STAB_BIOT_SCALING               1
+STARTING_DBC_FUNCT              0
+STARTING_DBC_ONOFF              0
+STARTING_DBC_TIME_END           -1
+THETA                           0.5
+TIMEINTEGR                      0
+TIMESTEP                        0.1
+TOLINC                          1e-06
+TOLRES                          1e-06
+VECTORNORM_INC                  3
+VECTORNORM_RESF                 3
+------------------------POROFLUIDMULTIPHASE DYNAMIC/ARTERY COUPLING
+ARTERY_COUPLING_METHOD          0
+COUPLEDDOFS_ART                 -1.0
+COUPLEDDOFS_PORO                -1.0
+DELETE_FREE_HANGING_ELES        false
+DELETE_SMALL_FREE_HANGING_COMPS -1
+EVALUATE_IN_REF_CONFIG          true
+LATERAL_SURFACE_COUPLING        false
+MAXNUMSEGPERARTELE              5
+NUMPATCH_AXI                    1
+NUMPATCH_RAD                    1
+OUTPUT_BLOODVESSELVOLFRAC       false
+PENALTY                         1000
+PRINT_OUT_SUMMARY_PAIRS         false
+REACFUNCT_ART                   -1
+REACFUNCT_CONT                  -1
+SCALEREAC_ART                   0
+SCALEREAC_CONT                  0
+
+
+---------------------------------------------POROMULTIPHASE DYNAMIC
+ARTERY_COUPLING                 false
+COUPALGO                        1
+ITEMAX                          10
+MAXTIME                         1000
+NUMSTEP                         200
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+SOLVE_STRUCTURE                 true
+TIMESTEP                        -1
+----------------------------------POROMULTIPHASE DYNAMIC/MONOLITHIC
+ADAPTCONV                       false
+ADAPTCONV_BETTER                0.001
+EQUILIBRATION                   FourC::Core::LinAlg::EquilibrationMethod
+FDCHECK                         0
+LINEAR_SOLVER                   -1
+TOLINC_GLOBAL                   1e-08
+TOLRES_GLOBAL                   1e-08
+VECTORNORM_INC                  3
+VECTORNORM_RESF                 3
+
+---------------------------------POROMULTIPHASE DYNAMIC/PARTITIONED
+CONVTOL                         1e-06
+MAXOMEGA                        10
+MINOMEGA                        0.1
+RELAXATION                      0
+STARTOMEGA                      1
+
+
+---------------------------------------POROMULTIPHASESCATRA DYNAMIC
+ARTERY_COUPLING                 false
+COUPALGO                        0
+DIVERCONT                       0
+ITEMAX                          10
+ITEMIN                          1
+MAXTIME                         1000
+NUMSTEP                         200
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+TIMESTEP                        0.05
+----------------------------POROMULTIPHASESCATRA DYNAMIC/MONOLITHIC
+ADAPTCONV                       false
+ADAPTCONV_BETTER                0.001
+EQUILIBRATION                   FourC::Core::LinAlg::EquilibrationMethod
+FDCHECK                         0
+LINEAR_SOLVER                   -1
+TOLINC_GLOBAL                   1e-08
+TOLRES_GLOBAL                   1e-08
+VECTORNORM_INC                  3
+VECTORNORM_RESF                 3
+
+---------------------------POROMULTIPHASESCATRA DYNAMIC/PARTITIONED
+CONVTOL                         1e-06
+
+
+-------------------------------------------------POROSCATRA CONTROL
+COUPALGO                        2
+ITEMAX                          10
+ITEMIN                          1
+LINEAR_SOLVER                   -1
+MATCHINGGRID                    true
+MAXTIME                         1000
+NORMCOMBI_RESFINC               1
+NORM_INC                        2
+NORM_RESF                       2
+NUMSTEP                         200
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+TIMESTEP                        0.05
+TOLINC_DISP                     1e-08
+TOLINC_GLOBAL                   1e-08
+TOLINC_PRES                     1e-08
+TOLINC_SCALAR                   1e-08
+TOLINC_VEL                      1e-08
+TOLRES_DISP                     1e-08
+TOLRES_GLOBAL                   1e-08
+TOLRES_PRES                     1e-08
+TOLRES_SCALAR                   1e-08
+TOLRES_VEL                      1e-08
+VECTORNORM_INC                  3
+VECTORNORM_RESF                 3
+
+-------------------------------------------------------PROBLEM SIZE
+DIM                             3
+ELEMENTS                        0
+MATERIALS                       0
+NODES                           0
+NPATCHES                        0
+NUMDF                           3
+
+-------------------------------------------------------PROBLEM TYPE
+PROBLEMTYPE                     FourC::Core::ProblemType
+RANDSEED                        -1
+RESTART                         0
+SHAPEFCT                        FourC::Core::FE::ShapeFunctionType
+
+--------------------------------REDUCED DIMENSIONAL AIRWAYS DYNAMIC
+CALCV0PRESTRESS                 false
+COMPAWACINTER                   false
+DYNAMICTYPE                     0
+LINEAR_SOLVER                   -1
+MAXITERATIONS                   1
+NUMSTEP                         0
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+SOLVERTYPE                      1
+SOLVESCATRA                     false
+THETA                           1
+TIMESTEP                        0.01
+TOLERANCE                       1e-06
+TRANSPULMPRESS                  800
+
+-------------------------------------------SCALAR TRANSPORT DYNAMIC
+ADAPTIVE_TIMESTEPPING           false
+ALPHA_F                         0.5
+ALPHA_M                         0.5
+CALCERROR                       0
+CALCERRORNO                     -1
+CALCFLUX_BOUNDARY               0
+CALCFLUX_BOUNDARY_LUMPED        true
+CALCFLUX_DOMAIN                 0
+CALCFLUX_DOMAIN_LUMPED          true
+COMPUTEINTEGRALS                0
+CONVFORM                        0
+CONV_HEAT_TRANS                 false
+EQUILIBRATION                   FourC::Core::LinAlg::EquilibrationMethod
+FDCHECK                         0
+FDCHECKEPS                      1e-06
+FDCHECKTOL                      1e-06
+FIELDCOUPLING                   0
+FSSUGRDIFF                      0
+GAMMA                           0.5
+INITFUNCNO                      -1
+INITIALFIELD                    0
+L2_PROJ_LINEAR_SOLVER           -1
+LINEAR_SOLVER                   -1
+MATID                           -1
+MATLAB_STATE_OUTPUT             false
+MATRIXTYPE                      FourC::Core::LinAlg::MatrixType
+MAXTIME                         1000
+MESHTYING                       0
+NATURAL_CONVECTION              false
+NEUMANNINFLOW                   false
+NULLSPACE_POINTBASED            false
+NUMSTEP                         20
+OUTINTEGRREAC                   false
+OUTPUTLINSOLVERSTATS            false
+OUTPUTNONLINSOLVERSTATS         false
+OUTPUTSCALARS                   0
+OUTPUTSCALARSMEANGRAD           false
+OUTPUT_GMSH                     false
+PADAPTDEGREEMAX                 4
+PADAPTERRORBASE                 1.66
+PADAPTERRORTOL                  1e-06
+PADAPTIVITY                     false
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+SEMIIMPLICIT                    false
+SKIPINITDER                     false
+SOLVERTYPE                      0
+SPHERICALCOORDS                 false
+THETA                           0.5
+TIMEINTEGR                      1
+TIMESTEP                        0.1
+VELFUNCNO                       -1
+VELOCITYFIELD                   0
+WRITEFLUX_IDS                   -1
+---------------------------SCALAR TRANSPORT DYNAMIC/ARTERY COUPLING
+ARTERY_COUPLING_METHOD          0
+COUPLEDDOFS_ARTSCATRA           -1.0
+COUPLEDDOFS_SCATRA              -1.0
+PENALTY                         1000
+REACFUNCT_ART                   -1
+REACFUNCT_CONT                  -1
+SCALEREAC_ART                   0
+SCALEREAC_CONT                  0
+
+----------------------------SCALAR TRANSPORT DYNAMIC/EXTERNAL FORCE
+EXTERNAL_FORCE                  false
+FORCE_FUNCTION_ID               -1
+INTRINSIC_MOBILITY_FUNCTION_ID  -1
+
+---------------------------------SCALAR TRANSPORT DYNAMIC/NONLINEAR
+ABSTOLRES                       1e-14
+ADAPTCONV                       false
+ADAPTCONV_BETTER                0.1
+CONVTOL                         1e-06
+CONVTOL_OUTER                   1e-06
+EXPLPREDICT                     false
+ITEMAX                          10
+ITEMAX_OUTER                    10
+
+------------------------------SCALAR TRANSPORT DYNAMIC/S2I COUPLING
+COUPLINGTYPE                    0
+INTLAYERGROWTH_CONVTOL          1e-12
+INTLAYERGROWTH_EVALUATION       0
+INTLAYERGROWTH_ITEMAX           5
+INTLAYERGROWTH_LINEAR_SOLVER    -1
+INTLAYERGROWTH_TIMESTEP         -1
+LMSIDE                          1
+MESHTYING_CONDITIONS_INDEPENDENT_SETUP false
+NTSPROJTOL                      0
+OUTPUT_INTERFACE_FLUX           false
+SLAVEONLY                       false
+
+-----------------------------SCALAR TRANSPORT DYNAMIC/STABILIZATION
+ASSUGRDIFF                      false
+CHARELELENGTH                   0
+CONSISTENCY                     0
+DEFINITION_ASSGD                0
+DEFINITION_TAU                  2
+EVALUATION_MAT                  0
+EVALUATION_TAU                  0
+STABTYPE                        1
+SUGRVEL                         false
+TAU_VALUE                       0
+
+
+--------------------------------------------------------SEARCH TREE
+TREE_TYPE                       0
+
+---------------------------------------------SEMI-SMOOTH PLASTICITY
+DISSIPATION_MODE                0
+NORMCOMBI_DISPPLASTINCR         1
+NORMCOMBI_EASINCR               1
+NORMCOMBI_EASRES                1
+NORMCOMBI_RESFPLASTCONSTR       1
+SEMI_SMOOTH_CPL                 1
+STABILIZATION_S                 1
+TOLDELTALP                      1e-08
+TOLEASINCR                      1e-08
+TOLEASRES                       1e-08
+TOLPLASTCONSTR                  1e-08
+
+-----------------------------------------------------------SOLVER 1
+AMGNXN_TYPE                     AMG(BGS)
+AMGNXN_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+AZCONV                          1
+AZITER                          1000
+AZOUTPUT                        0
+AZPREC                          FourC::Core::LinearSolver::PreconditionerType
+AZREUSE                         0
+AZSOLVE                         FourC::Core::LinearSolver::IterativeSolverType
+AZSUB                           50
+AZTOL                           1e-08
+IFPACKCOMBINE                   Add
+IFPACKGFILL                     0
+IFPACKOVERLAP                   0
+MUELU_XML_FILE                  std::optional<std::filesystem::__cxx11::path>
+NAME                            Structure_Solver
+SOLVER                          FourC::Core::LinearSolver::SolverType
+SOLVER_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+TEKO_XML_FILE                   std::optional<std::filesystem::__cxx11::path>
+
+-----------------------------------------------------------SOLVER 2
+AMGNXN_TYPE                     AMG(BGS)
+AMGNXN_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+AZCONV                          1
+AZITER                          1000
+AZOUTPUT                        0
+AZPREC                          FourC::Core::LinearSolver::PreconditionerType
+AZREUSE                         0
+AZSOLVE                         FourC::Core::LinearSolver::IterativeSolverType
+AZSUB                           50
+AZTOL                           1e-08
+IFPACKCOMBINE                   Add
+IFPACKGFILL                     0
+IFPACKOVERLAP                   0
+MUELU_XML_FILE                  std::optional<std::filesystem::__cxx11::path>
+NAME                            No_name
+SOLVER                          FourC::Core::LinearSolver::SolverType
+SOLVER_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+TEKO_XML_FILE                   std::optional<std::filesystem::__cxx11::path>
+
+-----------------------------------------------------------SOLVER 3
+AMGNXN_TYPE                     AMG(BGS)
+AMGNXN_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+AZCONV                          1
+AZITER                          1000
+AZOUTPUT                        0
+AZPREC                          FourC::Core::LinearSolver::PreconditionerType
+AZREUSE                         0
+AZSOLVE                         FourC::Core::LinearSolver::IterativeSolverType
+AZSUB                           50
+AZTOL                           1e-08
+IFPACKCOMBINE                   Add
+IFPACKGFILL                     0
+IFPACKOVERLAP                   0
+MUELU_XML_FILE                  std::optional<std::filesystem::__cxx11::path>
+NAME                            No_name
+SOLVER                          FourC::Core::LinearSolver::SolverType
+SOLVER_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+TEKO_XML_FILE                   std::optional<std::filesystem::__cxx11::path>
+
+-----------------------------------------------------------SOLVER 4
+AMGNXN_TYPE                     AMG(BGS)
+AMGNXN_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+AZCONV                          1
+AZITER                          1000
+AZOUTPUT                        0
+AZPREC                          FourC::Core::LinearSolver::PreconditionerType
+AZREUSE                         0
+AZSOLVE                         FourC::Core::LinearSolver::IterativeSolverType
+AZSUB                           50
+AZTOL                           1e-08
+IFPACKCOMBINE                   Add
+IFPACKGFILL                     0
+IFPACKOVERLAP                   0
+MUELU_XML_FILE                  std::optional<std::filesystem::__cxx11::path>
+NAME                            No_name
+SOLVER                          FourC::Core::LinearSolver::SolverType
+SOLVER_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+TEKO_XML_FILE                   std::optional<std::filesystem::__cxx11::path>
+
+-----------------------------------------------------------SOLVER 5
+AMGNXN_TYPE                     AMG(BGS)
+AMGNXN_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+AZCONV                          1
+AZITER                          1000
+AZOUTPUT                        0
+AZPREC                          FourC::Core::LinearSolver::PreconditionerType
+AZREUSE                         0
+AZSOLVE                         FourC::Core::LinearSolver::IterativeSolverType
+AZSUB                           50
+AZTOL                           1e-08
+IFPACKCOMBINE                   Add
+IFPACKGFILL                     0
+IFPACKOVERLAP                   0
+MUELU_XML_FILE                  std::optional<std::filesystem::__cxx11::path>
+NAME                            No_name
+SOLVER                          FourC::Core::LinearSolver::SolverType
+SOLVER_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+TEKO_XML_FILE                   std::optional<std::filesystem::__cxx11::path>
+
+-----------------------------------------------------------SOLVER 6
+AMGNXN_TYPE                     AMG(BGS)
+AMGNXN_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+AZCONV                          1
+AZITER                          1000
+AZOUTPUT                        0
+AZPREC                          FourC::Core::LinearSolver::PreconditionerType
+AZREUSE                         0
+AZSOLVE                         FourC::Core::LinearSolver::IterativeSolverType
+AZSUB                           50
+AZTOL                           1e-08
+IFPACKCOMBINE                   Add
+IFPACKGFILL                     0
+IFPACKOVERLAP                   0
+MUELU_XML_FILE                  std::optional<std::filesystem::__cxx11::path>
+NAME                            No_name
+SOLVER                          FourC::Core::LinearSolver::SolverType
+SOLVER_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+TEKO_XML_FILE                   std::optional<std::filesystem::__cxx11::path>
+
+-----------------------------------------------------------SOLVER 7
+AMGNXN_TYPE                     AMG(BGS)
+AMGNXN_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+AZCONV                          1
+AZITER                          1000
+AZOUTPUT                        0
+AZPREC                          FourC::Core::LinearSolver::PreconditionerType
+AZREUSE                         0
+AZSOLVE                         FourC::Core::LinearSolver::IterativeSolverType
+AZSUB                           50
+AZTOL                           1e-08
+IFPACKCOMBINE                   Add
+IFPACKGFILL                     0
+IFPACKOVERLAP                   0
+MUELU_XML_FILE                  std::optional<std::filesystem::__cxx11::path>
+NAME                            No_name
+SOLVER                          FourC::Core::LinearSolver::SolverType
+SOLVER_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+TEKO_XML_FILE                   std::optional<std::filesystem::__cxx11::path>
+
+-----------------------------------------------------------SOLVER 8
+AMGNXN_TYPE                     AMG(BGS)
+AMGNXN_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+AZCONV                          1
+AZITER                          1000
+AZOUTPUT                        0
+AZPREC                          FourC::Core::LinearSolver::PreconditionerType
+AZREUSE                         0
+AZSOLVE                         FourC::Core::LinearSolver::IterativeSolverType
+AZSUB                           50
+AZTOL                           1e-08
+IFPACKCOMBINE                   Add
+IFPACKGFILL                     0
+IFPACKOVERLAP                   0
+MUELU_XML_FILE                  std::optional<std::filesystem::__cxx11::path>
+NAME                            No_name
+SOLVER                          FourC::Core::LinearSolver::SolverType
+SOLVER_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+TEKO_XML_FILE                   std::optional<std::filesystem::__cxx11::path>
+
+-----------------------------------------------------------SOLVER 9
+AMGNXN_TYPE                     AMG(BGS)
+AMGNXN_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+AZCONV                          1
+AZITER                          1000
+AZOUTPUT                        0
+AZPREC                          FourC::Core::LinearSolver::PreconditionerType
+AZREUSE                         0
+AZSOLVE                         FourC::Core::LinearSolver::IterativeSolverType
+AZSUB                           50
+AZTOL                           1e-08
+IFPACKCOMBINE                   Add
+IFPACKGFILL                     0
+IFPACKOVERLAP                   0
+MUELU_XML_FILE                  std::optional<std::filesystem::__cxx11::path>
+NAME                            No_name
+SOLVER                          FourC::Core::LinearSolver::SolverType
+SOLVER_XML_FILE                 std::optional<std::filesystem::__cxx11::path>
+TEKO_XML_FILE                   std::optional<std::filesystem::__cxx11::path>
+
+--------------------------------------------------------SSI CONTROL
+ADAPTIVE_TIMESTEPPING           false
+COUPALGO                        FourC::Inpar::SSI::SolutionSchemeOverFields
+DIFFTIMESTEPSIZE                false
+FIELDCOUPLING                   FourC::Inpar::SSI::FieldCoupling
+ITEMAX                          10
+MAXTIME                         1000
+NUMSTEP                         200
+REDISTRIBUTE_SOLID              false
+RESTARTEVERY                    1
+RESTARTEVERYTIME                0
+RESTART_FROM_STRUCTURE          false
+RESULTSEVERY                    1
+RESULTSEVERYTIME                0
+SCATRATIMINTTYPE                FourC::Inpar::SSI::ScaTraTimIntType
+SCATRA_FILENAME                 nil
+SCATRA_FROM_RESTART_FILE        false
+TIMESTEP                        -1
+---------------------------------------------------SSI CONTROL/ELCH
+INITPOTCALC                     false
+
+-----------------------------------------------SSI CONTROL/MANIFOLD
+ADD_MANIFOLD                    false
+INITFUNCNO                      -1
+INITIALFIELD                    0
+LINEAR_SOLVER                   -1
+MESHTYING_MANIFOLD              false
+OUTPUT_INFLOW                   false
+
+---------------------------------------------SSI CONTROL/MONOLITHIC
+ABSTOLRES                       1e-14
+CONVTOL                         1e-06
+EQUILIBRATION                   FourC::Core::LinAlg::EquilibrationMethod
+EQUILIBRATION_SCATRA            FourC::Core::LinAlg::EquilibrationMethod
+EQUILIBRATION_STRUCTURE         FourC::Core::LinAlg::EquilibrationMethod
+LINEAR_SOLVER                   -1
+MATRIXTYPE                      FourC::Core::LinAlg::MatrixType
+PRINT_MAT_RHS_MAP_MATLAB        false
+RELAX_LIN_SOLVER_STEP           -1
+RELAX_LIN_SOLVER_TOLERANCE      1
+
+--------------------------------------------SSI CONTROL/PARTITIONED
+CONVTOL                         1e-06
+MAXOMEGA                        10
+MINOMEGA                        0.1
+STARTOMEGA                      1
+
+
+-------------------------------------------------------SSTI CONTROL
+ADAPTIVE_TIMESTEPPING           false
+COUPALGO                        FourC::Inpar::SSTI::SolutionScheme
+ITEMAX                          10
+MAXTIME                         1000
+NUMSTEP                         200
+RESTARTEVERY                    1
+RESTARTEVERYTIME                0
+RESULTSEVERY                    1
+RESULTSEVERYTIME                0
+SCATRATIMINTTYPE                FourC::Inpar::SSTI::ScaTraTimIntType
+SCATRA_FILENAME                 nil
+SCATRA_FROM_RESTART_FILE        false
+TIMESTEP                        -1
+--------------------------------------------SSTI CONTROL/MONOLITHIC
+ABSTOLRES                       1e-14
+CONVTOL                         1e-06
+EQUILIBRATION                   FourC::Core::LinAlg::EquilibrationMethod
+EQUILIBRATION_INIT_SCATRA       false
+EQUILIBRATION_SCATRA            FourC::Core::LinAlg::EquilibrationMethod
+EQUILIBRATION_STRUCTURE         FourC::Core::LinAlg::EquilibrationMethod
+EQUILIBRATION_THERMO            FourC::Core::LinAlg::EquilibrationMethod
+LINEAR_SOLVER                   -1
+MATRIXTYPE                      FourC::Core::LinAlg::MatrixType
+
+------------------------------------------------SSTI CONTROL/THERMO
+INITIALFIELD                    1
+INITTHERMOFUNCT                 -1
+LINEAR_SOLVER                   -1
+
+
+--------------------------------------------------------STI DYNAMIC
+COUPLINGTYPE                    FourC::Inpar::STI::CouplingType
+SCATRATIMINTTYPE                FourC::Inpar::STI::ScaTraTimIntType
+THERMO_CONDENSATION             false
+THERMO_INITFUNCNO               -1
+THERMO_INITIALFIELD             0
+THERMO_LINEAR_SOLVER            -1
+---------------------------------------------STI DYNAMIC/MONOLITHIC
+LINEAR_SOLVER                   -1
+MATRIXTYPE                      FourC::Core::LinAlg::MatrixType
+
+--------------------------------------------STI DYNAMIC/PARTITIONED
+OMEGA                           1
+OMEGAMAX                        0
+
+
+---------------------------------------------------------STRUCT NOX
+Nonlinear Solver                = Line Search Based
+-----------------------------------------------STRUCT NOX/Direction
+Method                          = Newton
+User Defined Method             = Modified Newton
+----------------------------------------STRUCT NOX/Direction/Newton
+Forcing Term Alpha              = 1.5
+Forcing Term Gamma              = 0.9
+Forcing Term Initial Tolerance  = 0.1
+Forcing Term Maximum Tolerance  = 0.01
+Forcing Term Method             = Constant
+Forcing Term Minimum Tolerance  = 1e-06
+Rescue Bad Newton Solve         = true
+--------------------------STRUCT NOX/Direction/Newton/Linear Solver
+Adaptive Control                = false
+Adaptive Control Objective      = 0.1
+Computing Scaling Manually      = false
+Output Solver Details           = true
+Zero Initial Guess              = true
+
+
+------------------------------STRUCT NOX/Direction/Steepest Descent
+Scaling Type                    = None
+
+
+---------------------------------------------STRUCT NOX/Line Search
+Inner Status Test Check Type    = 1
+Method                          = Full Step
+-----------------------------------STRUCT NOX/Line Search/Backtrack
+Allow Exceptions                = false
+Default Step                    = 1
+Max Iters                       = 50
+Minimum Step                    = 1e-12
+Recovery Step                   = 1
+Reduction Factor                = 0.5
+
+-----------------------------------STRUCT NOX/Line Search/Full Step
+Full Step                       = 1
+
+-------------------------------STRUCT NOX/Line Search/More'-Thuente
+Curvature Condition             = 0.9999
+Default Step                    = 1
+Interval Width                  = 1e-15
+Max Iters                       = 20
+Maximum Step                    = 1e+06
+Minimum Step                    = 1e-12
+Optimize Slope Calculation      = false
+Recovery Step                   = 1
+Recovery Step Type              = Constant
+Sufficient Decrease             = 0.0001
+Sufficient Decrease Condition   = Armijo-Goldstein
+
+----------------------------------STRUCT NOX/Line Search/Polynomial
+Allowed Relative Increase       = 100
+Alpha Factor                    = 0.0001
+Default Step                    = 1
+Force Interpolation             = false
+Interpolation Type              = Cubic
+Max Bounds Factor               = 0.5
+Max Iters                       = 100
+Maximum Iteration for Increase  = 0
+Min Bounds Factor               = 0.1
+Minimum Step                    = 1e-12
+Recovery Step                   = 1
+Recovery Step Type              = Constant
+Sufficient Decrease Condition   = Armijo-Goldstein
+Use Counters                    = true
+
+
+------------------------------------------------STRUCT NOX/Printing
+Debug                           = false
+Details                         = false
+Error                           = false
+Inner Iteration                 = true
+Linear Solver Details           = false
+Outer Iteration                 = true
+Outer Iteration StatusTest      = true
+Parameters                      = false
+Test Details                    = false
+Warning                         = true
+
+----------------------------------------STRUCT NOX/Pseudo Transient
+Build scaling operator          = every timestep
+Max Number of PTC Iterations    = 2147483647
+Norm Type for TSC               = Max Norm
+SER_alpha                       = 1
+Scaling Type                    = Identity
+ScalingFactor                   = 1
+Time Step Control               = SER
+deltaInit                       = -1
+deltaMax                        = 1.79769e+308
+deltaMin                        = 1e-05
+
+------------------------------------------STRUCT NOX/Solver Options
+Merit Function                  = 0
+Status Test Check Type          = Complete
+
+---------------------------------------------STRUCT NOX/Status Test
+XML File                        = std::optional<std::filesystem::__cxx11::path>
+
+--------------------------------------------STRUCT NOX/Trust Region
+Contraction Factor              = 0.25
+Contraction Trigger Ratio       = 0.1
+Expansion Factor                = 4
+Expansion Trigger Ratio         = 0.75
+Maximum Trust Region Radius     = 1e+09
+Minimum Improvement Ratio       = 0.0001
+Minimum Trust Region Radius     = 1e-06
+Recovery Step                   = 1
+
+
+-------------------------------------------------STRUCTURAL DYNAMIC
+ADAPTCONV                       false
+ADAPTCONV_BETTER                0.1
+ALPHA_LS                        0.5
+CALC_ACC_ON_RESTART             false
+DAMPING                         0
+DIVERCONT                       4
+DYNAMICTYPE                     0
+GEOMETRY                        0
+INITIALDISP                     0
+INT_STRATEGY                    1
+ITERNORM                        2
+K_DAMP                          -1
+LINEAR_SOLVER                   1
+LOADLIN                         false
+LSMAXITER                       30
+LUMPMASS                        false
+MASSLIN                         FourC::Inpar::Solid::MassLin
+MATERIALTANGENT                 analytical
+MAXDIVCONREFINEMENTLEVEL        10
+MAXITER                         50
+MAXTIME                         1
+MIDTIME_ENERGY_TYPE             0
+MINITER                         0
+MODIFIEDEXPLEULER               true
+M_DAMP                          -1
+NEGLECTINERTIA                  false
+NLNSOL                          1
+NORMCOMBI_DISPPRES              1
+NORMCOMBI_RESFDISP              1
+NORMCOMBI_RESFINCO              1
+NORM_DISP                       0
+NORM_INCO                       0
+NORM_PRES                       0
+NORM_RESF                       0
+NUMSTEP                         500
+OUTPUT_STEP_OFFSET              0
+PREDICT                         1
+PRESTRESS                       FourC::Inpar::Solid::PreStress
+PRESTRESSMINLOADSTEPS           0
+PRESTRESSTIME                   0
+PRESTRESSTOLDISP                1e-09
+PTCDT                           0.1
+RESEVERYERGY                    0
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+SIGMA_LS                        0.0001
+STARTFUNCNO                     -1
+STC_LAYER                       1
+STC_SCALING                     0
+TIMEINIT                        0
+TIMESTEP                        0.002
+TIME_ADAPTIVITY                 false
+TOLCONSTR                       1e-08
+TOLCONSTRINCR                   1e-08
+TOLDISP                         1e-10
+TOLINCO                         1e-08
+TOLPRE                          1e-08
+TOLRES                          1e-08
+UZAWAALGO                       0
+UZAWAMAXITER                    50
+UZAWAPARAM                      1
+UZAWATOL                        1e-08
+--------------------------------STRUCTURAL DYNAMIC/ERROR EVALUATION
+ANALYTICAL_DISPLACEMENT_FUNCTION -1
+EVALUATE_ERROR_ANALYTICAL_REFERENCE false
+
+----------------------------------------STRUCTURAL DYNAMIC/GENALPHA
+ALPHA_F                         -1
+ALPHA_M                         -1
+BETA                            -1
+GAMMA                           -1
+GENAVG                          2
+RHO_INF                         1
+
+------------------------------------STRUCTURAL DYNAMIC/ONESTEPTHETA
+THETA                           0.5
+
+----------------------------------STRUCTURAL DYNAMIC/TIMEADAPTIVITY
+ADAPTSTEPMAX                    0
+KIND                            0
+LOCERRNORM                      0
+LOCERRTOL                       0
+OUTENEPERIOD                    0
+OUTRESTPERIOD                   0
+OUTSIZEEVERY                    0
+OUTSTRPERIOD                    0
+OUTSYSPERIOD                    0
+SIZERATIOMAX                    0
+SIZERATIOMIN                    0
+SIZERATIOSCALE                  0.9
+STEPSIZEMAX                     0
+STEPSIZEMIN                     0
+-------------------STRUCTURAL DYNAMIC/TIMEADAPTIVITY/JOINT EXPLICIT
+DAMPING                         0
+DYNAMICTYPE                     5
+INT_STRATEGY                    1
+K_DAMP                          -1
+LINEAR_SOLVER                   -1
+LUMPMASS                        false
+M_DAMP                          -1
+
+
+
+----------------------------------------------------THERMAL DYNAMIC
+ADAPTCONV                       false
+ADAPTCONV_BETTER                0.1
+CALCERROR                       0
+CALCERRORFUNCNO                 -1
+DIVERCONT                       0
+DYNAMICTYPE                     2
+GEOMETRY                        0
+INITFUNCNO                      -1
+INITIALFIELD                    0
+ITERNORM                        2
+LINEAR_SOLVER                   -1
+LUMPCAPA                        false
+MAXDIVCONREFINEMENTLEVEL        10
+MAXITER                         50
+MAXTIME                         5
+MINITER                         0
+NLNSOL                          1
+NORMCOMBI_RESFTEMP              1
+NORM_RESF                       0
+NORM_TEMP                       0
+NUMSTEP                         200
+PREDICT                         1
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+TIMESTEP                        0.05
+TOLRES                          1e-08
+TOLTEMP                         1e-10
+-------------------------------------------THERMAL DYNAMIC/GENALPHA
+ALPHA_F                         0.5
+ALPHA_M                         0.5
+GAMMA                           0.5
+GENAVG                          2
+RHO_INF                         -1
+
+---------------------------------------THERMAL DYNAMIC/ONESTEPTHETA
+THETA                           0.5
+
+---------------------------------THERMAL DYNAMIC/RUNTIME CSV OUTPUT
+ENERGY                          false
+OUTPUT_THERMO                   false
+
+---------------------------------THERMAL DYNAMIC/RUNTIME VTK OUTPUT
+ELEMENT_GID                     false
+ELEMENT_OWNER                   false
+HEATFLUX                        false
+NODE_GID                        false
+OUTPUT_THERMO                   false
+TEMPERATURE                     false
+TEMPGRAD                        false
+
+
+--------------------------------------------------------TSI CONTACT
+HEATTRANSMASTER                 0
+HEATTRANSSLAVE                  0
+NITSCHE_METHOD_TSI              1
+NITSCHE_PENALTY_ADAPTIVE_TSI    true
+NITSCHE_THETA_TSI               0
+NITSCHE_WEIGHTING_TSI           2
+PENALTYPARAM_THERMO             0
+TEMP_DAMAGE                     1e+12
+TEMP_REF                        0
+
+--------------------------------------------------------TSI DYNAMIC
+COUPALGO                        6
+ITEMAX                          10
+ITEMIN                          1
+MATCHINGGRID                    true
+MAXTIME                         1000
+NORM_INC                        0
+NUMSTEP                         200
+RESTARTEVERY                    1
+RESULTSEVERY                    1
+TIMESTEP                        0.05
+---------------------------------------------TSI DYNAMIC/MONOLITHIC
+ADAPTCONV                       false
+ADAPTCONV_BETTER                0.1
+CALC_NECKING_TSI_VALUES         false
+CONVTOL                         1e-06
+INFNORMSCALING                  true
+ITERNORM                        4
+LINEAR_SOLVER                   -1
+MERGE_TSI_BLOCK_MATRIX          false
+NLNSOL                          0
+NORMCOMBI_RESFINC               3
+NORM_RESF                       0
+PTCDT                           0.1
+TOLINC                          1e-06
+TSI_LINE_SEARCH                 0
+
+--------------------------------------------TSI DYNAMIC/PARTITIONED
+CONVTOL                         1e-06
+COUPVARIABLE                    Displacement
+FIXEDOMEGA                      1
+MAXOMEGA                        0
+
+
+-------------------------------------------------VOLMORTAR COUPLING
+COUPLINGTYPE                    0
+CUTTYPE                         0
+DUALQUAD                        0
+INTTYPE                         1
+KEEP_EXTENDEDGHOSTING           true
+MESH_INIT                       false
+SHAPEFCN                        0
+
+---------------------------------------------------------------WEAR
+MATCHINGGRID                    true
+SSSLIP                          1
+SSWEAR                          false
+WEARCOEFF                       0
+WEARCOEFF_MASTER                0
+WEARLAW                         0
+WEARTIMINT                      0
+WEARTYPE                        0
+WEAR_SHAPEFCN                   1
+WEAR_SIDE                       0
+WEAR_TIMERATIO                  1
+WEAR_TIMESCALE                  0
+
+-------------------------------------------------------XFEM GENERAL
+BOUNDARY_GAUSS_POINTS_BY        0
+GMSH_CUT_OUT                    false
+GMSH_DEBUG_OUT                  false
+GMSH_DEBUG_OUT_SCREEN           false
+GMSH_DISCRET_OUT                false
+GMSH_EOS_OUT                    false
+GMSH_SOL_OUT                    false
+GMSH_TIMINT_OUT                 false
+MAX_NUM_DOFSETS                 3
+NODAL_DOFSET_STRATEGY           2
+PRINT_OUTPUT                    false
+VOLUME_GAUSS_POINTS_BY          0
+
+-----------------------------------------------------XFLUID DYNAMIC
+---------------------------------------------XFLUID DYNAMIC/GENERAL
+ALE_XFluid                      false
+INTERFACE_TERMS_PREVIOUS_STATE  0
+MONOLITHIC_XFFSI_APPROACH       2
+RELAXING_ALE                    true
+RELAXING_ALE_EVERY              1
+XFLUIDFLUID                     false
+XFLUIDFLUID_SEARCHRADIUS        1
+XFLUIDFLUID_TIMEINT             0
+XFLUID_TIMEINT                  1
+XFLUID_TIMEINT_CHECK_INTERFACETIPS true
+XFLUID_TIMEINT_CHECK_SLIDINGONSURFACE true
+
+---------------------------------------XFLUID DYNAMIC/STABILIZATION
+CONV_STAB_SCALING               2
+COUPLING_METHOD                 2
+GHOST_PENALTY_2nd_FAC           0.05
+GHOST_PENALTY_2nd_STAB          false
+GHOST_PENALTY_2nd_STAB_NORMAL   false
+GHOST_PENALTY_ADD_INNER_FACES   false
+GHOST_PENALTY_FAC               0.1
+GHOST_PENALTY_PRESSURE_2nd_FAC  0.05
+GHOST_PENALTY_STAB              false
+GHOST_PENALTY_TRANSIENT_FAC     0.001
+GHOST_PENALTY_TRANSIENT_STAB    false
+HYBRID_LM_L2_PROJ               1
+IS_PSEUDO_2D                    false
+MASS_CONSERVATION_COMBO         0
+MASS_CONSERVATION_SCALING       1
+NIT_STAB_FAC                    35
+NIT_STAB_FAC_TANG               35
+UPDATE_EIGENVALUE_TRACE_ESTIMATE 0
+VISC_ADJOINT_SYMMETRY           0
+VISC_STAB_HK                    4
+VISC_STAB_TRACE_ESTIMATE        0
+XFF_CONV_STAB_SCALING           2
+XFF_EOS_PRES_EMB_LAYER          false
+
+------------------------------------XFLUID DYNAMIC/XFPSI MONOLITHIC
+CUT_EVALUATE_MINITER            0
+CUT_EVALUATE_MINTOL             0
+EXTRAPOLATE_TO_ZERO             false
+ITEMAX_OUTER                    5
+ITEMIN                          1
+ND_MAX_DISP_ITERINC             -1
+ND_MAX_PPRES_ITERINC            -1
+ND_MAX_PRES_ITERINC             -1
+ND_MAX_PVEL_ITERINC             -1
+ND_MAX_VEL_ITERINC              -1
+ND_NEWTON_DAMPING               false
+POROCONTACTFPSI_FULLPCFRACTION  0
+POROCONTACTFPSI_HFRACTION       1
+USE_PORO_PRESSURE               true
+
+
+

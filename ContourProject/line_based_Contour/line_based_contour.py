@@ -43,7 +43,7 @@ to provide medical treatment coverage. The beams intersect at specific points
 and are coupled together to simulate realistic device behavior.
 
 The simulation is performed with configurable compression to simulate
-catheter-based deployment and device expansion.
+geometry creation and device expansion.
 
 Features:
 - Fully config-driven workflow using YAML configuration
@@ -104,7 +104,7 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
     This function generates multiple helical beams that form a medical contour device.
     The beams are arranged to intersect and provide specific coverage patterns
     for medical treatment applications. The device simulates deployment through
-    catheter-based compression and subsequent expansion.
+    marker-based compression and subsequent expansion.
     
     Args:
         config (dict): Configuration dictionary containing all simulation parameters
@@ -133,7 +133,7 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
     interval = [contour_config["interval_start"], contour_config["interval_end"]]  # z coordinate range
     cylinder_radius = contour_config["cylinder_radius"]  # radius of wrapping cylinder
     n_intersections = contour_config["n_intersections"]  # minimum 2 for stable intersection
-    number_of_beams = contour_config["number_of_beams"]  # each direction, normally 72 total
+    number_of_wires = contour_config["number_of_wires"]  # each direction, normally 72 total
     compression_factor = contour_config["compression_factor"]  # Maximum compression (0.9-0.95)
     compressed_part = contour_config["compressed_part"]  # ratio of beam compressed from start
     
@@ -147,7 +147,7 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
     rotational_coupling_penalty = contour_config["rot_penalty"]  # penalty for rotational coupling
     
     # Calculate simulation parameters
-    n_el = 8 * (n_intersections - 1) * number_of_beams  # Total number of elements
+    n_el = 8 * (n_intersections - 1) * number_of_wires  # Total number of elements
     num_steps = time_config["steps1"]
     time_step = time_config["dt_1"] / num_steps
 
@@ -181,13 +181,6 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
         # Returns list of lists where each inner list contains nodes that are close to each other
         close_node_groups = find_close_nodes(mesh.nodes)
         print("\nFound close node groups:")
-        for group_idx, node_group in enumerate(close_node_groups):
-            if len(node_group) > 1:  # Only print groups with multiple nodes
-                print(f"\nGroup {group_idx + 1}:")
-                for node_idx, node in enumerate(node_group):
-                    coords = node.coordinates
-                    print(f"Node {node_idx + 1}: ({coords[0]:.3f}, {coords[1]:.3f}, {coords[2]:.3f})")
-                print("-" * 50)
 
         # Create GeometrySet for intersecting nodes
         # Start with first group that has multiple nodes as initial geometry
@@ -220,7 +213,7 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
         
         This function computes the displacement required to compress a point
         from its current radial position to a new radial position on a cylinder.
-        Used to simulate catheter-based compression of the contour device.
+        Used to simulate marker-based compression of the contour device.
         
         Args:
             coordinates (array): [x, y, z] coordinates of the point
@@ -280,7 +273,7 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
 
     def create_multiple_beams_shifted_in_y(
         mesh,
-        number_of_beams,
+        number_of_wires,
         cylinder_radius,
         interval,
         n_el,
@@ -300,7 +293,7 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
         
         Args:
             mesh: Mesh object to add beams to
-            number_of_beams: Number of beam pairs to create
+            number_of_wires: Number of beam pairs to create
             cylinder_radius: Radius of the cylinder around which beams wrap
             interval: [start, end] z-coordinate range for beam generation
             n_el: Number of elements per beam
@@ -314,7 +307,7 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
         Note:
             Creates two beams per iteration - one with positive helical angle
             and one with negative helical angle to ensure intersection patterns.
-            Each beam is circumferentially shifted by 2π/number_of_beams.
+            Each beam is circumferentially shifted by 2π/number_of_wires.
         """
 
         def n_shape_yz(t):
@@ -337,9 +330,9 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
         beams_end = []
 
         # Create beam pairs with circumferential distribution
-        for i in range(number_of_beams):
+        for i in range(number_of_wires):
             # Calculate circumferential shift for even distribution
-            shift_i = (2.0 * npAD.pi * cylinder_radius / number_of_beams) * i
+            shift_i = (2.0 * npAD.pi * cylinder_radius / number_of_wires) * i
             
             def shape_with_shift(t, shift=shift_i):
                 """Positive helical beam with circumferential shift."""
@@ -389,16 +382,16 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
         
         mpy.check_overlapping_elements = False
         
-        # Calculate compressed radius for catheter simulation
+        # Calculate compressed radius for compressive simulation
         new_radius = cylinder_radius * (1.0 - compression_factor)
         
-        # Apply boundary conditions to simulate catheter compression
+        # Apply boundary conditions to simulate compression
         for node in mesh.nodes:
             if not node.is_middle_node:  # Only apply to end nodes
                 
                 # Identify start nodes (at z = interval[0]) and apply fixed constraints
                 if np.linalg.norm(node.coordinates[2] - interval[0]) < 1e-9:
-                    print(f"Start node coordinates: {node.coordinates}")
+
                     # Create node set for boundary condition application
                     node_set = GeometrySet(node)
 
@@ -430,7 +423,7 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
                     mesh.add(displacement_y)
 
                     # Apply Dirichlet boundary condition for start nodes
-                    # Constrains x,y translations and z rotation to simulate fixed catheter constraint
+                    # Constrains x,y translations and z rotation to simulate fixed marker constraint
                     mesh.add(
                         BoundaryCondition(
                             node_set,
@@ -447,7 +440,7 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
                         )
                     )
                 
-                # Apply compression to nodes in the catheter compression zone
+                # Apply compression to nodes in the marker compression zone
                 elif node.coordinates[2] < (interval[1] + interval[0]) * compressed_part:
                     # Create node set for compression boundary condition
                     node_set = GeometrySet(node)
@@ -499,10 +492,10 @@ def create_beams_wrapped_around_cylinder(config, preview=False):
     print(f"Helical angle: {degrees} degrees")
 
     # Generate the complete contour device beam structure
-    print(f"Creating contour device with {number_of_beams} beam pairs...")
+    print(f"Creating contour device with {number_of_wires} beam pairs...")
     create_multiple_beams_shifted_in_y(
         mesh,
-        number_of_beams,
+        number_of_wires,
         cylinder_radius,
         interval,
         n_el,
@@ -586,7 +579,7 @@ if __name__ == "__main__":
     This script performs a complete workflow:
     1. Load configuration from YAML file
     2. Create beam geometry and mesh
-    3. Apply boundary conditions for catheter compression
+    3. Apply boundary conditions for compression
     4. Generate 4C input file
     5. Run finite element simulation
     

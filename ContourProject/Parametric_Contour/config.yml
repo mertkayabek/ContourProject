@@ -21,23 +21,12 @@ mesh:
 # Boundary conditions
 boundary_conditions:
   fix_base_points: true       # Fix start and end points of each petal
-  coupling_penalty_pos: 200   # Positional penalty parameter for node coupling
-  coupling_penalty_rot: 0     # Rotational penalty parameter for node coupling
 
-# Simulation parameters
-simulation:
-  solver_type: "Superlu"      # Linear solver type
-  dynamics_type: "Statics"    # Type of analysis (Statics/Dynamics)
-  results_every: 1            # Output results every N steps
-  solver_method: "fullnewton" # Nonlinear solver method
-  timestep: 0.1               # Time step size
-  num_steps: 10               # Number of time steps
-  max_time: 1.0               # Maximum simulation time
 
 # Output settings
 output:
-  base_directory: "/home_student/kayabek/sw/meshpy/ContourProject/parametric_result/"
-  simulation_directory: "/home_student/kayabek/sw/meshpy/ContourProject/parametric_result/results"
+  base_directory: "/home_student/kayabek/sw/meshpy/ContourProject/Parametric_Contour/Simulation"
+  simulation_directory: "//home_student/kayabek/sw/meshpy/ContourProject/Parametric_Contour/Simulation/results"
   output_name: "rose_petal_device"
   vtk_output: true            # Generate VTK output for visualization
   binary_output: false        # Use binary output format
@@ -45,13 +34,3 @@ output:
 # Parallel processing
 parallel:
   num_processors: 2           # Number of processors for parallel execution
-
-# Visualization settings
-visualization:
-  output_displacement: true   # Output displacement field
-  output_strain: true         # Output strain field
-  output_stress: true         # Output stress field
-  output_beams: true          # Output beam-specific data
-  absolute_positions: true    # Use absolute positions in beam output
-  triad_visualization: true   # Show triad visualization points
-  strain_gausspoints: true    # Show strains at Gauss points

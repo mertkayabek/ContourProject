@@ -1,0 +1,137 @@
+# 4C output control file
+# created by kayabek on student5.bauv.unibw-muenchen.de at Fri Jul 11 19:42:03 2025
+# using code version (git SHA1) 966e6cf18248bf76f9bbb22b559739ea8455dad7 
+
+input_file = "/home_student/kayabek/sw/meshpy/ContourProject/Parametric_Contour/Simulation/rose_petal_device.dat"
+problem_type = "Structure"
+spatial_approximation = "Polynomial"
+ndim = 3
+
+field:
+    field = "structure"
+    time = 0
+    step = 0
+
+    num_nd = 168
+    max_nodeid = 167
+    num_ele = 80
+    num_dof = 1032
+    num_dim = 3
+
+    num_output_proc = 2
+    mesh_file = "rose_petal_device.mesh.structure.s0"
+
+result:
+    field = "structure"
+    time = 0
+    step = 0
+
+    num_output_proc = 2
+    result_file = "rose_petal_device.result.structure.s0"
+
+    Owner:
+        type = "element"
+        columns = 1
+        values = "/step0/Owner.values"
+        ids = "/step0/Owner.ids"
+
+    Nodeowner:
+        type = "node"
+        columns = 1
+        values = "/step0/Nodeowner.values"
+        ids = "/step0/Nodeowner.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step0/displacement.values"
+        ids = "/step0/displacement.ids"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step0/gauss_2PK_stresses_xyz.values"
+        ids = "/step0/Owner.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step0/gauss_GL_strains_xyz.values"
+        ids = "/step0/Owner.ids"
+
+field:
+    field = "structure"
+    time = 1
+    step = 1
+
+    num_nd = 168
+    max_nodeid = 167
+    num_ele = 80
+    num_dof = 1032
+    num_dim = 3
+
+    num_output_proc = 2
+    mesh_file = "rose_petal_device.mesh.structure.s1"
+
+result:
+    field = "structure"
+    time = 1
+    step = 1
+
+    num_output_proc = 2
+    result_file = "rose_petal_device.result.structure.s1"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step1/velocity.values"
+        ids = "/step1/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step1/acceleration.values"
+        ids = "/step1/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step1/finert.values"
+        ids = "/step1/velocity.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step1/fvisco.values"
+        ids = "/step1/velocity.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step1/fstructure_old.values"
+        ids = "/step1/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step1/fint.values"
+        ids = "/step1/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step1/displacement.values"
+        ids = "/step1/velocity.ids"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step1/gauss_2PK_stresses_xyz.values"
+        ids = "/step1/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step1/gauss_GL_strains_xyz.values"
+        ids = "/step1/gauss_2PK_stresses_xyz.ids"
+

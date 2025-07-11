@@ -1,0 +1,3684 @@
+# 4C output control file
+# created by kayabek on student5.bauv.unibw-muenchen.de at Fri Jul 11 20:20:35 2025
+# using code version (git SHA1) 966e6cf18248bf76f9bbb22b559739ea8455dad7 
+
+input_file = "/home_student/kayabek/sw/meshpy/ContourProject/Virtual_Deployment/Simulation/simulation_step_2/fd-vmc-art.dat"
+problem_type = "Structure"
+spatial_approximation = "Polynomial"
+ndim = 3
+
+restarted_run = "xxx"
+
+field:
+    field = "structure"
+    time = 0
+    step = 0
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s0"
+
+field:
+    field = "structure"
+    time = 1.02
+    step = 51
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s51"
+
+result:
+    field = "structure"
+    time = 1.02
+    step = 51
+
+    result_file = "xxx.result.structure.s51"
+
+    Owner:
+        type = "element"
+        columns = 1
+        values = "/step51/Owner.values"
+        ids = "/step51/Owner.ids"
+
+    Nodeowner:
+        type = "node"
+        columns = 1
+        values = "/step51/Nodeowner.values"
+        ids = "/step51/Nodeowner.ids"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step51/velocity.values"
+        ids = "/step51/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step51/acceleration.values"
+        ids = "/step51/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step51/finert.values"
+        ids = "/step51/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step51/fvisco.values"
+        ids = "/step51/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step51/fstructure_old.values"
+        ids = "/step51/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step51/fint.values"
+        ids = "/step51/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step51/displacement.values"
+        ids = "/step51/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.02
+    step = 51
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s51"
+
+result:
+    field = "ia_structure"
+    time = 1.02
+    step = 51
+
+    result_file = "xxx.result.ia_structure.s51"
+
+field:
+    field = "binning"
+    time = 1.02
+    step = 51
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s51"
+
+result:
+    field = "binning"
+    time = 1.02
+    step = 51
+
+    result_file = "xxx.result.binning.s51"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step51/gauss_2PK_stresses_xyz.values"
+        ids = "/step51/Owner.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step51/gauss_GL_strains_xyz.values"
+        ids = "/step51/Owner.ids"
+
+field:
+    field = "structure"
+    time = 1.04
+    step = 52
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s52"
+
+result:
+    field = "structure"
+    time = 1.04
+    step = 52
+
+    result_file = "xxx.result.structure.s52"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step52/velocity.values"
+        ids = "/step52/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step52/acceleration.values"
+        ids = "/step52/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step52/finert.values"
+        ids = "/step52/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step52/fvisco.values"
+        ids = "/step52/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step52/fstructure_old.values"
+        ids = "/step52/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step52/fint.values"
+        ids = "/step52/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step52/displacement.values"
+        ids = "/step52/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.04
+    step = 52
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s52"
+
+result:
+    field = "ia_structure"
+    time = 1.04
+    step = 52
+
+    result_file = "xxx.result.ia_structure.s52"
+
+field:
+    field = "binning"
+    time = 1.04
+    step = 52
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s52"
+
+result:
+    field = "binning"
+    time = 1.04
+    step = 52
+
+    result_file = "xxx.result.binning.s52"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step52/gauss_2PK_stresses_xyz.values"
+        ids = "/step52/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step52/gauss_GL_strains_xyz.values"
+        ids = "/step52/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.06
+    step = 53
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s53"
+
+result:
+    field = "structure"
+    time = 1.06
+    step = 53
+
+    result_file = "xxx.result.structure.s53"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step53/velocity.values"
+        ids = "/step53/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step53/acceleration.values"
+        ids = "/step53/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step53/finert.values"
+        ids = "/step53/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step53/fvisco.values"
+        ids = "/step53/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step53/fstructure_old.values"
+        ids = "/step53/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step53/fint.values"
+        ids = "/step53/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step53/displacement.values"
+        ids = "/step53/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.06
+    step = 53
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s53"
+
+result:
+    field = "ia_structure"
+    time = 1.06
+    step = 53
+
+    result_file = "xxx.result.ia_structure.s53"
+
+field:
+    field = "binning"
+    time = 1.06
+    step = 53
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s53"
+
+result:
+    field = "binning"
+    time = 1.06
+    step = 53
+
+    result_file = "xxx.result.binning.s53"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step53/gauss_2PK_stresses_xyz.values"
+        ids = "/step53/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step53/gauss_GL_strains_xyz.values"
+        ids = "/step53/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.08
+    step = 54
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s54"
+
+result:
+    field = "structure"
+    time = 1.08
+    step = 54
+
+    result_file = "xxx.result.structure.s54"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step54/velocity.values"
+        ids = "/step54/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step54/acceleration.values"
+        ids = "/step54/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step54/finert.values"
+        ids = "/step54/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step54/fvisco.values"
+        ids = "/step54/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step54/fstructure_old.values"
+        ids = "/step54/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step54/fint.values"
+        ids = "/step54/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step54/displacement.values"
+        ids = "/step54/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.08
+    step = 54
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s54"
+
+result:
+    field = "ia_structure"
+    time = 1.08
+    step = 54
+
+    result_file = "xxx.result.ia_structure.s54"
+
+field:
+    field = "binning"
+    time = 1.08
+    step = 54
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s54"
+
+result:
+    field = "binning"
+    time = 1.08
+    step = 54
+
+    result_file = "xxx.result.binning.s54"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step54/gauss_2PK_stresses_xyz.values"
+        ids = "/step54/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step54/gauss_GL_strains_xyz.values"
+        ids = "/step54/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.1
+    step = 55
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s55"
+
+result:
+    field = "structure"
+    time = 1.1
+    step = 55
+
+    result_file = "xxx.result.structure.s55"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step55/velocity.values"
+        ids = "/step55/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step55/acceleration.values"
+        ids = "/step55/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step55/finert.values"
+        ids = "/step55/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step55/fvisco.values"
+        ids = "/step55/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step55/fstructure_old.values"
+        ids = "/step55/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step55/fint.values"
+        ids = "/step55/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step55/displacement.values"
+        ids = "/step55/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.1
+    step = 55
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s55"
+
+result:
+    field = "ia_structure"
+    time = 1.1
+    step = 55
+
+    result_file = "xxx.result.ia_structure.s55"
+
+field:
+    field = "binning"
+    time = 1.1
+    step = 55
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s55"
+
+result:
+    field = "binning"
+    time = 1.1
+    step = 55
+
+    result_file = "xxx.result.binning.s55"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step55/gauss_2PK_stresses_xyz.values"
+        ids = "/step55/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step55/gauss_GL_strains_xyz.values"
+        ids = "/step55/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.12
+    step = 56
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s56"
+
+result:
+    field = "structure"
+    time = 1.12
+    step = 56
+
+    result_file = "xxx.result.structure.s56"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step56/velocity.values"
+        ids = "/step56/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step56/acceleration.values"
+        ids = "/step56/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step56/finert.values"
+        ids = "/step56/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step56/fvisco.values"
+        ids = "/step56/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step56/fstructure_old.values"
+        ids = "/step56/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step56/fint.values"
+        ids = "/step56/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step56/displacement.values"
+        ids = "/step56/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.12
+    step = 56
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s56"
+
+result:
+    field = "ia_structure"
+    time = 1.12
+    step = 56
+
+    result_file = "xxx.result.ia_structure.s56"
+
+field:
+    field = "binning"
+    time = 1.12
+    step = 56
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s56"
+
+result:
+    field = "binning"
+    time = 1.12
+    step = 56
+
+    result_file = "xxx.result.binning.s56"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step56/gauss_2PK_stresses_xyz.values"
+        ids = "/step56/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step56/gauss_GL_strains_xyz.values"
+        ids = "/step56/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.14
+    step = 57
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s57"
+
+result:
+    field = "structure"
+    time = 1.14
+    step = 57
+
+    result_file = "xxx.result.structure.s57"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step57/velocity.values"
+        ids = "/step57/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step57/acceleration.values"
+        ids = "/step57/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step57/finert.values"
+        ids = "/step57/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step57/fvisco.values"
+        ids = "/step57/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step57/fstructure_old.values"
+        ids = "/step57/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step57/fint.values"
+        ids = "/step57/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step57/displacement.values"
+        ids = "/step57/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.14
+    step = 57
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s57"
+
+result:
+    field = "ia_structure"
+    time = 1.14
+    step = 57
+
+    result_file = "xxx.result.ia_structure.s57"
+
+field:
+    field = "binning"
+    time = 1.14
+    step = 57
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s57"
+
+result:
+    field = "binning"
+    time = 1.14
+    step = 57
+
+    result_file = "xxx.result.binning.s57"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step57/gauss_2PK_stresses_xyz.values"
+        ids = "/step57/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step57/gauss_GL_strains_xyz.values"
+        ids = "/step57/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.16
+    step = 58
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s58"
+
+result:
+    field = "structure"
+    time = 1.16
+    step = 58
+
+    result_file = "xxx.result.structure.s58"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step58/velocity.values"
+        ids = "/step58/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step58/acceleration.values"
+        ids = "/step58/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step58/finert.values"
+        ids = "/step58/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step58/fvisco.values"
+        ids = "/step58/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step58/fstructure_old.values"
+        ids = "/step58/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step58/fint.values"
+        ids = "/step58/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step58/displacement.values"
+        ids = "/step58/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.16
+    step = 58
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s58"
+
+result:
+    field = "ia_structure"
+    time = 1.16
+    step = 58
+
+    result_file = "xxx.result.ia_structure.s58"
+
+field:
+    field = "binning"
+    time = 1.16
+    step = 58
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s58"
+
+result:
+    field = "binning"
+    time = 1.16
+    step = 58
+
+    result_file = "xxx.result.binning.s58"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step58/gauss_2PK_stresses_xyz.values"
+        ids = "/step58/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step58/gauss_GL_strains_xyz.values"
+        ids = "/step58/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.18
+    step = 59
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s59"
+
+result:
+    field = "structure"
+    time = 1.18
+    step = 59
+
+    result_file = "xxx.result.structure.s59"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step59/velocity.values"
+        ids = "/step59/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step59/acceleration.values"
+        ids = "/step59/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step59/finert.values"
+        ids = "/step59/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step59/fvisco.values"
+        ids = "/step59/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step59/fstructure_old.values"
+        ids = "/step59/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step59/fint.values"
+        ids = "/step59/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step59/displacement.values"
+        ids = "/step59/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.18
+    step = 59
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s59"
+
+result:
+    field = "ia_structure"
+    time = 1.18
+    step = 59
+
+    result_file = "xxx.result.ia_structure.s59"
+
+field:
+    field = "binning"
+    time = 1.18
+    step = 59
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s59"
+
+result:
+    field = "binning"
+    time = 1.18
+    step = 59
+
+    result_file = "xxx.result.binning.s59"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step59/gauss_2PK_stresses_xyz.values"
+        ids = "/step59/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step59/gauss_GL_strains_xyz.values"
+        ids = "/step59/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.2
+    step = 60
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s60"
+
+result:
+    field = "structure"
+    time = 1.2
+    step = 60
+
+    result_file = "xxx.result.structure.s60"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step60/velocity.values"
+        ids = "/step60/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step60/acceleration.values"
+        ids = "/step60/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step60/finert.values"
+        ids = "/step60/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step60/fvisco.values"
+        ids = "/step60/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step60/fstructure_old.values"
+        ids = "/step60/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step60/fint.values"
+        ids = "/step60/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step60/displacement.values"
+        ids = "/step60/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.2
+    step = 60
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s60"
+
+result:
+    field = "ia_structure"
+    time = 1.2
+    step = 60
+
+    result_file = "xxx.result.ia_structure.s60"
+
+field:
+    field = "binning"
+    time = 1.2
+    step = 60
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s60"
+
+result:
+    field = "binning"
+    time = 1.2
+    step = 60
+
+    result_file = "xxx.result.binning.s60"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step60/gauss_2PK_stresses_xyz.values"
+        ids = "/step60/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step60/gauss_GL_strains_xyz.values"
+        ids = "/step60/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.22
+    step = 61
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s61"
+
+result:
+    field = "structure"
+    time = 1.22
+    step = 61
+
+    result_file = "xxx.result.structure.s61"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step61/velocity.values"
+        ids = "/step61/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step61/acceleration.values"
+        ids = "/step61/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step61/finert.values"
+        ids = "/step61/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step61/fvisco.values"
+        ids = "/step61/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step61/fstructure_old.values"
+        ids = "/step61/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step61/fint.values"
+        ids = "/step61/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step61/displacement.values"
+        ids = "/step61/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.22
+    step = 61
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s61"
+
+result:
+    field = "ia_structure"
+    time = 1.22
+    step = 61
+
+    result_file = "xxx.result.ia_structure.s61"
+
+field:
+    field = "binning"
+    time = 1.22
+    step = 61
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s61"
+
+result:
+    field = "binning"
+    time = 1.22
+    step = 61
+
+    result_file = "xxx.result.binning.s61"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step61/gauss_2PK_stresses_xyz.values"
+        ids = "/step61/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step61/gauss_GL_strains_xyz.values"
+        ids = "/step61/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.24
+    step = 62
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s62"
+
+result:
+    field = "structure"
+    time = 1.24
+    step = 62
+
+    result_file = "xxx.result.structure.s62"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step62/velocity.values"
+        ids = "/step62/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step62/acceleration.values"
+        ids = "/step62/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step62/finert.values"
+        ids = "/step62/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step62/fvisco.values"
+        ids = "/step62/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step62/fstructure_old.values"
+        ids = "/step62/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step62/fint.values"
+        ids = "/step62/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step62/displacement.values"
+        ids = "/step62/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.24
+    step = 62
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s62"
+
+result:
+    field = "ia_structure"
+    time = 1.24
+    step = 62
+
+    result_file = "xxx.result.ia_structure.s62"
+
+field:
+    field = "binning"
+    time = 1.24
+    step = 62
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s62"
+
+result:
+    field = "binning"
+    time = 1.24
+    step = 62
+
+    result_file = "xxx.result.binning.s62"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step62/gauss_2PK_stresses_xyz.values"
+        ids = "/step62/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step62/gauss_GL_strains_xyz.values"
+        ids = "/step62/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.26
+    step = 63
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s63"
+
+result:
+    field = "structure"
+    time = 1.26
+    step = 63
+
+    result_file = "xxx.result.structure.s63"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step63/velocity.values"
+        ids = "/step63/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step63/acceleration.values"
+        ids = "/step63/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step63/finert.values"
+        ids = "/step63/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step63/fvisco.values"
+        ids = "/step63/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step63/fstructure_old.values"
+        ids = "/step63/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step63/fint.values"
+        ids = "/step63/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step63/displacement.values"
+        ids = "/step63/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.26
+    step = 63
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s63"
+
+result:
+    field = "ia_structure"
+    time = 1.26
+    step = 63
+
+    result_file = "xxx.result.ia_structure.s63"
+
+field:
+    field = "binning"
+    time = 1.26
+    step = 63
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s63"
+
+result:
+    field = "binning"
+    time = 1.26
+    step = 63
+
+    result_file = "xxx.result.binning.s63"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step63/gauss_2PK_stresses_xyz.values"
+        ids = "/step63/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step63/gauss_GL_strains_xyz.values"
+        ids = "/step63/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.28
+    step = 64
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s64"
+
+result:
+    field = "structure"
+    time = 1.28
+    step = 64
+
+    result_file = "xxx.result.structure.s64"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step64/velocity.values"
+        ids = "/step64/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step64/acceleration.values"
+        ids = "/step64/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step64/finert.values"
+        ids = "/step64/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step64/fvisco.values"
+        ids = "/step64/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step64/fstructure_old.values"
+        ids = "/step64/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step64/fint.values"
+        ids = "/step64/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step64/displacement.values"
+        ids = "/step64/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.28
+    step = 64
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s64"
+
+result:
+    field = "ia_structure"
+    time = 1.28
+    step = 64
+
+    result_file = "xxx.result.ia_structure.s64"
+
+field:
+    field = "binning"
+    time = 1.28
+    step = 64
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s64"
+
+result:
+    field = "binning"
+    time = 1.28
+    step = 64
+
+    result_file = "xxx.result.binning.s64"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step64/gauss_2PK_stresses_xyz.values"
+        ids = "/step64/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step64/gauss_GL_strains_xyz.values"
+        ids = "/step64/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.3
+    step = 65
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s65"
+
+result:
+    field = "structure"
+    time = 1.3
+    step = 65
+
+    result_file = "xxx.result.structure.s65"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step65/velocity.values"
+        ids = "/step65/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step65/acceleration.values"
+        ids = "/step65/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step65/finert.values"
+        ids = "/step65/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step65/fvisco.values"
+        ids = "/step65/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step65/fstructure_old.values"
+        ids = "/step65/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step65/fint.values"
+        ids = "/step65/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step65/displacement.values"
+        ids = "/step65/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.3
+    step = 65
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s65"
+
+result:
+    field = "ia_structure"
+    time = 1.3
+    step = 65
+
+    result_file = "xxx.result.ia_structure.s65"
+
+field:
+    field = "binning"
+    time = 1.3
+    step = 65
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s65"
+
+result:
+    field = "binning"
+    time = 1.3
+    step = 65
+
+    result_file = "xxx.result.binning.s65"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step65/gauss_2PK_stresses_xyz.values"
+        ids = "/step65/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step65/gauss_GL_strains_xyz.values"
+        ids = "/step65/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.32
+    step = 66
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s66"
+
+result:
+    field = "structure"
+    time = 1.32
+    step = 66
+
+    result_file = "xxx.result.structure.s66"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step66/velocity.values"
+        ids = "/step66/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step66/acceleration.values"
+        ids = "/step66/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step66/finert.values"
+        ids = "/step66/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step66/fvisco.values"
+        ids = "/step66/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step66/fstructure_old.values"
+        ids = "/step66/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step66/fint.values"
+        ids = "/step66/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step66/displacement.values"
+        ids = "/step66/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.32
+    step = 66
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s66"
+
+result:
+    field = "ia_structure"
+    time = 1.32
+    step = 66
+
+    result_file = "xxx.result.ia_structure.s66"
+
+field:
+    field = "binning"
+    time = 1.32
+    step = 66
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s66"
+
+result:
+    field = "binning"
+    time = 1.32
+    step = 66
+
+    result_file = "xxx.result.binning.s66"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step66/gauss_2PK_stresses_xyz.values"
+        ids = "/step66/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step66/gauss_GL_strains_xyz.values"
+        ids = "/step66/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.34
+    step = 67
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s67"
+
+result:
+    field = "structure"
+    time = 1.34
+    step = 67
+
+    result_file = "xxx.result.structure.s67"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step67/velocity.values"
+        ids = "/step67/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step67/acceleration.values"
+        ids = "/step67/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step67/finert.values"
+        ids = "/step67/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step67/fvisco.values"
+        ids = "/step67/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step67/fstructure_old.values"
+        ids = "/step67/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step67/fint.values"
+        ids = "/step67/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step67/displacement.values"
+        ids = "/step67/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.34
+    step = 67
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s67"
+
+result:
+    field = "ia_structure"
+    time = 1.34
+    step = 67
+
+    result_file = "xxx.result.ia_structure.s67"
+
+field:
+    field = "binning"
+    time = 1.34
+    step = 67
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s67"
+
+result:
+    field = "binning"
+    time = 1.34
+    step = 67
+
+    result_file = "xxx.result.binning.s67"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step67/gauss_2PK_stresses_xyz.values"
+        ids = "/step67/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step67/gauss_GL_strains_xyz.values"
+        ids = "/step67/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.36
+    step = 68
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s68"
+
+result:
+    field = "structure"
+    time = 1.36
+    step = 68
+
+    result_file = "xxx.result.structure.s68"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step68/velocity.values"
+        ids = "/step68/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step68/acceleration.values"
+        ids = "/step68/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step68/finert.values"
+        ids = "/step68/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step68/fvisco.values"
+        ids = "/step68/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step68/fstructure_old.values"
+        ids = "/step68/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step68/fint.values"
+        ids = "/step68/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step68/displacement.values"
+        ids = "/step68/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.36
+    step = 68
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s68"
+
+result:
+    field = "ia_structure"
+    time = 1.36
+    step = 68
+
+    result_file = "xxx.result.ia_structure.s68"
+
+field:
+    field = "binning"
+    time = 1.36
+    step = 68
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s68"
+
+result:
+    field = "binning"
+    time = 1.36
+    step = 68
+
+    result_file = "xxx.result.binning.s68"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step68/gauss_2PK_stresses_xyz.values"
+        ids = "/step68/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step68/gauss_GL_strains_xyz.values"
+        ids = "/step68/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.38
+    step = 69
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s69"
+
+result:
+    field = "structure"
+    time = 1.38
+    step = 69
+
+    result_file = "xxx.result.structure.s69"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step69/velocity.values"
+        ids = "/step69/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step69/acceleration.values"
+        ids = "/step69/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step69/finert.values"
+        ids = "/step69/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step69/fvisco.values"
+        ids = "/step69/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step69/fstructure_old.values"
+        ids = "/step69/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step69/fint.values"
+        ids = "/step69/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step69/displacement.values"
+        ids = "/step69/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.38
+    step = 69
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s69"
+
+result:
+    field = "ia_structure"
+    time = 1.38
+    step = 69
+
+    result_file = "xxx.result.ia_structure.s69"
+
+field:
+    field = "binning"
+    time = 1.38
+    step = 69
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s69"
+
+result:
+    field = "binning"
+    time = 1.38
+    step = 69
+
+    result_file = "xxx.result.binning.s69"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step69/gauss_2PK_stresses_xyz.values"
+        ids = "/step69/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step69/gauss_GL_strains_xyz.values"
+        ids = "/step69/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.4
+    step = 70
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s70"
+
+result:
+    field = "structure"
+    time = 1.4
+    step = 70
+
+    result_file = "xxx.result.structure.s70"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step70/velocity.values"
+        ids = "/step70/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step70/acceleration.values"
+        ids = "/step70/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step70/finert.values"
+        ids = "/step70/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step70/fvisco.values"
+        ids = "/step70/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step70/fstructure_old.values"
+        ids = "/step70/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step70/fint.values"
+        ids = "/step70/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step70/displacement.values"
+        ids = "/step70/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.4
+    step = 70
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s70"
+
+result:
+    field = "ia_structure"
+    time = 1.4
+    step = 70
+
+    result_file = "xxx.result.ia_structure.s70"
+
+field:
+    field = "binning"
+    time = 1.4
+    step = 70
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s70"
+
+result:
+    field = "binning"
+    time = 1.4
+    step = 70
+
+    result_file = "xxx.result.binning.s70"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step70/gauss_2PK_stresses_xyz.values"
+        ids = "/step70/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step70/gauss_GL_strains_xyz.values"
+        ids = "/step70/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.42
+    step = 71
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s71"
+
+result:
+    field = "structure"
+    time = 1.42
+    step = 71
+
+    result_file = "xxx.result.structure.s71"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step71/velocity.values"
+        ids = "/step71/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step71/acceleration.values"
+        ids = "/step71/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step71/finert.values"
+        ids = "/step71/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step71/fvisco.values"
+        ids = "/step71/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step71/fstructure_old.values"
+        ids = "/step71/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step71/fint.values"
+        ids = "/step71/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step71/displacement.values"
+        ids = "/step71/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.42
+    step = 71
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s71"
+
+result:
+    field = "ia_structure"
+    time = 1.42
+    step = 71
+
+    result_file = "xxx.result.ia_structure.s71"
+
+field:
+    field = "binning"
+    time = 1.42
+    step = 71
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s71"
+
+result:
+    field = "binning"
+    time = 1.42
+    step = 71
+
+    result_file = "xxx.result.binning.s71"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step71/gauss_2PK_stresses_xyz.values"
+        ids = "/step71/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step71/gauss_GL_strains_xyz.values"
+        ids = "/step71/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.44
+    step = 72
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s72"
+
+result:
+    field = "structure"
+    time = 1.44
+    step = 72
+
+    result_file = "xxx.result.structure.s72"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step72/velocity.values"
+        ids = "/step72/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step72/acceleration.values"
+        ids = "/step72/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step72/finert.values"
+        ids = "/step72/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step72/fvisco.values"
+        ids = "/step72/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step72/fstructure_old.values"
+        ids = "/step72/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step72/fint.values"
+        ids = "/step72/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step72/displacement.values"
+        ids = "/step72/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.44
+    step = 72
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s72"
+
+result:
+    field = "ia_structure"
+    time = 1.44
+    step = 72
+
+    result_file = "xxx.result.ia_structure.s72"
+
+field:
+    field = "binning"
+    time = 1.44
+    step = 72
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s72"
+
+result:
+    field = "binning"
+    time = 1.44
+    step = 72
+
+    result_file = "xxx.result.binning.s72"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step72/gauss_2PK_stresses_xyz.values"
+        ids = "/step72/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step72/gauss_GL_strains_xyz.values"
+        ids = "/step72/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.46
+    step = 73
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s73"
+
+result:
+    field = "structure"
+    time = 1.46
+    step = 73
+
+    result_file = "xxx.result.structure.s73"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step73/velocity.values"
+        ids = "/step73/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step73/acceleration.values"
+        ids = "/step73/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step73/finert.values"
+        ids = "/step73/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step73/fvisco.values"
+        ids = "/step73/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step73/fstructure_old.values"
+        ids = "/step73/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step73/fint.values"
+        ids = "/step73/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step73/displacement.values"
+        ids = "/step73/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.46
+    step = 73
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s73"
+
+result:
+    field = "ia_structure"
+    time = 1.46
+    step = 73
+
+    result_file = "xxx.result.ia_structure.s73"
+
+field:
+    field = "binning"
+    time = 1.46
+    step = 73
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s73"
+
+result:
+    field = "binning"
+    time = 1.46
+    step = 73
+
+    result_file = "xxx.result.binning.s73"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step73/gauss_2PK_stresses_xyz.values"
+        ids = "/step73/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step73/gauss_GL_strains_xyz.values"
+        ids = "/step73/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.48
+    step = 74
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s74"
+
+result:
+    field = "structure"
+    time = 1.48
+    step = 74
+
+    result_file = "xxx.result.structure.s74"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step74/velocity.values"
+        ids = "/step74/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step74/acceleration.values"
+        ids = "/step74/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step74/finert.values"
+        ids = "/step74/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step74/fvisco.values"
+        ids = "/step74/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step74/fstructure_old.values"
+        ids = "/step74/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step74/fint.values"
+        ids = "/step74/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step74/displacement.values"
+        ids = "/step74/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.48
+    step = 74
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s74"
+
+result:
+    field = "ia_structure"
+    time = 1.48
+    step = 74
+
+    result_file = "xxx.result.ia_structure.s74"
+
+field:
+    field = "binning"
+    time = 1.48
+    step = 74
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s74"
+
+result:
+    field = "binning"
+    time = 1.48
+    step = 74
+
+    result_file = "xxx.result.binning.s74"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step74/gauss_2PK_stresses_xyz.values"
+        ids = "/step74/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step74/gauss_GL_strains_xyz.values"
+        ids = "/step74/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.5
+    step = 75
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s75"
+
+result:
+    field = "structure"
+    time = 1.5
+    step = 75
+
+    result_file = "xxx.result.structure.s75"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step75/velocity.values"
+        ids = "/step75/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step75/acceleration.values"
+        ids = "/step75/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step75/finert.values"
+        ids = "/step75/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step75/fvisco.values"
+        ids = "/step75/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step75/fstructure_old.values"
+        ids = "/step75/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step75/fint.values"
+        ids = "/step75/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step75/displacement.values"
+        ids = "/step75/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.5
+    step = 75
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s75"
+
+result:
+    field = "ia_structure"
+    time = 1.5
+    step = 75
+
+    result_file = "xxx.result.ia_structure.s75"
+
+field:
+    field = "binning"
+    time = 1.5
+    step = 75
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s75"
+
+result:
+    field = "binning"
+    time = 1.5
+    step = 75
+
+    result_file = "xxx.result.binning.s75"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step75/gauss_2PK_stresses_xyz.values"
+        ids = "/step75/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step75/gauss_GL_strains_xyz.values"
+        ids = "/step75/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.52
+    step = 76
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s76"
+
+result:
+    field = "structure"
+    time = 1.52
+    step = 76
+
+    result_file = "xxx.result.structure.s76"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step76/velocity.values"
+        ids = "/step76/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step76/acceleration.values"
+        ids = "/step76/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step76/finert.values"
+        ids = "/step76/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step76/fvisco.values"
+        ids = "/step76/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step76/fstructure_old.values"
+        ids = "/step76/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step76/fint.values"
+        ids = "/step76/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step76/displacement.values"
+        ids = "/step76/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.52
+    step = 76
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s76"
+
+result:
+    field = "ia_structure"
+    time = 1.52
+    step = 76
+
+    result_file = "xxx.result.ia_structure.s76"
+
+field:
+    field = "binning"
+    time = 1.52
+    step = 76
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s76"
+
+result:
+    field = "binning"
+    time = 1.52
+    step = 76
+
+    result_file = "xxx.result.binning.s76"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step76/gauss_2PK_stresses_xyz.values"
+        ids = "/step76/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step76/gauss_GL_strains_xyz.values"
+        ids = "/step76/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.54
+    step = 77
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s77"
+
+result:
+    field = "structure"
+    time = 1.54
+    step = 77
+
+    result_file = "xxx.result.structure.s77"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step77/velocity.values"
+        ids = "/step77/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step77/acceleration.values"
+        ids = "/step77/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step77/finert.values"
+        ids = "/step77/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step77/fvisco.values"
+        ids = "/step77/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step77/fstructure_old.values"
+        ids = "/step77/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step77/fint.values"
+        ids = "/step77/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step77/displacement.values"
+        ids = "/step77/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.54
+    step = 77
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s77"
+
+result:
+    field = "ia_structure"
+    time = 1.54
+    step = 77
+
+    result_file = "xxx.result.ia_structure.s77"
+
+field:
+    field = "binning"
+    time = 1.54
+    step = 77
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s77"
+
+result:
+    field = "binning"
+    time = 1.54
+    step = 77
+
+    result_file = "xxx.result.binning.s77"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step77/gauss_2PK_stresses_xyz.values"
+        ids = "/step77/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step77/gauss_GL_strains_xyz.values"
+        ids = "/step77/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.56
+    step = 78
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s78"
+
+result:
+    field = "structure"
+    time = 1.56
+    step = 78
+
+    result_file = "xxx.result.structure.s78"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step78/velocity.values"
+        ids = "/step78/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step78/acceleration.values"
+        ids = "/step78/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step78/finert.values"
+        ids = "/step78/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step78/fvisco.values"
+        ids = "/step78/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step78/fstructure_old.values"
+        ids = "/step78/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step78/fint.values"
+        ids = "/step78/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step78/displacement.values"
+        ids = "/step78/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.56
+    step = 78
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s78"
+
+result:
+    field = "ia_structure"
+    time = 1.56
+    step = 78
+
+    result_file = "xxx.result.ia_structure.s78"
+
+field:
+    field = "binning"
+    time = 1.56
+    step = 78
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s78"
+
+result:
+    field = "binning"
+    time = 1.56
+    step = 78
+
+    result_file = "xxx.result.binning.s78"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step78/gauss_2PK_stresses_xyz.values"
+        ids = "/step78/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step78/gauss_GL_strains_xyz.values"
+        ids = "/step78/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.580000000000001
+    step = 79
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s79"
+
+result:
+    field = "structure"
+    time = 1.580000000000001
+    step = 79
+
+    result_file = "xxx.result.structure.s79"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step79/velocity.values"
+        ids = "/step79/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step79/acceleration.values"
+        ids = "/step79/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step79/finert.values"
+        ids = "/step79/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step79/fvisco.values"
+        ids = "/step79/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step79/fstructure_old.values"
+        ids = "/step79/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step79/fint.values"
+        ids = "/step79/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step79/displacement.values"
+        ids = "/step79/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.580000000000001
+    step = 79
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s79"
+
+result:
+    field = "ia_structure"
+    time = 1.580000000000001
+    step = 79
+
+    result_file = "xxx.result.ia_structure.s79"
+
+field:
+    field = "binning"
+    time = 1.580000000000001
+    step = 79
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s79"
+
+result:
+    field = "binning"
+    time = 1.580000000000001
+    step = 79
+
+    result_file = "xxx.result.binning.s79"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step79/gauss_2PK_stresses_xyz.values"
+        ids = "/step79/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step79/gauss_GL_strains_xyz.values"
+        ids = "/step79/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.600000000000001
+    step = 80
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s80"
+
+result:
+    field = "structure"
+    time = 1.600000000000001
+    step = 80
+
+    result_file = "xxx.result.structure.s80"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step80/velocity.values"
+        ids = "/step80/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step80/acceleration.values"
+        ids = "/step80/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step80/finert.values"
+        ids = "/step80/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step80/fvisco.values"
+        ids = "/step80/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step80/fstructure_old.values"
+        ids = "/step80/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step80/fint.values"
+        ids = "/step80/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step80/displacement.values"
+        ids = "/step80/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.600000000000001
+    step = 80
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s80"
+
+result:
+    field = "ia_structure"
+    time = 1.600000000000001
+    step = 80
+
+    result_file = "xxx.result.ia_structure.s80"
+
+field:
+    field = "binning"
+    time = 1.600000000000001
+    step = 80
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s80"
+
+result:
+    field = "binning"
+    time = 1.600000000000001
+    step = 80
+
+    result_file = "xxx.result.binning.s80"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step80/gauss_2PK_stresses_xyz.values"
+        ids = "/step80/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step80/gauss_GL_strains_xyz.values"
+        ids = "/step80/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.620000000000001
+    step = 81
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s81"
+
+result:
+    field = "structure"
+    time = 1.620000000000001
+    step = 81
+
+    result_file = "xxx.result.structure.s81"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step81/velocity.values"
+        ids = "/step81/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step81/acceleration.values"
+        ids = "/step81/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step81/finert.values"
+        ids = "/step81/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step81/fvisco.values"
+        ids = "/step81/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step81/fstructure_old.values"
+        ids = "/step81/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step81/fint.values"
+        ids = "/step81/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step81/displacement.values"
+        ids = "/step81/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.620000000000001
+    step = 81
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s81"
+
+result:
+    field = "ia_structure"
+    time = 1.620000000000001
+    step = 81
+
+    result_file = "xxx.result.ia_structure.s81"
+
+field:
+    field = "binning"
+    time = 1.620000000000001
+    step = 81
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s81"
+
+result:
+    field = "binning"
+    time = 1.620000000000001
+    step = 81
+
+    result_file = "xxx.result.binning.s81"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step81/gauss_2PK_stresses_xyz.values"
+        ids = "/step81/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step81/gauss_GL_strains_xyz.values"
+        ids = "/step81/gauss_2PK_stresses_xyz.ids"
+
+field:
+    field = "structure"
+    time = 1.640000000000001
+    step = 82
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.structure.s82"
+
+result:
+    field = "structure"
+    time = 1.640000000000001
+    step = 82
+
+    result_file = "xxx.result.structure.s82"
+
+    velocity:
+        type = "dof"
+        columns = 1
+        values = "/step82/velocity.values"
+        ids = "/step82/velocity.ids"
+
+    acceleration:
+        type = "dof"
+        columns = 1
+        values = "/step82/acceleration.values"
+        ids = "/step82/velocity.ids"
+
+    finert:
+        type = "dof"
+        columns = 1
+        values = "/step82/finert.values"
+        ids = "/step82/finert.ids"
+
+    fvisco:
+        type = "dof"
+        columns = 1
+        values = "/step82/fvisco.values"
+        ids = "/step82/finert.ids"
+
+    fstructure_old:
+        type = "dof"
+        columns = 1
+        values = "/step82/fstructure_old.values"
+        ids = "/step82/velocity.ids"
+
+    fint:
+        type = "dof"
+        columns = 1
+        values = "/step82/fint.values"
+        ids = "/step82/velocity.ids"
+
+    displacement:
+        type = "dof"
+        columns = 1
+        values = "/step82/displacement.values"
+        ids = "/step82/velocity.ids"
+
+field:
+    field = "ia_structure"
+    time = 1.640000000000001
+    step = 82
+
+    num_nd = 3292
+    max_nodeid = 3291
+    num_ele = 1616
+    num_dof = 11244
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.ia_structure.s82"
+
+result:
+    field = "ia_structure"
+    time = 1.640000000000001
+    step = 82
+
+    result_file = "xxx.result.ia_structure.s82"
+
+field:
+    field = "binning"
+    time = 1.640000000000001
+    step = 82
+
+    num_nd = 0
+    max_nodeid = -1
+    num_ele = 0
+    num_dof = 0
+    num_dim = 3
+
+    mesh_file = "xxx.mesh.binning.s82"
+
+result:
+    field = "binning"
+    time = 1.640000000000001
+    step = 82
+
+    result_file = "xxx.result.binning.s82"
+
+    gauss_2PK_stresses_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step82/gauss_2PK_stresses_xyz.values"
+        ids = "/step82/gauss_2PK_stresses_xyz.ids"
+
+    gauss_GL_strains_xyz:
+        type = "dof"
+        columns = 1
+        values = "/step82/gauss_GL_strains_xyz.values"
+        ids = "/step82/gauss_2PK_stresses_xyz.ids"
+

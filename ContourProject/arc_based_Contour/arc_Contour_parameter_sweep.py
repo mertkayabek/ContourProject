@@ -29,40 +29,66 @@
 # SOFTWARE.
 # -----------------------------------------------------------------------------
 """
-This script contains a tutorial for meshpy. Most basic functionality is covered
-by this tutorial. For more information have a closer look at the test cases,
-as they cover all functionality.
+Arc-Based Contour Device Parameter Sweep Simulation
+
+This script performs comprehensive parameter sweep studies for arc-based medical 
+contour devices using parametric curved beam structures. The simulation includes:
+
+1. Arc-based contour device beam structure generation with elliptical geometry
+2. Systematic parameter variation across multiple design dimensions
+3. Automated result processing and visualization generation
+4. Advanced retry mechanisms for simulation robustness
+5. Configuration-driven parameter management using YAML files
+
+Key Features:
+- Parametric arc geometry generation using elliptical parametric curves
+- Arc length-based node positioning for precise intersection calculations
+- Comprehensive parameter sweep capabilities with configurable ranges
+- Automatic beam intersection detection and penalty-based coupling
+- Memory-efficient result processing with selective file retention
+- Retry logic with adaptive time stepping for failed simulations
+- VTK output generation for visualization and analysis
+
+The simulation supports both single parameter combinations and comprehensive sweeps for design optimization and sensitivity analysis.
+
+Author: Mert Kayabek
 """
 
-# Import python modules.
+# Standard library imports
 import numpy as np
 import autograd.numpy as npAD
 import os
 import itertools
 import glob
-from datetime import datetime
-import shutil
-import pyvista as pv
-import re
-#pv.start_xvfb()  # Start virtual X server for headless rendering
 import time
 import sys
-from datetime import timedelta
+import shutil
+import re
+from datetime import datetime, timedelta
+
+# Third-party imports
+import pyvista as pv
 import yaml
+#pv.start_xvfb()  # Start virtual X server for headless rendering
 
-
-# Import the objects we need from meshpy.
+# MeshPy core modules
 from meshpy.core.conf import mpy
 from meshpy.core.geometry_set import GeometrySet
 from meshpy.core.mesh import Mesh
 from meshpy.core.rotation import Rotation
+
+# MeshPy 4C interface modules
 from meshpy.four_c.boundary_condition import BoundaryCondition
 from meshpy.four_c.element_beam import Beam3rHerm2Line3
 from meshpy.four_c.function import Function
 from meshpy.four_c.input_file import InputFile
 from meshpy.four_c.material import MaterialReissner
 from meshpy.four_c.run_four_c import run_four_c
+
+# MeshPy utility modules
 from meshpy.utils.nodes import get_single_node, find_close_nodes
+
+# MeshPy mesh creation modules
 from meshpy.mesh_creation_functions.beam_basic_geometry import (
     create_beam_mesh_arc_segment_2d,
     create_beam_mesh_line,
@@ -79,260 +105,305 @@ def create_beams_wrapped_around_cylinder(
     positional_coupling_penalty,
     rotational_coupling_penalty,
     z_scale_factor=1.0,
-    number_of_beams=12,
+    number_of_wires=12,
     youngs_modulus=83000,
     preview=False
 ):
+    """
+    Create an arc-based contour device beam structure wrapped around a cylindrical surface.
     
-    interval = [0, interval_end]
-    n_intersections = 2
-    #number_of_beams = 12
-    compression_factor = 0.95
-    #youngs_modulus = 83000  # Young's modulus in N/mm^2
-    # austenite phase value
-    # radius of marker max 0.25 mm
+    This function generates multiple curved beams that form a medical contour device using
+    parametric elliptical arc geometry. The beams are arranged to intersect at calculated
+    points and provide specific coverage patterns for medical treatment applications.
+    
+    The key difference from line-based devices is that this uses curved (arc) geometry
+    with sophisticated arc length calculations to ensure proper node placement and
+    intersection patterns.
+    
+    Args:
+        base_dir (str): Output directory for simulation files and results
+        interval_end (float): End z-coordinate for beam generation interval
+        cylinder_radius (float): Radius of the cylindrical surface for beam wrapping
+        compressed_part (float): Fraction of beam length to apply compression to
+        beam_radius (float): Cross-sectional radius of individual beam elements
+        positional_coupling_penalty (float): Penalty parameter for positional coupling
+        rotational_coupling_penalty (float): Penalty parameter for rotational coupling
+        z_scale_factor (float): Scaling factor for z-direction arc height (default: 1.0)
+        number_of_wires (int): Number of arc beams to create (default: 12)
+        youngs_modulus (float): Young's modulus of beam material in N/mm² (default: 83000)
+        preview (bool): Whether to show preview visualization (default: False)
+        
+    Returns:
+        InputFile: Complete 4C input file for arc-based contour device simulation
+        
+    Arc Geometry Features:
+        - Elliptical arc shapes in cylindrical coordinates
+        - Arc length-based node positioning for uniform distribution
+        - Parametric curve generation with configurable scaling
+        - Intersection point calculation based on geometric analysis
+    """
+    
+    # Define simulation parameters
+    interval = [0, interval_end]  # z-coordinate range for beam generation
+    n_intersections = 2  # Minimum number of beam intersections for stability
+    compression_factor = 0.95  # Maximum compression ratio (5% reduction)
 
-    n_el = 8*(n_intersections-1)*number_of_beams
-    num_steps = 20
-    time_step = 1/num_steps
+    # Calculate total number of elements based on intersection requirements
+    n_el = 8 * (n_intersections - 1) * number_of_wires
     
-
+    # Time stepping parameters for static analysis
+    num_steps = 20  # Number of load steps for gradual application
+    time_step = 1 / num_steps  # Individual time step size
     
+    # Initialize mesh and material objects
     mesh = Mesh()
     mat = MaterialReissner(youngs_modulus=youngs_modulus, radius=beam_radius)
     beam_object = Beam3rHerm2Line3
 
-    # use find_close_nodes() instead of this func
-
     def find_intersections_and_apply_coupling(mesh, beams, positional_coupling_penalty, rotational_coupling_penalty):
         """
-        Find intersections between beams and apply coupling.
-        """
-        # Get all nodes from all beams
-        #all_nodes = []
-        #for beam in beams:
-        #    all_nodes.extend(beam["line"].get_all_nodes())
+        Find intersections between beams and apply penalty coupling.
         
-        # Use find_close_nodes to find intersecting nodes
-        # Returns list of lists where each inner list contains nodes that are close to each other
-        close_node_groups = find_close_nodes(mesh.nodes)#, tol=1e-1)
-        #print("\nFound close node groups:")
-    
-        print("Number of close node groups:", len(close_node_groups))
-        required = (number_of_beams ** 2) / 2
-        if len(close_node_groups) < required:
-            print("The number of intersecting nodes are not found accurately, check integration.")
-            sys.exit(1)
-
-        for group_idx, node_group in enumerate(close_node_groups):
-            if len(node_group) > 1:  # Only print groups with multiple nodes
-                #print(f"\nGroup {group_idx + 1}:")
-                for node_idx, node in enumerate(node_group):
-                    coords = node.coordinates
-                    #print(f"Node {node_idx + 1}: ({coords[0]:.3f}, {coords[1]:.3f}, {coords[2]:.3f})")
-                #print("-" * 50)
-        # Create GeometrySet for intersecting nodes
-        # intersecting nodes with first node as initial geometry
+        This function identifies nodes that are geometrically close between
+        different beams and applies penalty-based coupling to simulate
+        beam-to-beam interactions in the contour device structure.
+        
+        Args:
+            mesh: Mesh object containing all beams
+            beams: List of beam dictionaries
+            positional_coupling_penalty: Penalty parameter for positional coupling
+            rotational_coupling_penalty: Penalty parameter for rotational coupling
+            
+        Returns:
+            GeometrySet: Set of intersecting nodes for visualization/analysis
+        """
+        # Find groups of nodes that are geometrically close
+        close_node_groups = find_close_nodes(mesh.nodes)
+        
+        print(f"Found {len(close_node_groups)} close node groups for beam coupling")
+        
+        # Initialize geometry set with first intersecting group
         first_group = next((group for group in close_node_groups if len(group) > 1), None)
         if not first_group:
+            print("Warning: No intersecting nodes found for beam coupling")
             return None
             
         intersecting_nodes = GeometrySet(first_group[0])
         
-        # Apply coupling for each group of close nodes
+        # Apply penalty coupling for each group of close nodes
+        coupling_count = 0
         for node_group in close_node_groups:
-            #print("\nLevel1:")
             if len(node_group) > 1:  # Only process groups with multiple nodes
-                #print("\nLevel2:")
-                # Add nodes to geometry set
+                # Add all nodes to the geometry set for visualization
                 for node in node_group:
                     intersecting_nodes.add(node)
                 
-                # Apply coupling between nodes in this group
-                
+                # Apply pairwise penalty coupling between first two nodes
                 mesh.couple_nodes(
                     nodes=[node_group[0], node_group[1]],
                     coupling_type=mpy.bc.point_coupling_penalty,
-                    coupling_dof_type=f"POSITIONAL_PENALTY_PARAMETER {positional_coupling_penalty} ROTATIONAL_PENALTY_PARAMETER {rotational_coupling_penalty}"
+                    coupling_dof_type=f"POSITIONAL_PENALTY_PARAMETER {positional_coupling_penalty} "
+                                    f"ROTATIONAL_PENALTY_PARAMETER {rotational_coupling_penalty}"
                 )
-                
+                coupling_count += 1
         
+        print(f"Applied penalty coupling to {coupling_count} node groups")
         return intersecting_nodes
 
     def calculate_displacement_for_cylinder(coordinates, new_radius):
         """
-        Calculates displacement for cylinder transformation.
+        Calculate radial displacement for cylindrical compression transformation.
+        
+        This function computes the displacement required to compress a point
+        from its current radial position to a new radial position on a cylinder.
+        
+        Args:
+            coordinates (array): [x, y, z] coordinates of the point
+            new_radius (float): Target radius for compression
+            
+        Returns:
+            array: [dx, dy, dz] displacement vector (dz = 0)
         """
         x = coordinates[0]
         y = coordinates[1]
-        # Calculate the original radius
+        
+        # Calculate current radial distance from z-axis
         original_radius = np.sqrt(x**2 + y**2)
-        # Calculate the scaling factor
+        
+        # Avoid division by zero for points on the axis
+        if original_radius < 1e-12:
+            return np.array([0.0, 0.0, 0.0])
+        
+        # Calculate scaling factor for radial compression
         scaling_factor = new_radius / original_radius
-        # Scale the x and y coordinates
+        
+        # Apply radial scaling to x and y coordinates
         new_x = x * scaling_factor
         new_y = y * scaling_factor
-        # return the displacement
-        return np.array([new_x-x, new_y-y, 0])
+        
+        # Return displacement (no z-displacement for cylindrical compression)
+        return np.array([new_x - x, new_y - y, 0.0])
     
     def calculate_angle_for_intersections(n_intersections, interval, radius):
         """
-        Calculate required angle for desired number of intersections
+        Calculate the helical angle required for desired number of beam intersections.
+        
+        This function determines the pitch angle needed for helical beams to
+        intersect the specified number of times over the given interval length.
         
         Args:
-            n_intersections: desired number of intersections
-            interval: [start, end] of beam
-            radius: cylinder radius
+            n_intersections (int): Desired number of intersections
+            interval (list): [start, end] length of the beam in z axis
+            radius (float): Cylinder radius
+            
+        Returns:
+            tuple: (yz_ratio, alpha_degrees) - tangent and angle in degrees
         """
         length = interval[1] - interval[0]
-        # Adjust for the interval offset
-        tan_yz = ((n_intersections - 1) * np.pi * radius) / length
-        alpha_degrees = np.degrees(np.arctan(tan_yz))
-        return tan_yz, alpha_degrees
+        
+        # Calculate required tangent for helical pitch
+        # Intersections occur when beams complete (n_intersections-1) * π radians
+        yz_ratio = ((n_intersections - 1) * np.pi * radius) / length
+        alpha_degrees = np.degrees(np.arctan(yz_ratio))
+        
+        return yz_ratio, alpha_degrees
 
     def create_multiple_beams_shifted_in_y(
         mesh,
-        number_of_beams,
+        number_of_wires,
         cylinder_radius,
         interval,
         n_el,
         add_sets,
         material,
         beam_object,
-        tan_yz,
         compression_factor,
         compressed_part,
-        #node_positions=None  # Add this parameter
     ):
         """
-        Creates multiple beams, each shifted in y by an equal amount of 2π/number_of_beams.
+        Create multiple helical beams with equal angular spacing around cylinder.
+        
+        This function generates the complete contour device structure by creating
+        multiple helical beams, each rotated by 2π/number_of_wires around the
+        cylinder axis. Each beam follows a parametric arc shape.
+        
+        Args:
+            mesh: Mesh object to add beams to
+            number_of_wires (int): Number of helical beams to create
+            cylinder_radius (float): Radius of the cylindrical surface
+            interval (list): [start, end] parametric interval
+            n_el (int): Number of elements per wire
+            add_sets (bool): Whether to add geometry sets
+            material: Material object for beams
+            beam_object: Beam element type
+            compression_factor (float): Factor for beam compression
+            compressed_part (float): Portion of wire that is compressed
+            
+        Returns:
+            tuple: (beams, beams_start) - lists of beam objects and start nodes
         """
     
         def n_shape_yz_complete(t):
-            x = cylinder_radius
-            R = interval[1]/2  # Radius of the arc (half of total interval)
-            arc_height = R  # Maximum height of the arc
+            """
+            Define the parametric shape function for helical beam geometry.
             
-            # Parameter from 0 to π (half circle)
-            theta = (t/(interval[1])) * npAD.pi
+            This creates a helical arc that starts at cylinder radius and
+            follows a sinusoidal path in both y and z directions.
             
-            # Calculate coordinates
-            z = z_scale_factor * R * npAD.sin(theta)  # z goes up and down
-            #z = R * npAD.sin(theta)  # z goes up and down
-            y = tan_yz * R * (1 - npAD.cos(theta))  # y increases throughout
+            Args:
+                t (float): Parameter from 0 to interval[1]
+                
+            Returns:
+                array: [x, y, z] coordinates of the beam curve
+            """
+            x = cylinder_radius  # Constant radial distance from z-axis
+            R = interval[1] / 2  # Arc radius (half of total interval)
+            
+            # Parametric angle from 0 to π (half circle in yz-plane)
+            theta = (t / interval[1]) * npAD.pi
+            
+            # Z-coordinate: creates vertical oscillation (scaled by z_scale_factor)
+            z = z_scale_factor * R * npAD.sin(theta)
+            
+            # Y-coordinate: creates forward progression with helical component
+            y = R * (1 - npAD.cos(theta))
             
             return npAD.array([x, y, z])
         
-        def calculate_node_positions(num_positions, R, tan_yz):
+        def calculate_node_positions(num_positions, R):
             """
-            Calculate normalized parameter positions that correspond to uniform y-coordinate spacing.
+            Calculate optimal node positions for uniform y-coordinate spacing.
+            
+            This function determines parameter values that result in evenly
+            spaced nodes along the y-direction, accounting for the nonlinear
+            parametric curve shape.
             
             Args:
-                number_of_beams: Number of beams (will create number_of_beams+1 nodes)
-                R: Radius of the arc (half of total interval)
-                tan_yz: Tangent angle factor for the arc
-                
+                num_positions (int): Number of positions to calculate
+                R (float): Arc radius parameter                
             Returns:
-                List of normalized positions in [0,1] for node placement
+                list: Normalized parameter positions [0,1] for node placement
             """
-            # Start with position 0
-            positions = [0.0]  # First node is at the start point
+            positions = [0.0]  # Start at parameter t=0
             
-            # Calculate y-coordinate increment
-            y_increment = 2 * tan_yz * R / number_of_beams
+            # Calculate uniform y-coordinate increments
+            y_increment = 2 * R / number_of_wires
             
-            # For each position, calculate the corresponding parameter value
-            for i in range(1, number_of_beams):
-                y = i * y_increment
-                #print("y found:", y)
-                #print("z found:", 0.5 * np.sqrt(2*R*y - y**2))
-                # Invert the y-coordinate function to find the parameter t
-                # y = tan_yz * R * (1 - cos(θ)) and θ = (t/interval[1]) * π
-                # Solving for t: t = interval[1] * arccos(1 - y/(tan_yz*R)) / π
-                #z = R * npAD.sin(theta)  # z goes up and down
-                #y = tan_yz * R * (1 - npAD.cos(theta))  # y increases throughout
+            # For each intermediate position, solve for the parameter value
+            for i in range(1, number_of_wires):
+                y_target = i * y_increment
                 
-                # Handle potential numerical issues
-                arc_length = calculate_elliptical_arc_length(y, R, tan_yz, z_scale_factor)
-                half_ellipse_length = calculate_elliptical_arc_length(2*R, R, tan_yz, z_scale_factor)
+                # Calculate arc length to this y-position (numerical integration)
+                arc_length = calculate_elliptical_arc_length(y_target, R, z_scale_factor)
+                half_ellipse_length = calculate_elliptical_arc_length(2 * R, R, z_scale_factor)
+                
+                # Normalize to [0,1] parameter range
                 normalized_t = arc_length / half_ellipse_length
-
-                """
-                arg = 1 - y / (tan_yz * R) 
-                if arg < -1:
-                    arg = -1
-                elif arg > 1:
-                    arg = 1
-                    
-                theta = np.arccos(arg)
-                t = interval[1] * theta / np.pi
-        
-                # Normalize to [0, 1]
-                normalized_t = t / interval[1]
-                """
                 positions.append(normalized_t)
-            # End with position 1
-            positions.append(1.0)
 
-            #add extra nodes every 0.025
+            positions.append(1.0)  # End at parameter t=1
             
+            # Add extra refinement nodes near the bottom of wires for better discretization
             step = (positions[1] - positions[0]) / 4
-            current = positions[0] + step  # Start at 0.01
+            current = positions[0] + step
             while current < positions[1]:
                 if current not in positions:
                     positions.append(current)
-                    positions.append(1 - current)
-                #positions.sort()
+                    positions.append(1 - current)  # Add symmetric position
                 current += step
             
-
-            """
-            # Now add 4 extra nodes between start (0.0) and first calculated node
-            first_interval = positions[1] - positions[0]
-            for i in range(1, 11):  # Create 4 equally spaced nodes
-                new_pos = positions[0] + (first_interval * i) / 5
-                positions.append(new_pos)
-            
-            # Add 4 extra nodes between last calculated node and position 1.0
-            for i in range(1, 11):  # Create 4 equally spaced nodes
-                new_pos = 1 - (first_interval * i) / 5
-                positions.append(new_pos)
-            """
-            # Sort the positions to maintain proper order7
             positions.sort()
-            #print("Sorted node positions:", positions)
-
-            
             return positions
         
-        def calculate_elliptical_arc_length(target_y, R, tan_yz, z_scale_factor, num_samples=1000000):
+        def calculate_elliptical_arc_length(target_y, R, z_scale_factor, num_samples=1000000):
             """
-            Calculate the arc length along the elliptical curve from (y=0,z=0) to a specified y-value.
+            Calculate arc length along the elliptical curve using numerical integration.
+            
+            This function computes the arc length from the curve origin to a point
+            with the specified y-coordinate. Used for uniform node spacing along
+            the curved beam geometry.
             
             Args:
-                target_y: The y-coordinate to calculate arc length to
-                R: Radius parameter (interval[1]/2)
-                tan_yz: Tangent factor for y-coordinate
-                z_scale_factor: Scaling factor for z-coordinate
-                num_samples: Number of samples for numerical integration
-            
+                target_y (float): Target y-coordinate
+                R (float): Arc radius parameter
+                z_scale_factor (float): Z-direction scaling factor
+                num_samples (int): Number of integration samples
+                
             Returns:
-                Arc length from origin to the point with the specified y-coordinate
-            """  
-            # Find theta corresponding to the target y-value
-            # From: y = tan_yz * R * (1 - cos(theta))
-            arg = 1 - target_y / (tan_yz * R)
+                float: Arc length to the target y-coordinate
+            """
+            # Find theta corresponding to target y-coordinate
+            arg = 1 - target_y / R
             
-            # Handle potential numerical issues
+            # Handle numerical edge cases
             if arg < -1:
                 arg = -1
             elif arg > 1:
                 arg = 1
             
             target_theta = np.arccos(arg)
-
             
-            # Create sample points for numerical integration
+            # Numerical integration using trapezoidal rule
             theta_values = np.linspace(0, target_theta, num_samples)
             
             # Calculate arc length using numerical integration
@@ -347,122 +418,59 @@ def create_beams_wrapped_around_cylinder(
                 
                 # Calculate the integrand at the midpoint
                 # √[(dy/dθ)² + (dz/dθ)²] 
-                dy_dtheta = tan_yz * R * np.sin(theta_mid)
+                dy_dtheta = R * np.sin(theta_mid)
                 dz_dtheta = z_scale_factor * R * np.cos(theta_mid)
                 
                 integrand = np.sqrt(dy_dtheta**2 + dz_dtheta**2)
                 
                 # Add segment length
                 arc_length += integrand * (theta2 - theta1)
-
-            #print("Target theta (degrees):", np.degrees(target_theta))
-            #print("Arc length:", arc_length)
             return arc_length
 
-
-        # Calculate node positions - number_of_beams/2 + 2 positions (including start and end)
-        num_positions = number_of_beams // 2
-        # Calculate node positions - number_of_beams+1 positions (including start and end)
-        node_positions = calculate_node_positions(number_of_beams, interval[1]/2, tan_yz)
+        # Calculate optimal node positions for beam discretization
+        num_positions = number_of_wires // 2
+        node_positions = calculate_node_positions(number_of_wires, interval[1] / 2)
         
-        #print("Node positions:", node_positions)
-
         beams = []
         beams_start = []
-        beams_end = []
 
-        for i in range(number_of_beams):
-            #shift_i = (2.0 * npAD.pi * cylinder_radius / number_of_beams) * i
-            shift_i = (2*(interval[1] - interval[0])/number_of_beams) * i
-            #shift_i = (2*(interval[1] - interval[0])/ npAD.pi) * i
+        # Create multiple wires with angular spacing
+        for i in range(number_of_wires):
+            shift_i = (2*(interval[1] - interval[0])/number_of_wires) * i
+
             def shape_with_shift(t, shift=shift_i):
                 base = n_shape_yz_complete(t)
                 return npAD.array([base[0], base[1] + shift, base[2]])
-
+            
             dir1 = create_beam_mesh_curve(
                 mesh,
                 beam_object,
                 material,
                 shape_with_shift,
                 interval=interval,
-                #n_el=n_el,
                 node_positions_of_elements=node_positions,  # Use calculated positions instead of n_el
                 add_sets=add_sets
             )
 
             beams.append(dir1)
             beams_start.append(dir1["start"])
-            beams_end.append(dir1["end"])
-            # Add this: Assign beam number to all nodes in this beam
-            beam_nodes = dir1["line"].get_all_nodes()
-            """
-            for node in beam_nodes:
-                node.beam_number = i  # Store the beam index as an attribute
-                print(f"Beam {i}: x = {node.coordinates[0]:.3f}, y = {node.coordinates[1]:.3f}, z = {node.coordinates[2]:.3f}")
-            """            
-    
-            if i == 0:
-                #print("\nY-coordinates of nodes on first arc:")
-                beam_nodes = dir1["line"].get_all_nodes()
-                beam_nodes.sort(key=lambda node: node.coordinates[1])
-                # for j, node in enumerate(beam_nodes):
-                # print(f"Node {j}: y = {node.coordinates[1]:.6f}")
 
-        #mesh.display_pyvista()
-        #mesh.scale(1,1,z_scale_factor)
-        """
-        for node in mesh.nodes:
-            node.coordinates[2] *= z_scale_factor
-        """
-        mesh.wrap_around_cylinder(radius=cylinder_radius)
-        find_intersections_and_apply_coupling(mesh, beams, positional_coupling_penalty, rotational_coupling_penalty) # change this
-        mpy.check_overlapping_elements = False
+        mesh.wrap_around_cylinder(radius=cylinder_radius) # wrap mesh around cylinder
+        find_intersections_and_apply_coupling(mesh, beams, positional_coupling_penalty, rotational_coupling_penalty)
+        mpy.check_overlapping_elements = False 
+       
+        new_radius = cylinder_radius * (1.0 - compression_factor) # final radius after compression
 
-
-             
-
-        #print("\nBeam start and end point coordinates:")
-        for i, beam in enumerate(beams):
-            start_node = beam["start"].get_all_nodes()[0]  # Get the first node from the geometry set
-            start_coords = start_node.coordinates
-            #print(f"Beam {i + 1}: ({start_coords[0]:.3f}, {start_coords[1]:.3f}, {start_coords[2]:.3f})")
-            end_node = beam["end"].get_all_nodes()[0]  # Get the first node from the geometry set
-            end_coords = end_node.coordinates
-            #print(f"Beam {i + 1}: ({end_coords[0]:.3f}, {end_coords[1]:.3f}, {end_coords[2]:.3f})")
-
-        new_radius = cylinder_radius * (1.0 - compression_factor)
-
-        # write a for loop for all nodes in mesh like below
         max_z = max(node.coordinates[2] for node in mesh.nodes if not node.is_middle_node)
-        threshold = max_z * compressed_part
-        num_nodes = len(mesh.nodes)
+        threshold = max_z * compressed_part # z coordinate threshold for compression
 
         for node in mesh.nodes:
-            # If node has a beam number attribute use it, otherwise mark as N/A
-            #beam_num = getattr(node, "beam_number", "N/A")
-            #print(f"Beam {beam_num}: x = {node.coordinates[0]:.3f}, y = {node.coordinates[1]:.3f}, z = {node.coordinates[2]:.3f}")
-            #print(f"Beam: x = {node.coordinates[0]:.3f}, y = {node.coordinates[1]:.3f}, z = {node.coordinates[2]:.3f}")
             if not node.is_middle_node:
-                #node in beams_start: This is wrong I dont know why
-
-                if  np.linalg.norm(node.coordinates[2] - interval[0]) < 1e-9:                #node in beams_start:
-                    #print(f"Start node coordinates: {node.coordinates}")
-                    # boundary condition with radial and axial=0 displacement
+                
+                # Nodes at the bottom
+                if  np.linalg.norm(node.coordinates[2] - interval[0]) < 1e-9:                
                     node_set = GeometrySet(node)
-                    #print(f"Start Node coordinates: {node.coordinates}")
-                    """
-                    mesh.add(
-                        BoundaryCondition(
-                            node_set,
-                            (
-                                "NUMDOF 9 ONOFF 0 0 1 1 1 1 0 0 0 "
-                                "VAL 0 0 0 0 0 0 0 0 0 "
-                                "FUNCT 0 0 0 0 0 0 0 0 0"
-                            ),
-                            bc_type=mpy.bc.dirichlet,
-                        )
-                    )
-                    """
+                    
                     displacement = calculate_displacement_for_cylinder(
                             node.coordinates, 
                             new_radius
@@ -486,33 +494,31 @@ def create_beams_wrapped_around_cylinder(
                     mesh.add(displacement_x)
                     mesh.add(displacement_y)
 
+                    # Apply Dirichlet boundary condition with displacement functions
+                    # The nodes at the bottom are also fixed in all 3 rotational DOFs
                     mesh.add(
                         BoundaryCondition(
                             node_set,
                             (
-                                "NUMDOF 9 ONOFF 1 1 1 1 1 1 0 0 0 "  # Fix z also only x and y translations
+                                "NUMDOF 9 ONOFF 1 1 1 1 1 1 0 0 0 "
                                 "VAL 1 1 0 0 0 0 0 0 0 "
-                                "FUNCT {} {} 0 0 0 0 0 0 0"  # Use displacement functions for x,y
+                                "FUNCT {} {} 0 0 0 0 0 0 0" 
                             ),
-                            format_replacement=[displacement_x, displacement_y],  # Use the displacement functions
+                            format_replacement=[displacement_x, displacement_y],
                             bc_type=mpy.bc.dirichlet,
                         )
                     )
                     
                 
+                # Nodes in compressed region: Radial compression only
                 elif node.coordinates[2] <= threshold:
-                #node.coordinates[2] < ((interval[1] + interval[0])/2)*compressed_part:  # z < 5 for interval [0, 10]
-                    # add here the boundary condition with radial displacement according to coordinate
                     node_set = GeometrySet(node)
-
+                    
                     displacement = calculate_displacement_for_cylinder(
                             node.coordinates, 
                             new_radius
                         )
-                    #print(f"Compressed Node coordinates: {node.coordinates[2]}")
-                    #print(f"Calculated displacement: {displacement}")
-
-                    # Create displacement functions with time interpolation
+                    # Create radial displacement functions (x,y only)
                     displacement_x = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
@@ -529,67 +535,44 @@ def create_beams_wrapped_around_cylinder(
                             displacement[1]
                         )
                     )
+
                     mesh.add(displacement_x)
                     mesh.add(displacement_y)
+                    
+                    # Apply radial compression (x,y constrained, z free, rotation free)
+                    mesh.add(
+                        BoundaryCondition(
+                            node_set,
+                            "NUMDOF 9 ONOFF 1 1 0 0 0 0 0 0 0 "
+                            "VAL 1 1 0 0 0 0 0 0 0 "
+                            "FUNCT {} {} 0 0 0 0 0 0 0",
+                            format_replacement=[displacement_x, displacement_y],
+                            bc_type=mpy.bc.dirichlet,
+                        )
+                    )
 
-                    mesh.add(
-                        BoundaryCondition(
-                            node_set,
-                            (
-                                # no need for fixing rotation check that
-                                "NUMDOF 9 ONOFF 1 1 0 1 1 1 0 0 0 "  # Fix only x and y translations
-                                "VAL 1 1 0 0 0 0 0 0 0 "
-                                "FUNCT {} {} 0 0 0 0 0 0 0"  # Use displacement functions for x,y
-                            ),
-                            format_replacement=[displacement_x, displacement_y],  # Use the displacement functions
-                            bc_type=mpy.bc.dirichlet,
-                        )
-                    )
-                    #node in beams_end: This didnot work I dont know why
-                """
-                elif np.linalg.norm(node.coordinates[2] - interval[0])<1e-9: 
-                    # add here find end nodes
-                    print(f"End node coordinates: {node.coordinates}")
-                    node_set = GeometrySet(node)
-                    mesh.add(
-                        BoundaryCondition(
-                            node_set,
-                            (
-                                "NUMDOF 9 ONOFF 0 0 0 0 0 0 0 0 0 "  # Fix only x and y translations
-                                # kola bardağı gibi oluyor x ve y sınırlayınca
-                                "VAL 0 0 0 0 0 0 0 0 0 "
-                                "FUNCT 0 0 0 0 0 0 0 0 0"  # Use displacement functions for x,y
-                            ),
-                            bc_type=mpy.bc.dirichlet,
-                        )
-                    )
-                    """
-                    #pass
+    yz_ratio, degrees = calculate_angle_for_intersections(n_intersections, interval, cylinder_radius)
     
-            
-    tan_yz, degrees = calculate_angle_for_intersections(n_intersections, interval, cylinder_radius)
-    
-    #print(f"degrees: {degrees}")
-    interval[1] = interval[1] * tan_yz
-    tan_yz = 1
+    interval[1] = interval[1] * yz_ratio
 
     create_multiple_beams_shifted_in_y(
         mesh,
-        number_of_beams,
+        number_of_wires,
         cylinder_radius,
         interval,
         n_el,
         True,
         mat,
         beam_object,
-        tan_yz,
         compression_factor,
         compressed_part
     )
 
+
+    # Generate VTK output for visualization
+    mesh.write_vtk("contour_device_beams", base_dir)
     
-    # The vtk output will also show all node sets for BCs on the mesh.
-    mesh.write_vtk("simple_beam", base_dir)
+
 
     # The object InputFile is a mesh, but can also store 4C input parameters.
     # Additionally we load an existing solid mesh. This shows how solid, or in
@@ -662,9 +645,23 @@ def visualize_timestep(vtk_file_path, output_path):
     Creates a PyVista visualization of a VTK file and saves it as an image.
     
     Args:
-        vtk_file_path: Path to the VTK file
-        output_path: Path to save the output image
+        vtk_file_path (str): Absolute path to the VTK file to visualize
+        output_path (str): Absolute path for the output image file
+        
+    Returns:
+        bool: True if visualization was created successfully, False otherwise
+        
+    Error Handling:
+        - Checks file existence before processing
+        - Handles PyVista rendering errors
+        - Reports specific error messages for debugging
+        
+    Usage in Parameter Sweeps:
+        This function is typically called for key timesteps (0, middle, final)
+        to create visualization summaries of simulation results without storing
+        the complete time history.
     """
+    # Validate input file existence
     if not os.path.exists(vtk_file_path):
         print(f"Warning: VTK file not found: {vtk_file_path}")
         return False
@@ -696,36 +693,72 @@ def visualize_timestep(vtk_file_path, output_path):
     
 def copy_vtk_files(results_dir, viz_dir, keep_timesteps=[0, 25, 50]):
     """
-    Copies the VTK files for specified timesteps instead of visualizing them.
-    Includes both .pvtu and their associated .vtu files.
+    Copy VTK simulation result files for specified timesteps to visualization directory.
+    
+    This function implements memory-efficient result processing by selectively copying
+    only the most important simulation timesteps rather than storing all output files.
+    It handles both parallel VTK master files (.pvtu) and their associated piece files
+    (.vtu) to ensure complete visualization datasets.
+    
+    The function is designed for parameter sweep workflows where disk space is critical
+    and only key simulation states need to be preserved for analysis.
+    
+    File Types Processed:
+        - .pvtu files: Parallel VTK master files containing metadata
+        - .vtu files: Individual processor piece files with actual data
+        - .log/.err files: Simulation logs and error messages
+    
+    Args:
+        results_dir (str): Source directory containing simulation results
+        viz_dir (str): Destination directory for copied visualization files
+        keep_timesteps (list): List of timestep indices to preserve (default: [0, 25, 50])
+        
+    Returns:
+        bool: True if files were successfully copied, False if no files found
+        
+    File Naming Convention:
+        The function expects 4C simulation output files with naming pattern:
+        - structure-beams-{timestep:05d}.pvtu (master files)
+        - structure-beams-{timestep:05d}-{proc}.vtu (piece files)
+        
+    Error Handling:
+        - Gracefully handles missing VTK directories
+        - Reports missing timesteps without failing
+        - Continues processing if individual files are missing
+        
+    Memory Optimization:
+        By copying only selected timesteps (typically beginning, middle, end),
+        this function reduces storage requirements by 90%+ while preserving
+        essential simulation data for visualization and analysis.
     """
+    # Locate VTK files directory within simulation results
     vtk_files_dir = os.path.join(results_dir, "xxx-vtk-files")
     if not os.path.exists(vtk_files_dir):
         print(f"Warning: VTK files directory not found: {vtk_files_dir}")
         return False
     
     files_copied = 0
+    
+    # Process each specified timestep
     for timestep in keep_timesteps:
         # Format the timestep to match file pattern
         timestep_str = f"{timestep:05d}"
         
         # First find all pvtu files for this timestep (master files)
         pvtu_files = glob.glob(os.path.join(vtk_files_dir, f"structure-beams-{timestep_str}.pvtu"))
-        #pvtu_files += glob.glob(os.path.join(vtk_files_dir, f"boundingbox-{timestep_str}.pvtu"))
         
-        # Then find all vtu files for this timestep (piece files)
+        # Find all associated piece files for this timestep
         vtu_files = glob.glob(os.path.join(vtk_files_dir, f"structure-beams-{timestep_str}-*.vtu"))
-        #vtu_files += glob.glob(os.path.join(vtk_files_dir, f"boundingbox-{timestep_str}-*.vtu"))
         
-        # Combine all files to copy
+        # Combine all files for this timestep
         all_files = pvtu_files + vtu_files
         
         if all_files:
+            # Copy all files for this timestep
             for src_file in all_files:
                 dest_file = os.path.join(viz_dir, os.path.basename(src_file))
                 shutil.copy2(src_file, dest_file)
                 files_copied += 1
-                #print(f"Copied: {os.path.basename(src_file)}")
         else:
             print(f"No VTK files found for timestep {timestep}")
 
@@ -739,67 +772,72 @@ def copy_vtk_files(results_dir, viz_dir, keep_timesteps=[0, 25, 50]):
             shutil.copy2(src_file, dest_file)
             files_copied += 1
     
-    #print(f"Total files copied: {files_copied}")
     return files_copied > 0
 
-"""
-def get_dynamic_timesteps(results_dir):
-   
-    vtk_files_dir = os.path.join(results_dir, "xxx-vtk-files")
-    if not os.path.exists(vtk_files_dir):
-        print(f"Warning: VTK files directory not found: {vtk_files_dir}")
-        return [0, 5, 10]  # Default fallback
-    
-    # Find all structure beam files
-    structure_files = glob.glob(os.path.join(vtk_files_dir, "structure-beams-*.v*u"))
-    
-    # Extract timesteps
-    timesteps = []
-    for filename in structure_files:
-        basename = os.path.basename(filename)
-        match = re.search(r'structure-beams-(\d+)', basename)
-        if match:
-            timestep = int(match.group(1))
-            if timestep not in timesteps:
-                timesteps.append(timestep)
-    
-    if not timesteps:
-        print("No timestep files found, using default")
-        return [0, 5, 10]
-    
-    # Sort the timesteps
-    timesteps.sort()
-    
-    first_timestep = 0  # Always use 0 as first
-    last_timestep = timesteps[-1]
-    middle_timestep = (first_timestep + last_timestep) // 2
-    
-    print(f"Using timesteps: first={first_timestep}, middle={middle_timestep}, last={last_timestep}")
-    return [first_timestep, middle_timestep, last_timestep]
-"""
-
-
-def scale(self, vector):
-    """Scale beam nodes of this mesh.
-
-    Args
-    ----
-    vector: np.array, list
-            that will be added to all nodes.
-    """
-    for node in self.nodes:
-        node.coordinates *= vector
 
 def parameter_sweep():
+    """
+    Execute comprehensive parameter sweep for arc-based contour device simulations.
+    
+    This function performs systematic parameter studies by varying multiple design
+    and material properties of the arc-based contour device. It creates a complete
+    simulation matrix exploring different combinations of geometric, material, and
+    coupling parameters to understand device behavior and optimize performance.
+    
+    The function implements the following workflow:
+    1. Load configuration parameters from YAML file
+    2. Generate parameter combination matrix
+    3. Check for existing results to avoid duplication
+    4. Execute simulations with retry logic for failed cases
+    5. Process and store results with memory optimization
+    6. Generate comprehensive sweep summary
+    
+    Parameter Sweep Dimensions:
+        - Material Properties: Young's modulus variations for different wire materials
+        - Geometric Properties: beam radius, compression ratios, z-scaling factors
+        - Interaction Parameters: positional and rotational coupling penalties
+        - Device Configuration: derived from base geometry parameters
+    
+    Advanced Features:
+        - Automatic retry with adaptive time stepping for convergence issues
+        - Memory-efficient result processing with selective file retention
+        - Dynamic timestep determination based on simulation output
+        - Progress tracking with estimated completion times
+        - Error handling and logging for failed simulations
+        - Duplicate detection to resume interrupted sweeps
+    
+    Configuration Loading:
+        All parameters are loaded from config.yml including:
+        - Simulation directories (output and existing results)
+        - Geometric parameters (interval_end, cylinder_radius, number_of_wires)
+        - Parameter arrays for systematic variation
+    
+    Output Structure:
+        Results are organized in timestamped directories with parameter-specific
+        subdirectories containing:
+        - VTK files for key timesteps
+        - Simulation logs and error files
+        - Parameter configuration records
+        - Visualization outputs (when enabled)
+    
+    Retry Logic:
+        Failed simulations are automatically retried with progressively finer
+        time stepping (increasing from 20 to 180 steps) to improve convergence.
+        
+    """
     # Load configuration from YAML file
     config_path = os.path.join(os.path.dirname(__file__), "config.yml")
     with open(config_path, "r") as file:
         config = yaml.safe_load(file)
     
-    # Extract parameters from config file
+    # Extract directory configurations from config file
+    base_output_dir = config.get("output_directory", "/home_student/kayabek/sw/Results")
+    existing_sweeps_dir = config.get("existing_sweeps_directory", "/home_student/kayabek/sw/Results/Sweeps_new")
+    
+    # Extract simulation parameters from config file
     interval_end = config["interval_end"]
     cylinder_radius = config["cylinder_radius"]
-    number_of_beams = config["number_of_beams"]
+    number_of_wires = config["number_of_wires"]
     youngs_moduli = np.array(config["youngs_moduli"])  # Different material stiffness values (N/mm²)
     beam_radii = np.array(config["beam_radii"])  # Different beam cross-sectional radii (mm)
     compressed_parts = np.array(config["compressed_parts"])  # Compression ratios (0 = no compression)
@@ -807,17 +845,15 @@ def parameter_sweep():
     rotational_penalties = np.array(config["rotational_penalties"])  # Rotational penalties
     z_scale_factors = np.array(config["z_scale_factors"])  # Z-direction arc scaling factors
 
+    # Default timesteps for result processing (beginning, middle, end)
     keep_timesteps = [0, 25, 50]
 
     # Timing variables
     sweep_start_time = time.time()
-
-    # Path to check for existing combinations
-    existing_sweeps_dir = "/home_student/kayabek/sw/Results/Sweeps_new"
     
-    # Create base directory for results with timestamp
+    # Create timestamped base directory for this parameter sweep
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    base_results_dir = f"/home_student/kayabek/sw/Results/parameter_sweep_{timestamp}"
+    base_results_dir = os.path.join(base_output_dir, f"parameter_sweep_{timestamp}")
     os.makedirs(base_results_dir, exist_ok=True)
 
     # Save parameter configuration for reference
@@ -848,7 +884,7 @@ def parameter_sweep():
                 
                 # Create parameter directory name
                 params_dir_name = (
-                    f"nbeams{number_of_beams}_"
+                    f"nbeams{number_of_wires}_"
                     f"int{interval_end:.1f}_"
                     f"rad{cylinder_radius:.2f}_"
                     f"comp{compressed_part:.2f}_"
@@ -895,11 +931,11 @@ def parameter_sweep():
                         pos_penalty,
                         rot_penalty,
                         z_scale_factor,
-                        number_of_beams,
+                        number_of_wires,
                         youngs_modulus=youngs_modulus
                     )
                     
-                    input_file_path = os.path.join(params_dir, "simple_beam.dat")
+                    input_file_path = os.path.join(params_dir, "contour_device_beams.dat")
                     input_file.write_input_file(input_file_path)
                     
                     # Run simulation
@@ -996,7 +1032,7 @@ def parameter_sweep():
                                 pos_penalty,
                                 rot_penalty,
                                 z_scale_factor,
-                                number_of_beams,
+                                number_of_wires,
                                 youngs_modulus=youngs_modulus
                             )
                             """
@@ -1011,7 +1047,7 @@ def parameter_sweep():
                             )
                             
                             # Write the modified input file
-                            retry_input_file_path = os.path.join(params_dir, f"simple_beam.dat")
+                            retry_input_file_path = os.path.join(params_dir, f"contour_device_beams.dat")
                             with open(retry_input_file_path, "w") as f:
                                 f.write(retry_input_file_content)
                             

@@ -422,7 +422,7 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
         beams = []
         beams_start = []
 
-        # Create multiple beams with angular spacing
+        # Create multiple wires with angular spacing
         for i in range(number_of_wires):
             shift_i = (2*(interval[1] - interval[0])/number_of_wires) * i
 
@@ -490,7 +490,7 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
                     displacement_z = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
-                        "NUMPOINTS 5 TIMES 0.0 1.0 2.0 2.5 1000.0 VALUES 0.0 {} {} {}".format(
+                        "NUMPOINTS 4 TIMES 0.0 1.0 2.0 1000.0 VALUES 0.0 {} {} {}".format(
                             z_intermediate,
                             z_final,
                             z_final,
@@ -573,7 +573,7 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
     interval[1] = interval[1] * yz_ratio
     
     # Generate the complete contour device beam structure
-    print(f"Creating contour device with {number_of_wires} beams...")
+    print(f"Creating contour device with {number_of_wires} wires...")
     create_multiple_beams_shifted_in_y(
         mesh,
         number_of_wires,
@@ -695,7 +695,7 @@ def create_straight_toy_aneurysm(cubit, config, restart):
 
     # Get united volume and apply positioning
     united_volumes = cubit.get_last_id("volume")
-    cubit.cmd(f"move volume {united_volumes} Y -2.5 Z 0.2")
+    cubit.cmd(f"move volume {united_volumes} Y -2.5 Z 0.0")
     cubit.cmd(f"Rotate Volume {united_volumes} about X Angle 90")
 
     # Apply geometric tweaks for smooth transitions
@@ -821,7 +821,7 @@ if __name__ == "__main__":
     
     # Load configuration from YAML file
     pwd = os.getcwd()
-    config_path = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/config.yml"
+    config_path = "/home_student/kayabek/sw/meshpy/ContourProject/Virtual_Deployment/config.yml"
     
     with open(config_path, "r") as file:
         config = yaml.safe_load(file)
@@ -836,7 +836,9 @@ if __name__ == "__main__":
     print("STEP 1: Contour Device Deployment Simulation")
     print("="*60)
     
-    simulation_dir_1 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_1"
+    # Get base output directory from config and create simulation step directories
+    base_output_dir = config["contour"]["output_directory"]
+    simulation_dir_1 = os.path.join(base_output_dir, "simulation_step_1")
     os.makedirs(simulation_dir_1, exist_ok=True)
     
     # Generate first simulation input
@@ -862,7 +864,8 @@ if __name__ == "__main__":
     print("STEP 2: Contour Device-Aneurysm Contact Simulation")
     print("="*60)
     
-    simulation_dir_2 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_2"
+    # Use same base output directory from config for simulation step 2
+    simulation_dir_2 = os.path.join(base_output_dir, "simulation_step_2")
     
     os.makedirs(simulation_dir_2, exist_ok=True)
     
@@ -908,7 +911,6 @@ if __name__ == "__main__":
     print(f"Running contact simulation...")
     print(f"Input file: {fd_placement_dat2}")
     print(f"Output directory: {simulation_dir_2}")
-    print(f"Restarting from step: {config['time']['steps1']}")
     
     run_four_c(
         fd_placement_dat2,

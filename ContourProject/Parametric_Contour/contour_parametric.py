@@ -64,8 +64,7 @@ def create_rose_petals(config):
     Create a rose petal medical contour device with parametric geometry.
     
     This function generates a medical device consisting of multiple beam elements
-    arranged in a rose petal pattern. Each petal follows a parametric curve that
-    creates a smooth, organic shape suitable for medical applications.
+    arranged in a rose petal pattern. Each petal follows a parametric curve that creates a smooth shape.
     
     Args:
         config (dict): Configuration dictionary containing all parameters
@@ -196,60 +195,56 @@ def create_rose_petals(config):
     # Create 4C input file
     input_file = InputFile()
     input_file.add(mesh)
-
-    # Extract simulation parameters
-    sim_config = config["simulation"]
-    vis_config = config["visualization"]
     
-    # Generate 4C input parameters string
-    input_parameters = f"""
+    input_file.add(
+        f"""
         ------------------------------------------------------------------TITLE
-        Rose Petal Medical Contour Device - Author: Mert Kayabek
+        Medical Contour Device Simulation - Author: Mert Kayabek
         -----------------------------------------------------------PROBLEM TYPE
         PROBLEMTYPE                           Structure
         RESTART                               0
         ---------------------------------------------------------------------IO
-        OUTPUT_BIN                            {"yes" if not vis_config["output_displacement"] else "no"}
-        STRUCT_DISP                           {"yes" if vis_config["output_displacement"] else "no"}
-        FILESTEPS                             1000
+        OUTPUT_BIN                            yes
+        STRUCT_DISP                           yes
+        FILESTEPS                             1
         VERBOSITY                             Standard
-        STRUCT_STRAIN                         {"yes" if vis_config["output_strain"] else "no"}
-        STRUCT_STRESS                         {"yes" if vis_config["output_stress"] else "no"}
+        STRUCT_STRAIN                         yes
+        STRUCT_STRESS                         yes
         -----------------------------------------------------STRUCTURAL DYNAMIC
         LINEAR_SOLVER                         1
         INT_STRATEGY                          Standard
-        DYNAMICTYPE                           {sim_config["dynamics_type"]}
-        RESULTSEVERY                          {sim_config["results_every"]}
-        NLNSOL                                {sim_config["solver_method"]}
-        TIMESTEP                              {sim_config["timestep"]}
-        NUMSTEP                               {sim_config["num_steps"]}
-        MAXTIME                               {sim_config["max_time"]}
+        DYNAMICTYPE                           Statics
+        RESULTSEVERY                          1
+        NLNSOL                                fullnewton
+        TIMESTEP                              1
+        NUMSTEP                               1
+        MAXTIME                               1.0
         ---------------------------------------------------------------SOLVER 1
         NAME                                  Structure_Solver
-        SOLVER                                {sim_config["solver_type"]}
+        SOLVER                                Superlu
         --------------------------------------------------IO/RUNTIME VTK OUTPUT
         OUTPUT_DATA_FORMAT                    binary
         INTERVAL_STEPS                        1
         EVERY_ITERATION                       no
         ----------------------------------------IO/RUNTIME VTK OUTPUT/STRUCTURE
-        OUTPUT_STRUCTURE                      {"yes" if vis_config["output_displacement"] else "no"}
-        DISPLACEMENT                          {"yes" if vis_config["output_displacement"] else "no"}
+        OUTPUT_STRUCTURE                      yes
+        DISPLACEMENT                          yes
         --------------------------------------------IO/RUNTIME VTK OUTPUT/BEAMS
-        OUTPUT_BEAMS                          {"yes" if vis_config["output_beams"] else "no"}
-        DISPLACEMENT                          {"yes" if vis_config["output_displacement"] else "no"}
-        USE_ABSOLUTE_POSITIONS                {"yes" if vis_config["absolute_positions"] else "no"}
-        TRIAD_VISUALIZATIONPOINT              {"yes" if vis_config["triad_visualization"] else "no"}
-        STRAINS_GAUSSPOINT                    {"yes" if vis_config["strain_gausspoints"] else "no"}
+        OUTPUT_BEAMS                          yes
+        DISPLACEMENT                          yes
+        USE_ABSOLUTE_POSITIONS                yes
+        TRIAD_VISUALIZATIONPOINT              yes
+        STRAINS_GAUSSPOINT                    yes
+        ELEMENT_GID                           yes
         ----------------------------------------------------------------BINNING STRATEGY
         BIN_SIZE_LOWER_BOUND                  3.0
-        DOMAINBOUNDINGBOX                     -5 -5 -5 5 5 5
+        DOMAINBOUNDINGBOX                     -30 -30 -30 30 30 30
         ----------------------------------------------------------------BEAM INTERACTION
         REPARTITIONSTRATEGY                   Everydt
         SEARCH_STRATEGY                       bounding_volume_hierarchy
-        """
-    
-    # Add the input parameters to the file
-    input_file.add(input_parameters)
+        """,
+        option_overwrite=True,
+    )
 
     return input_file
 

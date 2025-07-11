@@ -1,0 +1,9 @@
+Parameter sweep configuration:
+interval_end: 7.0
+cylinder_radius: 3.5
+youngs_moduli: [83000]
+beam_radii: [0.015]
+compressed_parts: [0]
+positional_penalties: [100]
+rotational_penalties: [5.0e-04 1.5e-03 5.0e-03 1.0e-05]
+z_scale_factors: [0.6]

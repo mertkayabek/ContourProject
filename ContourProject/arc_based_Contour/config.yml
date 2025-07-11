@@ -2,10 +2,14 @@
 # Author: Mert Kayabek
 # Device: Arc-based contour device simulation with parameter sweep
 
+# Output directory configuration
+output_directory: "/home_student/kayabek/sw/meshpy/ContourProject/arc_based_Contour/Simulation"  # Base directory for simulation results
+existing_sweeps_directory: "/home_student/kayabek/sw/meshpy/ContourProject/arc_based_Contour/Simulation/Sweeps"  # Directory to check for existing results
+
 # Basic geometry parameters
 interval_end: 7.0                    # End of z-coordinate interval
 cylinder_radius: 3.5                 # Radius of wrapping cylinder
-number_of_wires: 36                  # Total number of wires in the device
+number_of_wires: 12                  # Total number of wires in the device
 
 # Parameter sweep arrays
 youngs_moduli: [83000]               # Different material stiffness values (N/mm²)
