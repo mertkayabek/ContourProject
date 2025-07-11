@@ -42,7 +42,7 @@ The contour device uses multiple helical beams arranged in a specific pattern
 to provide medical treatment coverage for aneurysms.
 
 The simulation is performed in two steps:
-1. Device deployment simulation (catheter-based compression)
+1. Device undeployed shape simulation
 2. Device-aneurysm contact simulation
 
 Author: Mert Kayabek
@@ -154,8 +154,11 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
     time_config = config["time"]
     
     # Output and geometry parameters
-    base_dir = contour_config.get("output_directory", 
-                                  "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results")
+    default_output_dir = os.path.join(os.path.dirname(__file__), "Simulation")
+    base_dir = contour_config.get("output_directory", default_output_dir)
+    
+    # Create output directory if it doesn't exist
+    os.makedirs(base_dir, exist_ok=True)
     interval_end = contour_config.get("interval_end", 6.0)
     cylinder_radius = contour_config.get("cylinder_radius", 3.0)
     compressed_part = contour_config.get("compressed_part", 0.0)
@@ -170,12 +173,11 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
     
     # Geometric scaling factors
     z_scale_factor = contour_config.get("z_scale_factor", 0.5)
-    number_of_beams = contour_config.get("number_of_beams", 12)
+    number_of_wires = contour_config.get("number_of_wires", 12)
     compression_factor = contour_config.get("compression_factor", 0.95)
 
     z_intermediate = disp_config.get("z_intermediate", -1.0)
     z_final = disp_config.get("z_final", -2.5)
-    z_final2 = disp_config.get("z_final2", -4.2)
     
     # Time stepping parameters
     num_steps = time_config.get("steps1", 100)
@@ -184,7 +186,7 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
     # Beam generation parameters
     interval = [0, interval_end]
     n_intersections = 2  # Number of beam intersections
-    n_el = 8 * (n_intersections - 1) * number_of_beams  # Total number of elements
+    n_el = 8 * (n_intersections - 1) * number_of_wires  # Total number of elements
     
     # Initialize mesh and material
     mesh = Mesh()
@@ -250,44 +252,40 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
         
         Args:
             n_intersections (int): Desired number of intersections
-            interval (list): [start, end] length of the beam
+            interval (list): [start, end] length of the beam in z axis
             radius (float): Cylinder radius
             
         Returns:
-            tuple: (tan_yz, alpha_degrees) - tangent and angle in degrees
+            tuple: (yz_ratio, alpha_degrees) - tangent and angle in degrees
         """
         length = interval[1] - interval[0]
         
         # Calculate required tangent for helical pitch
         # Intersections occur when beams complete (n_intersections-1) * π radians
-        tan_yz = ((n_intersections - 1) * np.pi * radius) / length
-        alpha_degrees = np.degrees(np.arctan(tan_yz))
+        yz_ratio = ((n_intersections - 1) * np.pi * radius) / length
+        alpha_degrees = np.degrees(np.arctan(yz_ratio))
         
-        #print(f"Calculated helical angle: {alpha_degrees:.2f} degrees for {n_intersections} intersections")
-        return tan_yz, alpha_degrees
+        return yz_ratio, alpha_degrees
 
-    def create_multiple_beams_shifted_in_y(mesh, number_of_beams, cylinder_radius, interval, 
-                                         n_el, add_sets, material, beam_object, tan_yz, 
-                                         compression_factor, compressed_part):
+    def create_multiple_beams_shifted_in_y(mesh, number_of_wires, cylinder_radius, interval, n_el, add_sets, material, beam_object, compression_factor, compressed_part):
         """
         Create multiple helical beams with equal angular spacing around cylinder.
         
         This function generates the complete contour device structure by creating
-        multiple helical beams, each rotated by 2π/number_of_beams around the
+        multiple helical beams, each rotated by 2π/number_of_wires around the
         cylinder axis. Each beam follows a parametric arc shape.
         
         Args:
             mesh: Mesh object to add beams to
-            number_of_beams (int): Number of helical beams to create
+            number_of_wires (int): Number of helical beams to create
             cylinder_radius (float): Radius of the cylindrical surface
             interval (list): [start, end] parametric interval
-            n_el (int): Number of elements per beam
+            n_el (int): Number of elements per wire
             add_sets (bool): Whether to add geometry sets
             material: Material object for beams
             beam_object: Beam element type
-            tan_yz (float): Tangent factor for helical pitch
             compression_factor (float): Factor for beam compression
-            compressed_part (float): Portion of beam that is compressed
+            compressed_part (float): Portion of wire that is compressed
             
         Returns:
             tuple: (beams, beams_start) - lists of beam objects and start nodes
@@ -316,11 +314,11 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
             z = z_scale_factor * R * npAD.sin(theta)
             
             # Y-coordinate: creates forward progression with helical component
-            y = tan_yz * R * (1 - npAD.cos(theta))
+            y = R * (1 - npAD.cos(theta))
             
             return npAD.array([x, y, z])
         
-        def calculate_node_positions(num_positions, R, tan_yz):
+        def calculate_node_positions(num_positions, R):
             """
             Calculate optimal node positions for uniform y-coordinate spacing.
             
@@ -330,24 +328,22 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
             
             Args:
                 num_positions (int): Number of positions to calculate
-                R (float): Arc radius parameter
-                tan_yz (float): Tangent factor for the arc
-                
+                R (float): Arc radius parameter                
             Returns:
                 list: Normalized parameter positions [0,1] for node placement
             """
             positions = [0.0]  # Start at parameter t=0
             
             # Calculate uniform y-coordinate increments
-            y_increment = 2 * tan_yz * R / number_of_beams
+            y_increment = 2 * R / number_of_wires
             
             # For each intermediate position, solve for the parameter value
-            for i in range(1, number_of_beams):
+            for i in range(1, number_of_wires):
                 y_target = i * y_increment
                 
                 # Calculate arc length to this y-position (numerical integration)
-                arc_length = calculate_elliptical_arc_length(y_target, R, tan_yz, z_scale_factor)
-                half_ellipse_length = calculate_elliptical_arc_length(2 * R, R, tan_yz, z_scale_factor)
+                arc_length = calculate_elliptical_arc_length(y_target, R, z_scale_factor)
+                half_ellipse_length = calculate_elliptical_arc_length(2 * R, R, z_scale_factor)
                 
                 # Normalize to [0,1] parameter range
                 normalized_t = arc_length / half_ellipse_length
@@ -355,7 +351,7 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
 
             positions.append(1.0)  # End at parameter t=1
             
-            # Add extra refinement nodes near the start for better discretization
+            # Add extra refinement nodes near the bottom of wires for better discretization
             step = (positions[1] - positions[0]) / 4
             current = positions[0] + step
             while current < positions[1]:
@@ -367,7 +363,7 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
             positions.sort()
             return positions
         
-        def calculate_elliptical_arc_length(target_y, R, tan_yz, z_scale_factor, num_samples=1000000):
+        def calculate_elliptical_arc_length(target_y, R, z_scale_factor, num_samples=1000000):
             """
             Calculate arc length along the elliptical curve using numerical integration.
             
@@ -378,7 +374,6 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
             Args:
                 target_y (float): Target y-coordinate
                 R (float): Arc radius parameter
-                tan_yz (float): Tangent factor
                 z_scale_factor (float): Z-direction scaling factor
                 num_samples (int): Number of integration samples
                 
@@ -386,8 +381,7 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
                 float: Arc length to the target y-coordinate
             """
             # Find theta corresponding to target y-coordinate
-            # From: y = tan_yz * R * (1 - cos(theta))
-            arg = 1 - target_y / (tan_yz * R)
+            arg = 1 - target_y / R
             
             # Handle numerical edge cases
             if arg < -1:
@@ -412,28 +406,25 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
                 
                 # Calculate the integrand at the midpoint
                 # √[(dy/dθ)² + (dz/dθ)²] 
-                dy_dtheta = tan_yz * R * np.sin(theta_mid)
+                dy_dtheta = R * np.sin(theta_mid)
                 dz_dtheta = z_scale_factor * R * np.cos(theta_mid)
                 
                 integrand = np.sqrt(dy_dtheta**2 + dz_dtheta**2)
                 
                 # Add segment length
                 arc_length += integrand * (theta2 - theta1)
-
-            #print("Target theta (degrees):", np.degrees(target_theta))
-            #print("Arc length:", arc_length)
             return arc_length
 
         # Calculate optimal node positions for beam discretization
-        num_positions = number_of_beams // 2
-        node_positions = calculate_node_positions(number_of_beams, interval[1] / 2, tan_yz)
+        num_positions = number_of_wires // 2
+        node_positions = calculate_node_positions(number_of_wires, interval[1] / 2)
         
         beams = []
         beams_start = []
 
         # Create multiple beams with angular spacing
-        for i in range(number_of_beams):
-            shift_i = (2*(interval[1] - interval[0])/number_of_beams) * i
+        for i in range(number_of_wires):
+            shift_i = (2*(interval[1] - interval[0])/number_of_wires) * i
 
             def shape_with_shift(t, shift=shift_i):
                 base = n_shape_yz_complete(t)
@@ -452,15 +443,14 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
             beams.append(dir1)
             beams_start.append(dir1["start"])
 
-        mesh.wrap_around_cylinder(radius=cylinder_radius)
-        find_intersections_and_apply_coupling(mesh, beams, positional_coupling_penalty, rotational_coupling_penalty) # change this
+        mesh.wrap_around_cylinder(radius=cylinder_radius) # wrap mesh around cylinder
+        find_intersections_and_apply_coupling(mesh, beams, positional_coupling_penalty, rotational_coupling_penalty)
         mpy.check_overlapping_elements = False 
 
-        new_radius = cylinder_radius * (1.0 - compression_factor)
+        new_radius = cylinder_radius * (1.0 - compression_factor) # final radius after compression
 
-        # write a for loop for all nodes in mesh like below
         max_z = max(node.coordinates[2] for node in mesh.nodes if not node.is_middle_node)
-        threshold = max_z * compressed_part
+        threshold = max_z * compressed_part # z coordinate threshold for compression
 
         beam_lines = GeometrySet(beams[0]["line"])
         for i in range(1, len(beams)):
@@ -469,6 +459,7 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
         for node in mesh.nodes:
             if not node.is_middle_node:
                 
+                # Nodes at the bottom
                 if np.linalg.norm(node.coordinates[2] - interval[0]) < 1e-9:
                     node_set = GeometrySet(node)
                     
@@ -476,6 +467,8 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
                             node.coordinates, 
                             new_radius
                         )
+                    
+                    # Compression is for x and y displacements
                     displacement_x = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
@@ -492,14 +485,15 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
                             displacement[1]
                         )
                     )
+
+                    # The device is displaced in -z direction for deployment
                     displacement_z = Function(
                         "COMPONENT 0 SYMBOLIC_FUNCTION_OF_SPACE_TIME a\n"
                         "VARIABLE 0 NAME a TYPE linearinterpolation "
                         "NUMPOINTS 5 TIMES 0.0 1.0 2.0 2.5 1000.0 VALUES 0.0 {} {} {}".format(
                             z_intermediate,
                             z_final,
-                            z_final2,
-                            z_final2
+                            z_final,
                         )
                     )
                     
@@ -508,6 +502,7 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
                     mesh.add(displacement_z)
                     
                     # Apply Dirichlet boundary condition with displacement functions
+                    # The nodes at the bottom are also fixed in all 3 rotational DOFs
                     mesh.add(
                         BoundaryCondition(
                             node_set,
@@ -548,7 +543,7 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
                     mesh.add(displacement_x)
                     mesh.add(displacement_y)
                     
-                    # Apply radial compression (x,y constrained, z free)
+                    # Apply radial compression (x,y constrained, z free, rotation free)
                     mesh.add(
                         BoundaryCondition(
                             node_set,
@@ -573,23 +568,21 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
 
 
 
-    tan_yz, degrees = calculate_angle_for_intersections(n_intersections, interval, cylinder_radius)
+    yz_ratio, degrees = calculate_angle_for_intersections(n_intersections, interval, cylinder_radius)
 
-    interval[1] = interval[1] * tan_yz
-    tan_yz = 1  
+    interval[1] = interval[1] * yz_ratio
     
     # Generate the complete contour device beam structure
-    print(f"Creating contour device with {number_of_beams} beams...")
+    print(f"Creating contour device with {number_of_wires} beams...")
     create_multiple_beams_shifted_in_y(
         mesh,
-        number_of_beams,
+        number_of_wires,
         cylinder_radius,
         interval,
         n_el,
         True,
         mat,
         beam_object,
-        tan_yz,
         compression_factor,
         compressed_part
     )
@@ -600,9 +593,6 @@ def create_beams_wrapped_around_cylinder(cubit, second_simulation, preview=False
     # Create 4C input file
     input_file = InputFile(cubit=cubit)
     input_file.add(mesh)
-    
-    # Add runtime output settings
-    #set_runtime_output(input_file, btss_output=True, option_overwrite=True)
     
     # Generate simulation parameters
     input_file.add(
@@ -706,7 +696,7 @@ def create_straight_toy_aneurysm(cubit, config, restart):
     # Get united volume and apply positioning
     united_volumes = cubit.get_last_id("volume")
     cubit.cmd(f"move volume {united_volumes} Y -2.5 Z 0.2")
-    cubit.cmd(f"Rotate Volume {united_volumes} about X Angle 80")
+    cubit.cmd(f"Rotate Volume {united_volumes} about X Angle 90")
 
     # Apply geometric tweaks for smooth transitions
     curves_to_tweak = [3]  # Aneurysm neck curve
@@ -718,7 +708,6 @@ def create_straight_toy_aneurysm(cubit, config, restart):
     cubit.cmd(f"surface {5} {6} {7} Scheme Auto")
     cubit.cmd("surface {5} {6} {7} size auto factor 4")
     cubit.cmd(f"mesh surface {5} {6} {7}")
-
 
     # Apply surface refinement
     for n in range(int(n_ref_surf)):
@@ -757,7 +746,6 @@ def create_straight_toy_aneurysm(cubit, config, restart):
                 bc_section="BEAM INTERACTION/BEAM TO SOLID SURFACE CONTACT SURFACE",
                 bc_description="COUPLING_ID 2",
             )
-
 
     # Fix outer surface to prevent rigid body motion
     outer_ca_surf = 9  # Outer surface ID
@@ -810,10 +798,8 @@ def setup_simulation(config, second_simulation):
     
     mat_artery = MaterialStVenantKirchhoff(youngs_modulus=116000.0, nu=0.3, density=4506000)
     input_file.add(mat_artery)
-    
     print("Simulation setup completed successfully")
     return input_file
-
 
 # Global simulation settings
 preview = False
@@ -824,7 +810,7 @@ if __name__ == "__main__":
     Main execution section for contour device-aneurysm simulation.
     
     This script runs a two-step simulation:
-    1. Contour device deployment simulation
+    1. Contour device undeployed shape simulation
     2. Contour device-aneurysm contact simulation
     """
     
@@ -852,7 +838,7 @@ if __name__ == "__main__":
     
     simulation_dir_1 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_1"
     os.makedirs(simulation_dir_1, exist_ok=True)
-    """""
+    
     # Generate first simulation input
     inputfile_1 = setup_simulation(config, False)
     
@@ -863,12 +849,12 @@ if __name__ == "__main__":
     fd_placement_dat = os.path.join(simulation_dir_1, "fd-vmc-art.dat")
     inputfile_1.write_input_file(fd_placement_dat)
     
-    print(f"Running deployment simulation...")
+    print(f"Running shape generation simulation...")
     print(f"Input file: {fd_placement_dat}")
     print(f"Output directory: {simulation_dir_1}")
     
     run_four_c(fd_placement_dat, simulation_dir_1)
-    """
+    
     # ========================================================================
     # STEP 2: Contour Device-Aneurysm Contact Simulation
     # ========================================================================
@@ -877,12 +863,11 @@ if __name__ == "__main__":
     print("="*60)
     
     simulation_dir_2 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_2"
-    """"
+    
     os.makedirs(simulation_dir_2, exist_ok=True)
     
     # Clean simulation directory
     clean_simulation_directory(simulation_dir_2)
-    
     
     fd_placement_dat2 = os.path.join(simulation_dir_2, "fd-vmc-art.dat")
 
@@ -892,32 +877,32 @@ if __name__ == "__main__":
         InputSection(
             "STRUCTURAL DYNAMIC",
             f"""
-#        LINEAR_SOLVER     1
-#        NUMSTEP           {config['time']['steps1']+config['time']['steps2']}
-#        MAXTIME           {config['time']['dt_1']+config['time']['dt_2']}
-#        TIMESTEP          {config['time']['dt_2']/config['time']['steps2']}
-#        """,
-#            option_overwrite=True,
-#        )
-#    )
+        LINEAR_SOLVER     1
+        NUMSTEP           {config['time']['steps1']+config['time']['steps2']}
+        MAXTIME           {config['time']['dt_1']+config['time']['dt_2']}
+        TIMESTEP          {config['time']['dt_2']/config['time']['steps2']}
+        """,
+            option_overwrite=True,
+        )
+    )
 
-#    inputfile_1.add(
-#        """----------------------------------BEAM INTERACTION/BEAM TO SOLID SURFACE CONTACT
-#                    CONSTRAINT_STRATEGY                      penalty
- #                   CONTACT_DISCRETIZATION                   mortar
-  #                  CONTACT_TYPE                             gap_variation
-   #                 GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 6
-    #                GAUSS_POINTS                             6
-     #               GEOMETRY_PAIR_STRATEGY                   segmentation
-      #              PENALTY_LAW                              linear_quadratic
-       #             PENALTY_PARAMETER                        100.0
-        #            PENALTY_PARAMETER_G0                     0.0001
-         #           MORTAR_SHAPE_FUNCTION                    line2
-          #          MORTAR_CONTACT_DEFINED_IN                reference_configuration
-           #     """,
-            #    option_overwrite=True,
-    #)
-    """
+    inputfile_1.add(
+        """----------------------------------BEAM INTERACTION/BEAM TO SOLID SURFACE CONTACT
+                    CONSTRAINT_STRATEGY                      penalty
+                    CONTACT_DISCRETIZATION                   mortar
+                    CONTACT_TYPE                             gap_variation
+                    GEOMETRY_PAIR_SEGMENTATION_SEARCH_POINTS 6
+                    GAUSS_POINTS                             6
+                    GEOMETRY_PAIR_STRATEGY                   segmentation
+                    PENALTY_LAW                              linear_quadratic
+                    PENALTY_PARAMETER                        100.0
+                    PENALTY_PARAMETER_G0                     0.0001
+                    MORTAR_SHAPE_FUNCTION                    line2
+                    MORTAR_CONTACT_DEFINED_IN                reference_configuration
+                """,
+                option_overwrite=True,
+    )
+    
     inputfile_1.write_input_file(fd_placement_dat2)
     
     print(f"Running contact simulation...")
@@ -931,51 +916,3 @@ if __name__ == "__main__":
         restart_step=config["time"]["steps1"],
         restart_from=os.path.join(os.path.relpath(simulation_dir_1, simulation_dir_2), "xxx"),
     )
-    """
-    print("\\n" + "="*60)
-    print("STEP 3: Contour Device-Aneurysm Contact Simulation")
-    print("="*60)
-    simulation_dir_3 = "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results/simulation_step_3"
-    os.makedirs(simulation_dir_3, exist_ok=True)
-    
-    # Clean simulation directory
-    clean_simulation_directory(simulation_dir_3)
-    
-    
-    fd_placement_dat3 = os.path.join(simulation_dir_3, "fd-vmc-art.dat")
-
-    inputfile_1 = setup_simulation(config, True)
-    
-    inputfile_1.add(
-        InputSection(
-            "STRUCTURAL DYNAMIC",
-            f"""
-        LINEAR_SOLVER     1
-        NUMSTEP           {config['time']['steps1']+config['time']['steps2'] + config['time']['steps3']}
-        MAXTIME           {config['time']['dt_1']+config['time']['dt_2'] + config['time']['dt_3']}
-        TIMESTEP          {config['time']['dt_3']/config['time']['steps3']}
-        """,
-            option_overwrite=True,
-        )
-    )
-
-    inputfile_1.write_input_file(fd_placement_dat3)
-    
-    print(f"Running contact simulation...")
-    print(f"Input file: {fd_placement_dat3}")
-    print(f"Output directory: {simulation_dir_3}")
-    print(f"Restarting from step: {config['time']['steps2']}")
-    
-    run_four_c(
-        fd_placement_dat3,
-        simulation_dir_3,
-        restart_step=config["time"]["steps3"],
-        restart_from=os.path.join(os.path.relpath(simulation_dir_2, simulation_dir_3), "xxx"),
-    )
-
-    print("\\n" + "="*80)
-    print("SIMULATION COMPLETED SUCCESSFULLY")
-    print("Results available in:")
-    print(f"  Step 1: {simulation_dir_1}")
-    print(f"  Step 2: {simulation_dir_2}")
-    print("="*80)

@@ -8,24 +8,22 @@ aneurysm:
   n_ref_neck: 0 # refine additional the surface around the anerym neck
 time:
   steps1: 50
-  steps2: 250
-  steps3: 125
+  steps2: 50
   dt_1: 1
   dt_2: 1
-  dt_3: 0.5
 displacement:  # Add this section
   z_intermediate: -0.9
   z_final: -3.0
   z_final2: -4.2
 contour:
-  output_directory: "/home_student/kayabek/sw/meshpy/ContourProject/example_toy/cubit_results"
-  interval_end: 7.0
+  output_directory: "/home_student/kayabek/sw/meshpy/ContourProject/Virtual_Deployment/Simulation"
+  interval_end: 7.0 # End of z-coordinate interval
   cylinder_radius: 3.5
   compressed_part: 0
   beam_radius: 0.015
   youngs_modulus: 83000
   pos_penalty: 100
   rot_penalty: 0.0015
-  z_scale_factor: 0.5
-  number_of_beams: 72
+  z_scale_factor: 0.5 # ellipse coeffiecient
+  number_of_wires: 12
   compression_factor: 0.95

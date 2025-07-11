@@ -5,7 +5,7 @@
 # Basic geometry parameters
 interval_end: 7.0                    # End of z-coordinate interval
 cylinder_radius: 3.5                 # Radius of wrapping cylinder
-number_of_beams: 36                  # Total number of beams in the device
+number_of_wires: 36                  # Total number of wires in the device
 
 # Parameter sweep arrays
 youngs_moduli: [83000]               # Different material stiffness values (N/mm²)
